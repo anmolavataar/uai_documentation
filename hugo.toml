@@ -1,0 +1,24 @@
+baseURL = "http://localhost/"
+locale = "en-us"
+title = "UAI Protocol Documentation"
+enableRobotsTXT = true
+
+[params]
+  description = "India's sovereign Digital Public Infrastructure for AI agent interoperability"
+  ui.sidebar_menu_compact = true
+  ui.breadcrumb_disable = false
+  ui.sidebar_cache_limit = 10
+  ui.sidebar_menu_foldable = true
+  ui.feedback.enable = false
+  ui.readingtime.enable = false
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "tango"
+
+[module]
+  [[module.imports]]
+    path = "github.com/google/docsy"
