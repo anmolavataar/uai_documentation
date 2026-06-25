@@ -4,10 +4,10 @@ linkTitle: "UAI Protocol"
 ---
 
 {{< blocks/cover title="Unified AI Interface (UAI) Protocol" image_anchor="top" height="full" >}}
-<a class="btn btn-lg btn-primary me-3 mb-4" href="/docs/">
+<a class="btn btn-lg btn-primary me-3 mb-4" href="docs/">
   Read the Docs <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
-<a class="btn btn-lg btn-secondary me-3 mb-4" href="/docs/guides/getting-started/">
+<a class="btn btn-lg btn-secondary me-3 mb-4" href="docs/guides/getting-started/">
   Get Started <i class="fas fa-play-circle ms-2"></i>
 </a>
 <p class="lead mt-5">India's sovereign Digital Public Infrastructure for secure, trusted, and interoperable AI agent communication.</p>
