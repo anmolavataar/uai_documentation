@@ -1,191 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Concepts on UAI Protocol Documentation</title><link>http://localhost/docs/concepts/</link><description>Recent content in Concepts on UAI Protocol Documentation</description><generator>Hugo</generator><language>en-us</language><atom:link href="http://localhost/docs/concepts/index.xml" rel="self" type="application/rss+xml"/><item><title>Trust Tiers</title><link>http://localhost/docs/concepts/trust-tiers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/concepts/trust-tiers/</guid><description>&lt;p&gt;Every scope in UAI is assigned a &lt;strong&gt;trust tier&lt;/strong&gt; (1–4) that determines the authentication requirements, token lifetime, consent type, and additional controls required before the Trust Server will issue a delegation token.&lt;/p&gt;
-&lt;h2 id="tier-summary"&gt;Tier Summary&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Tier&lt;/th&gt;
-					&lt;th&gt;Risk&lt;/th&gt;
-					&lt;th&gt;Auth Required&lt;/th&gt;
-					&lt;th&gt;Token TTL&lt;/th&gt;
-					&lt;th&gt;Consent&lt;/th&gt;
-					&lt;th&gt;DPoP&lt;/th&gt;
-					&lt;th&gt;Insurance VC&lt;/th&gt;
-					&lt;th&gt;Human Gate&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;1&lt;/td&gt;
-					&lt;td&gt;Low&lt;/td&gt;
-					&lt;td&gt;None&lt;/td&gt;
-					&lt;td&gt;5 min&lt;/td&gt;
-					&lt;td&gt;Not required&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;2&lt;/td&gt;
-					&lt;td&gt;Medium&lt;/td&gt;
-					&lt;td&gt;Consent (OTP or consent-manager)&lt;/td&gt;
-					&lt;td&gt;2 min&lt;/td&gt;
-					&lt;td&gt;Required&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;3&lt;/td&gt;
-					&lt;td&gt;High&lt;/td&gt;
-					&lt;td&gt;MFA + Insurance VC&lt;/td&gt;
-					&lt;td&gt;30 sec&lt;/td&gt;
-					&lt;td&gt;Required (biometric or consent-manager)&lt;/td&gt;
-					&lt;td&gt;Required&lt;/td&gt;
-					&lt;td&gt;Required&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;4&lt;/td&gt;
-					&lt;td&gt;Critical&lt;/td&gt;
-					&lt;td&gt;Manual + dual-control&lt;/td&gt;
-					&lt;td&gt;Session only&lt;/td&gt;
-					&lt;td&gt;Required (manual-approval)&lt;/td&gt;
-					&lt;td&gt;Required&lt;/td&gt;
-					&lt;td&gt;Required&lt;/td&gt;
-					&lt;td&gt;Yes (2 approvers)&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="tier-1--low-risk-open-public-data"&gt;Tier 1 — Low Risk (Open Public Data)&lt;/h2&gt;
-&lt;p&gt;Tier 1 covers public or aggregated data that does not require citizen consent. Anyone with a registered DID can call a Tier 1 scope.&lt;/p&gt;</description></item><item><title>Corridors</title><link>http://localhost/docs/concepts/corridors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/concepts/corridors/</guid><description>&lt;p&gt;A &lt;strong&gt;corridor&lt;/strong&gt; is a domain-specific deployment of UAI covering a particular sector — agriculture, health, finance, education, or language. Each corridor is defined entirely by a JSON configuration file (the Risk Policy). No code changes to the UAI platform are required to add a new corridor.&lt;/p&gt;
-&lt;h2 id="active-corridors"&gt;Active Corridors&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Corridor&lt;/th&gt;
-					&lt;th&gt;Key Scopes&lt;/th&gt;
-					&lt;th&gt;Tier Range&lt;/th&gt;
-					&lt;th&gt;Regulatory Context&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Agriculture&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:crop_diagnosis&lt;/code&gt;, &lt;code&gt;read:soil_data&lt;/code&gt;, &lt;code&gt;read:fpo_info&lt;/code&gt;, &lt;code&gt;read:mandi_prices&lt;/code&gt; (T1); &lt;code&gt;read:pmkisan_status&lt;/code&gt; (T2)&lt;/td&gt;
-					&lt;td&gt;1–2&lt;/td&gt;
-					&lt;td&gt;ICAR, NAFPO FPO records&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Education&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:curriculum_data&lt;/code&gt; (T1); &lt;code&gt;read:student_progress&lt;/code&gt; (T2)&lt;/td&gt;
-					&lt;td&gt;1–2&lt;/td&gt;
-					&lt;td&gt;DIKSHA, National Curriculum Framework&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Health&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:health_profile&lt;/code&gt; (T2); &lt;code&gt;read:diagnostic_result&lt;/code&gt; (T3)&lt;/td&gt;
-					&lt;td&gt;2–3&lt;/td&gt;
-					&lt;td&gt;ABDM / NHA; requires Insurance VC&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Finance&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:credit_data&lt;/code&gt; (T2); &lt;code&gt;write:loan_application&lt;/code&gt; (T3)&lt;/td&gt;
-					&lt;td&gt;2–3&lt;/td&gt;
-					&lt;td&gt;RBI / Account Aggregator; requires Insurance VC&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Language (Bhashini)&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:translation&lt;/code&gt; (T1)&lt;/td&gt;
-					&lt;td&gt;1&lt;/td&gt;
-					&lt;td&gt;MeitY Bhashini programme&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="anatomy-of-a-corridor-agriculture-example"&gt;Anatomy of a Corridor (Agriculture Example)&lt;/h2&gt;
-&lt;p&gt;The agriculture corridor policy defines six scopes:&lt;/p&gt;</description></item><item><title>DIDs and Identity</title><link>http://localhost/docs/concepts/dids-and-identity/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/concepts/dids-and-identity/</guid><description>&lt;p&gt;Every agent in the UAI ecosystem has a &lt;strong&gt;DID (Decentralized Identifier)&lt;/strong&gt; as its permanent, cryptographically verifiable identity. UAI uses the &lt;code&gt;did:web&lt;/code&gt; method for Phase 1.&lt;/p&gt;
-&lt;h2 id="did-format"&gt;DID Format&lt;/h2&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;did:web:{domain}[:{path}]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Examples:&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;DID&lt;/th&gt;
-					&lt;th&gt;DID Document URL&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;did:web:nafpo.gov.in&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;https://nafpo.gov.in/.well-known/did.json&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:education&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;http://localhost:8005/education/did.json&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;did:web:trust.uai.local&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;http://trust.uai.local/.well-known/did.json&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;did:web:example.com:users:alice&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;https://example.com/users/alice/did.json&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;URL mapping rules:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Root DID (&lt;code&gt;did:web:{domain}&lt;/code&gt;) → &lt;code&gt;{scheme}://{domain}/.well-known/did.json&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Path DID (&lt;code&gt;did:web:{domain}:{path}&lt;/code&gt;) → &lt;code&gt;{scheme}://{domain}/{path}/did.json&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Port encoding: &lt;code&gt;%3A&lt;/code&gt; is decoded to &lt;code&gt;:&lt;/code&gt; before URL construction&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;did:web:localhost&lt;/code&gt; uses &lt;code&gt;http://&lt;/code&gt; (not &lt;code&gt;https://&lt;/code&gt;) in development&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="did-document-structure"&gt;DID Document Structure&lt;/h2&gt;
-&lt;p&gt;A DID Document published at &lt;code&gt;/.well-known/did.json&lt;/code&gt; contains the agent&amp;rsquo;s public key(s):&lt;/p&gt;</description></item><item><title>Receipts and Audit</title><link>http://localhost/docs/concepts/receipts-and-audit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/concepts/receipts-and-audit/</guid><description>&lt;p&gt;Every UAI interaction produces a &lt;strong&gt;receipt&lt;/strong&gt; — a cryptographically signed, append-only record that proves the interaction happened, what was authorized, and what the outcome was, without ever storing the raw data exchanged.&lt;/p&gt;
-&lt;h2 id="privacy-first-design"&gt;Privacy-First Design&lt;/h2&gt;
-&lt;p&gt;UAI stores &lt;strong&gt;hashes, not payloads&lt;/strong&gt;. The receipt contains:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;SHA-256 hash of the JCS-canonicalized request body&lt;/li&gt;
-&lt;li&gt;SHA-256 hash of the JCS-canonicalized response body&lt;/li&gt;
-&lt;li&gt;The token hash (not the token itself)&lt;/li&gt;
-&lt;li&gt;Participant DIDs&lt;/li&gt;
-&lt;li&gt;Scope and tier&lt;/li&gt;
-&lt;li&gt;Outcome status&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;No citizen data ever enters the Audit Ledger.&lt;/p&gt;</description></item><item><title>Consent</title><link>http://localhost/docs/concepts/consent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/concepts/consent/</guid><description>&lt;p&gt;Every Tier 2+ data access in UAI requires a &lt;strong&gt;consent artifact&lt;/strong&gt; — a machine-readable document proving that the data principal (citizen) gave informed, free, specific, unambiguous, and revocable consent for this exact data access.&lt;/p&gt;
-&lt;h2 id="legal-basis"&gt;Legal Basis&lt;/h2&gt;
-&lt;p&gt;UAI consent artifacts are designed to comply with the &lt;strong&gt;Digital Personal Data Protection (DPDP) Act, 2023&lt;/strong&gt; (India). The act requires that consent for processing personal data be:&lt;/p&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;DPDP Property&lt;/th&gt;
-					&lt;th&gt;Meaning&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;free&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Not coerced or conditional on a service&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;specific&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Tied to a specific purpose&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;informed&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;The citizen understands what they are consenting to&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;unambiguous&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;A clear affirmative action (not a default)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;affirmative&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Explicit opt-in (not implied)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;revocable&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Can be withdrawn at any time&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;All six properties must be &lt;code&gt;true&lt;/code&gt; in every consent artifact UAI validates.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Concepts on UAI Protocol Documentation</title>
+		<link>http://localhost/docs/concepts/</link>
+		<description>Recent content in Concepts on UAI Protocol Documentation</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="http://localhost/docs/concepts/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Trust Tiers</title>
+				<link>http://localhost/docs/concepts/trust-tiers/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost/docs/concepts/trust-tiers/</guid>
+				<description>&lt;p&gt;Every scope in UAI is assigned a &lt;strong&gt;trust tier&lt;/strong&gt; (1–4) that determines the authentication requirements, token lifetime, consent type, and additional controls required before the Trust Server will issue a delegation token.&lt;/p&gt;&#xA;&lt;h2 id=&#34;tier-summary&#34;&gt;Tier Summary&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Tier&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Risk&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Auth Required&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Token TTL&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Consent&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;DPoP&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Insurance VC&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Human Gate&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;1&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Low&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;None&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;5 min&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Not required&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;2&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Medium&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Consent (OTP or consent-manager)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;2 min&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Required&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;3&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;High&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;MFA + Insurance VC&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;30 sec&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Required (biometric or consent-manager)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Required&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Required&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;4&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Critical&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Manual + dual-control&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Session only&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Required (manual-approval)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Required&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Required&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes (2 approvers)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;tier-1--low-risk-open-public-data&#34;&gt;Tier 1 — Low Risk (Open Public Data)&lt;/h2&gt;&#xA;&lt;p&gt;Tier 1 covers public or aggregated data that does not require citizen consent. Anyone with a registered DID can call a Tier 1 scope.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Corridors</title>
+				<link>http://localhost/docs/concepts/corridors/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost/docs/concepts/corridors/</guid>
+				<description>&lt;p&gt;A &lt;strong&gt;corridor&lt;/strong&gt; is a domain-specific deployment of UAI covering a particular sector — agriculture, health, finance, education, or language. Each corridor is defined entirely by a JSON configuration file (the Risk Policy). No code changes to the UAI platform are required to add a new corridor.&lt;/p&gt;&#xA;&lt;h2 id=&#34;active-corridors&#34;&gt;Active Corridors&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Corridor&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Key Scopes&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Tier Range&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Regulatory Context&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Agriculture&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:crop_diagnosis&lt;/code&gt;, &lt;code&gt;read:soil_data&lt;/code&gt;, &lt;code&gt;read:fpo_info&lt;/code&gt;, &lt;code&gt;read:mandi_prices&lt;/code&gt; (T1); &lt;code&gt;read:pmkisan_status&lt;/code&gt; (T2)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;1–2&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;ICAR, NAFPO FPO records&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Education&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:curriculum_data&lt;/code&gt; (T1); &lt;code&gt;read:student_progress&lt;/code&gt; (T2)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;1–2&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;DIKSHA, National Curriculum Framework&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Health&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:health_profile&lt;/code&gt; (T2); &lt;code&gt;read:diagnostic_result&lt;/code&gt; (T3)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;2–3&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;ABDM / NHA; requires Insurance VC&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Finance&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:credit_data&lt;/code&gt; (T2); &lt;code&gt;write:loan_application&lt;/code&gt; (T3)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;2–3&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;RBI / Account Aggregator; requires Insurance VC&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Language (Bhashini)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:translation&lt;/code&gt; (T1)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;1&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;MeitY Bhashini programme&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;anatomy-of-a-corridor-agriculture-example&#34;&gt;Anatomy of a Corridor (Agriculture Example)&lt;/h2&gt;&#xA;&lt;p&gt;The agriculture corridor policy defines six scopes:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>DIDs and Identity</title>
+				<link>http://localhost/docs/concepts/dids-and-identity/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost/docs/concepts/dids-and-identity/</guid>
+				<description>&lt;p&gt;Every agent in the UAI ecosystem has a &lt;strong&gt;DID (Decentralized Identifier)&lt;/strong&gt; as its permanent, cryptographically verifiable identity. UAI uses the &lt;code&gt;did:web&lt;/code&gt; method for Phase 1.&lt;/p&gt;&#xA;&lt;h2 id=&#34;did-format&#34;&gt;DID Format&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;did:web:{domain}[:{path}]&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Examples:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;DID&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;DID Document URL&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did:web:nafpo.gov.in&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;https://nafpo.gov.in/.well-known/did.json&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:education&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;http://localhost:8005/education/did.json&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did:web:trust.uai.local&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;http://trust.uai.local/.well-known/did.json&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did:web:example.com:users:alice&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;https://example.com/users/alice/did.json&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;&lt;strong&gt;URL mapping rules:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Root DID (&lt;code&gt;did:web:{domain}&lt;/code&gt;) → &lt;code&gt;{scheme}://{domain}/.well-known/did.json&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Path DID (&lt;code&gt;did:web:{domain}:{path}&lt;/code&gt;) → &lt;code&gt;{scheme}://{domain}/{path}/did.json&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Port encoding: &lt;code&gt;%3A&lt;/code&gt; is decoded to &lt;code&gt;:&lt;/code&gt; before URL construction&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;did:web:localhost&lt;/code&gt; uses &lt;code&gt;http://&lt;/code&gt; (not &lt;code&gt;https://&lt;/code&gt;) in development&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;did-document-structure&#34;&gt;DID Document Structure&lt;/h2&gt;&#xA;&lt;p&gt;A DID Document published at &lt;code&gt;/.well-known/did.json&lt;/code&gt; contains the agent&amp;rsquo;s public key(s):&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Receipts and Audit</title>
+				<link>http://localhost/docs/concepts/receipts-and-audit/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost/docs/concepts/receipts-and-audit/</guid>
+				<description>&lt;p&gt;Every UAI interaction produces a &lt;strong&gt;receipt&lt;/strong&gt; — a cryptographically signed, append-only record that proves the interaction happened, what was authorized, and what the outcome was, without ever storing the raw data exchanged.&lt;/p&gt;&#xA;&lt;h2 id=&#34;privacy-first-design&#34;&gt;Privacy-First Design&lt;/h2&gt;&#xA;&lt;p&gt;UAI stores &lt;strong&gt;hashes, not payloads&lt;/strong&gt;. The receipt contains:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;SHA-256 hash of the JCS-canonicalized request body&lt;/li&gt;&#xA;&lt;li&gt;SHA-256 hash of the JCS-canonicalized response body&lt;/li&gt;&#xA;&lt;li&gt;The token hash (not the token itself)&lt;/li&gt;&#xA;&lt;li&gt;Participant DIDs&lt;/li&gt;&#xA;&lt;li&gt;Scope and tier&lt;/li&gt;&#xA;&lt;li&gt;Outcome status&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;No citizen data ever enters the Audit Ledger.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Consent</title>
+				<link>http://localhost/docs/concepts/consent/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost/docs/concepts/consent/</guid>
+				<description>&lt;p&gt;Every Tier 2+ data access in UAI requires a &lt;strong&gt;consent artifact&lt;/strong&gt; — a machine-readable document proving that the data principal (citizen) gave informed, free, specific, unambiguous, and revocable consent for this exact data access.&lt;/p&gt;&#xA;&lt;h2 id=&#34;legal-basis&#34;&gt;Legal Basis&lt;/h2&gt;&#xA;&lt;p&gt;UAI consent artifacts are designed to comply with the &lt;strong&gt;Digital Personal Data Protection (DPDP) Act, 2023&lt;/strong&gt; (India). The act requires that consent for processing personal data be:&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;DPDP Property&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Meaning&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;free&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Not coerced or conditional on a service&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;specific&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Tied to a specific purpose&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;informed&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;The citizen understands what they are consenting to&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;unambiguous&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;A clear affirmative action (not a default)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;affirmative&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Explicit opt-in (not implied)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;revocable&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Can be withdrawn at any time&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;All six properties must be &lt;code&gt;true&lt;/code&gt; in every consent artifact UAI validates.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

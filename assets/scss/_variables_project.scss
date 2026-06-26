@@ -1,0 +1,22 @@
+// Inter via Google Fonts — closest to Stripe's typeface
+$td-enable-google-fonts: true;
+$td-google-font-name: 'Inter';
+$td-google-font-family: 'Inter:300,400,500,600,700';
+$td-web-font-path: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
+
+// Font sizing & rhythm
+$font-weight-base: 400;
+$td-font-weight-body-text: 400;
+$font-size-base: 0.9375rem;   // ~15px
+$line-height-base: 1.7;
+
+// Heading weight
+$headings-font-weight: 600;
+$headings-color: #1a1f36;
+
+// Color palette — Stripe-inspired
+$body-color: #3c4257;
+$link-color: #4F8EF7;
+$link-hover-color: #3B7AE0;
+$primary: #635BFF;
+$secondary: #8792a2;

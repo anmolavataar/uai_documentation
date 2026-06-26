@@ -1,0 +1,176 @@
+// ─── Links ────────────────────────────────────────────────────────────────────
+a {
+  text-decoration: none !important;
+  &:hover { text-decoration: none !important; }
+}
+
+// ─── Navbar ───────────────────────────────────────────────────────────────────
+.td-navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e6ebf1;
+  box-shadow: none !important;
+
+  .nav-link {
+    color: #3c4257 !important;
+    font-weight: 500;
+    &:hover, &.active { color: #0055DE !important; text-decoration: none; }
+  }
+
+  .navbar-brand {
+    color: #1a1f36 !important;
+    font-weight: 700;
+  }
+}
+
+// ─── Sidebar dropdown arrows → simple "›" ────────────────────────────────────
+nav.foldable-nav .ul-1 .with-child > label::before {
+  font: normal 0.85rem/1.5 inherit !important;
+  content: "›" !important;
+  padding-left: 0.1em;
+  padding-right: 0.3em;
+}
+
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
+.td-sidebar {
+  background-color: #f6f9fc;
+  border-right: 1px solid #e6ebf1 !important;
+}
+
+.td-sidebar-nav {
+  a {
+    text-decoration: none !important;
+    &:hover { text-decoration: none !important; color: #4F8EF7 !important; }
+    &.active { color: #4F8EF7 !important; font-weight: 600; }
+  }
+}
+
+.td-sidebar-nav__section-title {
+  // Default: muted uppercase label
+  a {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #8792a2;
+  }
+
+  // Hovering anywhere on the label (including the arrow area) turns the text blue too
+  label:hover a,
+  label:hover a span {
+    color: #4F8EF7 !important;
+  }
+
+  // Active section (current page is inside this section)
+  &.active-path > label > a,
+  &.active-path > a {
+    color: #4F8EF7 !important;
+  }
+}
+
+.td-sidebar-link__page {
+  font-size: 0.875rem;
+  color: #3c4257;
+}
+
+// ─── Headings ─────────────────────────────────────────────────────────────────
+h1, h2, h3, h4, h5, h6 {
+  color: #1a1f36;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2rem; }
+
+h2 {
+  font-size: 1.375rem;
+  border-bottom: 1px solid #e6ebf1;
+  padding-bottom: 0.5rem;
+}
+
+h3 { font-size: 1.125rem; }
+
+// ─── Code blocks ──────────────────────────────────────────────────────────────
+.td-content pre,
+.td-content .highlight pre {
+  background-color: #f6f9fc !important;
+  border: 1px solid #e6ebf1 !important;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+}
+
+.td-content p code,
+.td-content li > code,
+.td-content table code {
+  background-color: #f6f9fc;
+  color: #c1274a;
+  border-radius: 4px;
+  font-size: 85%;
+}
+
+// ─── Right sidebar (TOC) ──────────────────────────────────────────────────────
+.td-sidebar-toc {
+  background-color: #f6f9fc;
+  border-left: 1px solid #e6ebf1 !important;
+}
+
+.td-toc {
+  &-title {
+    color: #8792a2;
+    border-bottom: 1px solid #e6ebf1;
+
+    &__text {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  #TableOfContents {
+    a {
+      font-size: 0.875rem;
+      color: #3c4257;
+      font-weight: 400;
+      text-decoration: none !important;
+      border-left-color: transparent;
+
+      &:hover {
+        color: #4F8EF7 !important;
+        background-color: transparent;
+        text-decoration: none !important;
+      }
+
+      &:focus,
+      &:active {
+        color: #4F8EF7 !important;
+        text-decoration: none !important;
+        outline: none;
+      }
+
+      &.active {
+        color: #4F8EF7 !important;
+        font-weight: 600;
+        border-left-color: #4F8EF7 !important;
+        background-color: transparent !important;
+      }
+    }
+
+    // Top-level entries — same weight as left sidebar section links
+    > ul > li > :not(ul) {
+      font-weight: 500;
+    }
+  }
+}
+
+// ─── Content area ─────────────────────────────────────────────────────────────
+.td-content {
+  p, li, td { color: #3c4257; }
+
+  blockquote {
+    border-left: 3px solid #635BFF;
+    color: #6b7c93;
+    background-color: #f6f9fc;
+    padding: 0.75rem 1rem;
+    border-radius: 0 4px 4px 0;
+  }
+}
