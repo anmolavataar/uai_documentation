@@ -19934,26 +19934,29 @@ body {
     object-fit: cover;
     object-position: center; }
 
-@media (min-width: 768px) {
-  .td-navbar {
-    top: 72px !important; } }
+.td-navbar {
+  display: none !important; }
 
 body {
   padding-top: 72px; }
 
-@supports (position: sticky) {
-  .td-sidebar__inner {
-    top: calc(72px + 4rem) !important; } }
+.td-sidebar {
+  margin-top: 0 !important; }
 
 @supports (position: sticky) {
-  .td-sidebar-toc {
-    top: calc(72px + 4rem) !important;
-    margin-top: calc(72px + 4rem) !important;
-    height: calc(100vh - 72px - 4rem) !important; } }
+  .td-sidebar__inner {
+    top: 72px !important; } }
+
+.td-sidebar-toc {
+  margin-top: 0 !important; }
+  @supports (position: sticky) {
+    .td-sidebar-toc {
+      top: 72px !important;
+      height: calc(100vh - 72px) !important; } }
 
 @media (min-width: 768px) {
   .td-main main {
-    padding-top: calc(1.5rem + 4rem + 72px) !important; } }
+    padding-top: calc(1.5rem + 72px) !important; } }
 
 a {
   text-decoration: none !important; }
@@ -19979,6 +19982,37 @@ nav.foldable-nav .ul-1 .with-child > label::before {
   content: "›" !important;
   padding-left: 0.1em;
   padding-right: 0.3em; }
+
+.uai-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1rem 0.75rem 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #e6ebf1;
+  text-decoration: none !important; }
+  .uai-sidebar-brand__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; }
+    .uai-sidebar-brand__logo svg {
+      width: 28px;
+      height: 28px; }
+  .uai-sidebar-brand__title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1a1f36;
+    line-height: 1.3;
+    letter-spacing: -0.01em; }
+  .uai-sidebar-brand:hover .uai-sidebar-brand__title {
+    color: #4F8EF7; }
+
+.td-sidebar-tree-root-li > a.tree-root {
+  display: none !important; }
+
+.td-sidebar-link.tree-root {
+  border-bottom: none !important;
+  margin-bottom: 0 !important; }
 
 .td-sidebar {
   background-color: #f6f9fc;
@@ -20058,7 +20092,7 @@ h3, .h3 {
 .td-toc #TableOfContents a {
   font-size: 0.875rem;
   color: #3c4257;
-  font-weight: 400;
+  font-weight: 300;
   text-decoration: none !important;
   border-left-color: transparent; }
   .td-toc #TableOfContents a:hover {
@@ -20074,9 +20108,6 @@ h3, .h3 {
     font-weight: 600;
     border-left-color: #4F8EF7 !important;
     background-color: transparent !important; }
-
-.td-toc #TableOfContents > ul > li > :not(ul) {
-  font-weight: 500; }
 
 .td-footer {
   background-color: #0a0f1e !important;

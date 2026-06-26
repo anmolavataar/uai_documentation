@@ -20,38 +20,39 @@ $uai-banner-height: 72px;
   }
 }
 
-// Push fixed navbar below the banner
-@include media-breakpoint-up(md) {
-  .td-navbar {
-    top: $uai-banner-height !important;
-  }
-}
+// Hide the now-removed navbar entirely
+.td-navbar { display: none !important; }
 
-// Add room at the top of the page for banner + navbar on mobile
+// Page body offset — only the banner now
 body {
   padding-top: $uai-banner-height;
 }
 
-// Adjust sidebar sticky top (banner + navbar)
+// Left sidebar — remove navbar margin, stick directly under banner
+.td-sidebar {
+  margin-top: 0 !important;
+}
+
 .td-sidebar__inner {
   @supports (position: sticky) {
-    top: calc(#{$uai-banner-height} + #{$td-navbar-min-height}) !important;
+    top: $uai-banner-height !important;
   }
 }
 
-// Adjust TOC sticky top (banner + navbar)
+// Right TOC — remove navbar margin, stick directly under banner
 .td-sidebar-toc {
+  margin-top: 0 !important;
+
   @supports (position: sticky) {
-    top: calc(#{$uai-banner-height} + #{$td-navbar-min-height}) !important;
-    margin-top: calc(#{$uai-banner-height} + #{$td-navbar-min-height}) !important;
-    height: calc(100vh - #{$uai-banner-height} - #{$td-navbar-min-height}) !important;
+    top: $uai-banner-height !important;
+    height: calc(100vh - #{$uai-banner-height}) !important;
   }
 }
 
-// Adjust main content top padding (banner + navbar)
+// Main content top padding — banner only (no navbar below it)
 @include media-breakpoint-up(md) {
   .td-main main {
-    padding-top: calc(1.5rem + #{$td-navbar-min-height} + #{$uai-banner-height}) !important;
+    padding-top: calc(1.5rem + #{$uai-banner-height}) !important;
   }
 }
 
@@ -85,6 +86,51 @@ nav.foldable-nav .ul-1 .with-child > label::before {
   content: "›" !important;
   padding-left: 0.1em;
   padding-right: 0.3em;
+}
+
+// ─── Sidebar brand (replaces "Docs" tree-root) ───────────────────────────────
+.uai-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1rem 0.75rem 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #e6ebf1;
+  text-decoration: none !important;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  &__title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1a1f36;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  &:hover &__title {
+    color: #4F8EF7;
+  }
+}
+
+// Hide the raw "Docs" tree-root link — replaced by .uai-sidebar-brand above
+.td-sidebar-tree-root-li > a.tree-root {
+  display: none !important;
+}
+
+// Remove the border/margin that was on the tree-root link since brand has its own
+.td-sidebar-link.tree-root {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
@@ -187,7 +233,7 @@ h3 { font-size: 1.125rem; }
     a {
       font-size: 0.875rem;
       color: #3c4257;
-      font-weight: 400;
+      font-weight: 300;
       text-decoration: none !important;
       border-left-color: transparent;
 
@@ -210,11 +256,6 @@ h3 { font-size: 1.125rem; }
         border-left-color: #4F8EF7 !important;
         background-color: transparent !important;
       }
-    }
-
-    // Top-level entries — same weight as left sidebar section links
-    > ul > li > :not(ul) {
-      font-weight: 500;
     }
   }
 }
