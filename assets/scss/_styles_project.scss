@@ -1,3 +1,60 @@
+// ─── Government banner ────────────────────────────────────────────────────────
+$uai-banner-height: 72px;
+
+.uai-gov-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $uai-banner-height;
+  z-index: 50;
+  overflow: hidden;
+  padding: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+// Push fixed navbar below the banner
+@include media-breakpoint-up(md) {
+  .td-navbar {
+    top: $uai-banner-height !important;
+  }
+}
+
+// Add room at the top of the page for banner + navbar on mobile
+body {
+  padding-top: $uai-banner-height;
+}
+
+// Adjust sidebar sticky top (banner + navbar)
+.td-sidebar__inner {
+  @supports (position: sticky) {
+    top: calc(#{$uai-banner-height} + #{$td-navbar-min-height}) !important;
+  }
+}
+
+// Adjust TOC sticky top (banner + navbar)
+.td-sidebar-toc {
+  @supports (position: sticky) {
+    top: calc(#{$uai-banner-height} + #{$td-navbar-min-height}) !important;
+    margin-top: calc(#{$uai-banner-height} + #{$td-navbar-min-height}) !important;
+    height: calc(100vh - #{$uai-banner-height} - #{$td-navbar-min-height}) !important;
+  }
+}
+
+// Adjust main content top padding (banner + navbar)
+@include media-breakpoint-up(md) {
+  .td-main main {
+    padding-top: calc(1.5rem + #{$td-navbar-min-height} + #{$uai-banner-height}) !important;
+  }
+}
+
 // ─── Links ────────────────────────────────────────────────────────────────────
 a {
   text-decoration: none !important;
@@ -160,6 +217,52 @@ h3 { font-size: 1.125rem; }
       font-weight: 500;
     }
   }
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+// "row" class on the footer cancels the container-fluid's gutter padding,
+// making the dark background truly edge-to-edge with no white lines.
+.td-footer {
+  background-color: #0a0f1e !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 !important;
+  min-height: unset !important;
+}
+
+.uai-footer-bottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 4rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.uai-footer-copyright {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  padding-top: 0.1rem;
+}
+
+.uai-footer-attr {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+
+  span {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+@media (max-width: 767px) {
+  .uai-footer-bottom { flex-direction: column; align-items: flex-start; }
+  .uai-footer-attr { align-items: flex-start; }
 }
 
 // ─── Content area ─────────────────────────────────────────────────────────────
