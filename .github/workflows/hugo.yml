@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 permissions:
   contents: read
@@ -44,21 +47,31 @@ jobs:
         run: npm install -D autoprefixer postcss postcss-cli
 
       - name: Setup Pages
+        if: github.event_name == 'push'
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Build with Hugo
+      - name: Build with Hugo (PR check)
+        if: github.event_name == 'pull_request'
+        env:
+          HUGO_ENVIRONMENT: production
+        run: hugo --minify
+
+      - name: Build with Hugo (deploy)
+        if: github.event_name == 'push'
         env:
           HUGO_ENVIRONMENT: production
         run: |
           hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
+        if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
   deploy:
+    if: github.event_name == 'push'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
