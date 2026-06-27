@@ -35,7 +35,7 @@
   {{- end }}
 
   <!-- Brand header replacing the plain "Docs" tree-root link -->
-  <a href="uai_documentation/docs/" class="uai-sidebar-brand">
+  <a href="{{ "docs/" | relURL }}" class="uai-sidebar-brand">
     <span class="uai-sidebar-brand__logo">
       {{ with resources.Get "icons/logo.svg" }}{{ (. | minify).Content | safeHTML }}{{ end }}
     </span>
