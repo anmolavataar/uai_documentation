@@ -261,49 +261,59 @@ h3 { font-size: 1.125rem; }
 }
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
-// "row" class on the footer cancels the container-fluid's gutter padding,
-// making the dark background truly edge-to-edge with no white lines.
 .td-footer {
-  background-color: #0a0f1e !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #000000 !important;
+  border-top: none !important;
   padding: 0 !important;
   min-height: unset !important;
 }
 
 .uai-footer-bottom {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 1rem 4rem;
+  padding: 1.5rem 2rem;
   width: 100%;
   box-sizing: border-box;
+  max-width: 1224px;
+  margin: 0 auto;
 }
 
 .uai-footer-copyright {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: rgb(241, 241, 241);
   white-space: nowrap;
-  padding-top: 0.1rem;
+  line-height: 1.3;
 }
 
 .uai-footer-attr {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.15rem;
+  gap: 0;
+  text-align: right;
 
   span {
     display: block;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.35);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: rgb(241, 241, 241);
+    line-height: 1.3;
+
+    &:last-child {
+      color: rgba(241, 241, 241, 0.45);
+    }
   }
 }
 
 @media (max-width: 767px) {
-  .uai-footer-bottom { flex-direction: column; align-items: flex-start; }
-  .uai-footer-attr { align-items: flex-start; }
+  .uai-footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+  .uai-footer-attr { align-items: center; }
 }
 
 // ─── Content area ─────────────────────────────────────────────────────────────
