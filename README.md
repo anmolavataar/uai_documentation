@@ -48,8 +48,8 @@ sudo mv hugo /usr/local/bin/hugo
 
 ```bash
 # 1. Clone
-git clone https://github.com/<org>/uai_documentation.git
-cd uai_documentation
+git clone https://github.com/<org>/uai_handbook.git
+cd uai_handbook
 
 # 2. Install PostCSS toolchain (required by Docsy)
 npm install
@@ -211,7 +211,7 @@ Check the new page renders correctly, appears in the sidebar, and has no broken 
 ## Project structure
 
 ```
-uai_documentation/
+uai_handbook/
 ├── content/docs/          # All documentation pages (Markdown)
 ├── assets/scss/           # Custom style overrides
 │   ├── _variables_project.scss   # Bootstrap/Docsy variable overrides
