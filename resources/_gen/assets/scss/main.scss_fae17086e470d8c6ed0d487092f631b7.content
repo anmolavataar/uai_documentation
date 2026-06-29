@@ -19924,9 +19924,11 @@ body {
   left: 0;
   width: 100%;
   height: 72px;
+  height: calc(72px + env(safe-area-inset-top, 0px));
   z-index: 50;
   overflow: hidden;
-  padding: 0; }
+  padding: 0;
+  padding-top: env(safe-area-inset-top, 0px); }
   .uai-gov-banner img {
     display: block;
     width: 100%;
@@ -19938,21 +19940,25 @@ body {
   display: none !important; }
 
 body {
-  padding-top: 72px; }
+  padding-top: 72px;
+  padding-top: calc(72px + env(safe-area-inset-top, 0px)); }
 
 .td-sidebar {
   margin-top: 0 !important; }
 
 @supports (position: sticky) {
   .td-sidebar__inner {
-    top: 72px !important; } }
+    top: 72px !important;
+    top: calc(72px + env(safe-area-inset-top, 0px)) !important; } }
 
 .td-sidebar-toc {
   margin-top: 0 !important; }
   @supports (position: sticky) {
     .td-sidebar-toc {
       top: 72px !important;
-      height: calc(100vh - 72px) !important; } }
+      top: calc(72px + env(safe-area-inset-top, 0px)) !important;
+      height: calc(100vh - 72px) !important;
+      height: calc(100dvh - 72px - env(safe-area-inset-top, 0px)) !important; } }
 
 @media (min-width: 768px) {
   .td-main main {
