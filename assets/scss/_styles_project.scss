@@ -7,9 +7,11 @@ $uai-banner-height: 72px;
   left: 0;
   width: 100%;
   height: $uai-banner-height;
+  height: calc(#{$uai-banner-height} + env(safe-area-inset-top, 0px));
   z-index: 50;
   overflow: hidden;
   padding: 0;
+  padding-top: env(safe-area-inset-top, 0px);
 
   img {
     display: block;
@@ -26,6 +28,7 @@ $uai-banner-height: 72px;
 // Page body offset — only the banner now
 body {
   padding-top: $uai-banner-height;
+  padding-top: calc(#{$uai-banner-height} + env(safe-area-inset-top, 0px));
 }
 
 // Left sidebar — remove navbar margin, stick directly under banner
@@ -36,6 +39,7 @@ body {
 .td-sidebar__inner {
   @supports (position: sticky) {
     top: $uai-banner-height !important;
+    top: calc(#{$uai-banner-height} + env(safe-area-inset-top, 0px)) !important;
   }
 }
 
@@ -45,7 +49,9 @@ body {
 
   @supports (position: sticky) {
     top: $uai-banner-height !important;
+    top: calc(#{$uai-banner-height} + env(safe-area-inset-top, 0px)) !important;
     height: calc(100vh - #{$uai-banner-height}) !important;
+    height: calc(100dvh - #{$uai-banner-height} - env(safe-area-inset-top, 0px)) !important;
   }
 }
 
