@@ -56,7 +56,7 @@ jobs:
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --root-dir $GITHUB_WORKSPACE/public --timeout 10 --max-retries 3 --exclude-mail './public/**/*.html'
+          args: --root-dir $GITHUB_WORKSPACE/public --timeout 10 --max-retries 3 './public/**/*.html'
           fail: true
 
       - name: Upload artifact
