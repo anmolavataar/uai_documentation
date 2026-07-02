@@ -1,446 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Schemas on UAI Protocol Documentation</title><link>http://localhost/docs/schemas/</link><description>Recent content in Schemas on UAI Protocol Documentation</description><generator>Hugo</generator><language>en-us</language><atom:link href="http://localhost/docs/schemas/index.xml" rel="self" type="application/rss+xml"/><item><title>Registry Agent Record</title><link>http://localhost/docs/schemas/registry-agent-record/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/schemas/registry-agent-record/</guid><description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/registry-agent-record/schema.json&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Every registered agent has exactly one Registry Agent Record. It is created via &lt;code&gt;POST /registry/v1/agents&lt;/code&gt; and stored in Elasticsearch.&lt;/p&gt;
-&lt;h2 id="required-fields"&gt;Required Fields&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Field&lt;/th&gt;
-					&lt;th&gt;Type&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;did&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Agent DID. Must start with &lt;code&gt;did:&lt;/code&gt;.&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;role&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;enum&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;&amp;quot;seeker&amp;quot;&lt;/code&gt;, &lt;code&gt;&amp;quot;provider&amp;quot;&lt;/code&gt;, or &lt;code&gt;&amp;quot;both&amp;quot;&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;endpoints&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;array&lt;/td&gt;
-					&lt;td&gt;Communication endpoints (see below)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;capabilities&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;array&lt;/td&gt;
-					&lt;td&gt;Capability URNs supported by this agent&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;supported_scopes&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;array&lt;/td&gt;
-					&lt;td&gt;Scope strings this agent can serve (or request)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;risk_tier_max&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;integer&lt;/td&gt;
-					&lt;td&gt;Maximum trust tier: 1–4&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;registered_at&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;ISO 8601 datetime of registration&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="conditional-fields"&gt;Conditional Fields&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Field&lt;/th&gt;
-					&lt;th&gt;Required when&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;vc_refs&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;risk_tier_max &amp;gt;= 3&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Array of DID URIs pointing to VC credentials (e.g., &lt;code&gt;did:web:abdm.gov.in#vc-insurance-2026&lt;/code&gt;)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;consent_endpoint&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;role = seeker&lt;/code&gt; AND &lt;code&gt;risk_tier_max &amp;gt;= 2&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;URL where Trust Server fetches consent artifacts&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="optional-fields"&gt;Optional Fields&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Field&lt;/th&gt;
-					&lt;th&gt;Type&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;facts_ref&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;URL to the agent&amp;rsquo;s NANDA AgentFacts document&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;india_compliance&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;{dpdp_category, data_residency}&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;etag&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;ETag for optimistic concurrency&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;registry_version&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Schema version&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="endpoint-object"&gt;Endpoint Object&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;uri&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;https://provider.example.gov.in/uai/v1/query&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;transport&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;https&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;auth&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;bearer&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Field&lt;/th&gt;
-					&lt;th&gt;Values&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;transport&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;https&lt;/code&gt;, &lt;code&gt;wss&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;auth&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;bearer&lt;/code&gt;, &lt;code&gt;dpop&lt;/code&gt;, &lt;code&gt;none&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="capability-object"&gt;Capability Object&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;urn:capability:crop-disease-detection:v1&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;version&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;id&lt;/code&gt; must start with &lt;code&gt;urn:capability:&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>UAI Receipt</title><link>http://localhost/docs/schemas/uai-receipt/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/schemas/uai-receipt/</guid><description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/uai-receipt/schema.json&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;A UAI Receipt is produced by the Provider after every successful (or failed) P2P interaction. It contains cryptographic hashes of the exchanged data — never the raw data itself.&lt;/p&gt;
-&lt;h2 id="required-fields"&gt;Required Fields&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Field&lt;/th&gt;
-					&lt;th&gt;Type&lt;/th&gt;
-					&lt;th&gt;Constraint&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;receipt_version&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Must be &lt;code&gt;&amp;quot;1.0.0&amp;quot;&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Schema version&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;transaction_id&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Must start with &lt;code&gt;txn_&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Unique transaction identifier&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;message_id&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Must start with &lt;code&gt;msg_&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Unique message identifier&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;issued_at&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;ISO 8601&lt;/td&gt;
-					&lt;td&gt;When the receipt was created&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;participants&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;—&lt;/td&gt;
-					&lt;td&gt;DIDs of all parties&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;authorization&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;—&lt;/td&gt;
-					&lt;td&gt;Token and scope information&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;artifacts&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;—&lt;/td&gt;
-					&lt;td&gt;Hashes of exchanged data&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;outcome&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;—&lt;/td&gt;
-					&lt;td&gt;Interaction result&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;signature&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;—&lt;/td&gt;
-					&lt;td&gt;Provider&amp;rsquo;s cryptographic signature&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="participants-object"&gt;Participants Object&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;seeker_did&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;did:web:seeker.example.com&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;provider_did&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;did:web:provider.example.com&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;trust_server_did&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;did:web:trust.uai.local&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All three DID fields must start with &lt;code&gt;did:&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>UAI Risk Policy</title><link>http://localhost/docs/schemas/uai-risk-policy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/schemas/uai-risk-policy/</guid><description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/uai-risk-policy/schema.json&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;The Risk Policy is a JSON file evaluated by the Trust Server for every token request. One file can cover multiple corridors. Adding new corridors or scopes requires only editing this file and restarting the Trust Server — no code changes.&lt;/p&gt;
-&lt;h2 id="top-level-fields"&gt;Top-Level Fields&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Field&lt;/th&gt;
-					&lt;th&gt;Type&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;policy_id&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Unique identifier for this policy (e.g., &lt;code&gt;uai-risk-policy:agri:2026-04&lt;/code&gt;)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;version&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Policy version string&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;scopes&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;array&lt;/td&gt;
-					&lt;td&gt;Array of &lt;code&gt;ScopeRule&lt;/code&gt; objects&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="scoperule-fields"&gt;ScopeRule Fields&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Field&lt;/th&gt;
-					&lt;th&gt;Type&lt;/th&gt;
-					&lt;th&gt;Required&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;scope&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Yes&lt;/td&gt;
-					&lt;td&gt;Exact scope string, or wildcard ending with &lt;code&gt;*&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;tier&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;integer&lt;/td&gt;
-					&lt;td&gt;Yes&lt;/td&gt;
-					&lt;td&gt;Risk tier (1–4)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;consent&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;Yes&lt;/td&gt;
-					&lt;td&gt;Consent requirements&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;receipts&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-					&lt;td&gt;Receipt requirements&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;logging&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-					&lt;td&gt;Audit logging requirements&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;provider_requirements&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-					&lt;td&gt;Provider-side requirements&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;runtime_controls&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;No&lt;/td&gt;
-					&lt;td&gt;Human gate and dual control&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id="consent-object"&gt;Consent Object&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;required&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;true&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;allowed_methods&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#000;font-weight:bold"&gt;[&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#34;otp&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;consent-manager&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;],&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;dpdp_properties_required&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#000;font-weight:bold"&gt;[&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#34;free&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;specific&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;informed&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;unambiguous&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;affirmative&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;revocable&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;],&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;purpose_bound&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;true&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="receipts-object"&gt;Receipts Object&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;required&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;true&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;payload_hashing&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;sha256&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="logging-object"&gt;Logging Object&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;min_retention_days&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#0000cf;font-weight:bold"&gt;180&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;jurisdiction&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;IN&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="provider-requirements-object"&gt;Provider Requirements Object&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;required_vc_types&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#000;font-weight:bold"&gt;[&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#34;UAIInsuranceCredential&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;],&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;insurance_vc_required&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;true&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Constraint:&lt;/strong&gt; If &lt;code&gt;tier &amp;gt;= 3&lt;/code&gt;, &lt;code&gt;provider_requirements.insurance_vc_required&lt;/code&gt; must be &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>AgentFacts UAI Extension</title><link>http://localhost/docs/schemas/agentfacts-extension/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/schemas/agentfacts-extension/</guid><description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/agentfacts-uai-extension/schema.json&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;NANDA (Network of AI Networked Distributed Agents) defines the global &lt;strong&gt;AgentFacts&lt;/strong&gt; document format for AI agent discovery. UAI extends this with a &lt;code&gt;uai&lt;/code&gt; block that carries UAI-specific registration information, enabling global discovery while preserving UAI trust metadata.&lt;/p&gt;
-&lt;h2 id="purpose"&gt;Purpose&lt;/h2&gt;
-&lt;p&gt;An agent that publishes an AgentFacts document with a valid &lt;code&gt;uai&lt;/code&gt; extension block can be discovered through both the NANDA global directory and the UAI national Registry. The bridge adapter validates this block before publishing.&lt;/p&gt;</description></item><item><title>Consent Artifact</title><link>http://localhost/docs/schemas/consent-artifact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/schemas/consent-artifact/</guid><description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/consent-artifact/schema.json&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;A consent artifact is the machine-readable proof that a citizen consented to a specific data access. The Trust Server fetches and validates a consent artifact for every Tier 2+ token request.&lt;/p&gt;
-&lt;h2 id="required-fields"&gt;Required Fields&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Field&lt;/th&gt;
-					&lt;th&gt;Type&lt;/th&gt;
-					&lt;th&gt;Constraint&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;consent_id&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Must start with &lt;code&gt;cns_&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Unique identifier for this consent&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;subject_ref&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Must be masked (e.g., &lt;code&gt;masked_aadhaar_8765&lt;/code&gt;)&lt;/td&gt;
-					&lt;td&gt;Reference to the consenting citizen — never raw PII&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;seeker_did&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Must start with &lt;code&gt;did:&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;DID of the agent requesting the data&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;provider_did&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Must start with &lt;code&gt;did:&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;DID of the agent providing the data&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;purpose&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Machine-readable&lt;/td&gt;
-					&lt;td&gt;Specific purpose string that binds this consent&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;allowed_scopes&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;array&lt;/td&gt;
-					&lt;td&gt;Non-empty&lt;/td&gt;
-					&lt;td&gt;Scope strings this consent covers&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;issued_at&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;ISO 8601&lt;/td&gt;
-					&lt;td&gt;When consent was collected&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;expires_at&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;ISO 8601&lt;/td&gt;
-					&lt;td&gt;When consent expires&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;collection_method&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;enum&lt;/td&gt;
-					&lt;td&gt;See below&lt;/td&gt;
-					&lt;td&gt;How consent was collected&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;dpdp_properties&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td&gt;All 6 must be &lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;DPDP Act 2023 compliance properties&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;revocation_status&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;string&lt;/td&gt;
-					&lt;td&gt;Must be &lt;code&gt;&amp;quot;active&amp;quot;&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Current status of this consent&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="conditional-fields"&gt;Conditional Fields&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Field&lt;/th&gt;
-					&lt;th&gt;Required when&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;revocation_check_url&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;collection_method&lt;/code&gt; is &lt;code&gt;biometric&lt;/code&gt; or &lt;code&gt;manual-approval&lt;/code&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="collection-methods"&gt;Collection Methods&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Value&lt;/th&gt;
-					&lt;th&gt;Tier&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;otp&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;2&lt;/td&gt;
-					&lt;td&gt;OTP-based consent (e.g., mobile OTP)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;biometric&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;3&lt;/td&gt;
-					&lt;td&gt;Biometric authentication (fingerprint, iris)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;consent-manager&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;2–3&lt;/td&gt;
-					&lt;td&gt;Account Aggregator / consent manager platform&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;manual-approval&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;4&lt;/td&gt;
-					&lt;td&gt;Human review and sign-off&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="dpdp-properties"&gt;DPDP Properties&lt;/h2&gt;
-&lt;p&gt;All six DPDP properties must be &lt;code&gt;true&lt;/code&gt; for the consent to be valid:&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Schemas on UAI Protocol Documentation</title>
+		<link>http://localhost:1313/docs/schemas/</link>
+		<description>Recent content in Schemas on UAI Protocol Documentation</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="http://localhost:1313/docs/schemas/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Registry Agent Record</title>
+				<link>http://localhost:1313/docs/schemas/registry-agent-record/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/schemas/registry-agent-record/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/registry-agent-record/schema.json&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;Every registered agent has exactly one Registry Agent Record. It is created via &lt;code&gt;POST /registry/v1/agents&lt;/code&gt; and stored in Elasticsearch.&lt;/p&gt;&#xA;&lt;h2 id=&#34;required-fields&#34;&gt;Required Fields&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Field&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Type&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Agent DID. Must start with &lt;code&gt;did:&lt;/code&gt;.&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;role&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;enum&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;&amp;quot;seeker&amp;quot;&lt;/code&gt;, &lt;code&gt;&amp;quot;provider&amp;quot;&lt;/code&gt;, or &lt;code&gt;&amp;quot;both&amp;quot;&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;endpoints&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;array&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Communication endpoints (see below)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;capabilities&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;array&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Capability URNs supported by this agent&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;supported_scopes&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;array&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Scope strings this agent can serve (or request)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;risk_tier_max&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;integer&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Maximum trust tier: 1–4&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;registered_at&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;ISO 8601 datetime of registration&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;conditional-fields&#34;&gt;Conditional Fields&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Field&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Required when&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;vc_refs&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;risk_tier_max &amp;gt;= 3&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Array of DID URIs pointing to VC credentials (e.g., &lt;code&gt;did:web:abdm.gov.in#vc-insurance-2026&lt;/code&gt;)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;consent_endpoint&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;role = seeker&lt;/code&gt; AND &lt;code&gt;risk_tier_max &amp;gt;= 2&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;URL where Trust Server fetches consent artifacts&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;optional-fields&#34;&gt;Optional Fields&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Field&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Type&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;facts_ref&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;URL to the agent&amp;rsquo;s NANDA AgentFacts document&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;india_compliance&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;{dpdp_category, data_residency}&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;etag&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;ETag for optimistic concurrency&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;registry_version&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Schema version&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;endpoint-object&#34;&gt;Endpoint Object&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;uri&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://provider.example.gov.in/uai/v1/query&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;transport&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;auth&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;bearer&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Field&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Values&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;transport&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;https&lt;/code&gt;, &lt;code&gt;wss&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;auth&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;bearer&lt;/code&gt;, &lt;code&gt;dpop&lt;/code&gt;, &lt;code&gt;none&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;capability-object&#34;&gt;Capability Object&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;urn:capability:crop-disease-detection:v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;version&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;id&lt;/code&gt; must start with &lt;code&gt;urn:capability:&lt;/code&gt;.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>UAI Receipt</title>
+				<link>http://localhost:1313/docs/schemas/uai-receipt/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/schemas/uai-receipt/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/uai-receipt/schema.json&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;A UAI Receipt is produced by the Provider after every successful (or failed) P2P interaction. It contains cryptographic hashes of the exchanged data — never the raw data itself.&lt;/p&gt;&#xA;&lt;h2 id=&#34;required-fields&#34;&gt;Required Fields&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Field&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Type&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Constraint&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;receipt_version&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Must be &lt;code&gt;&amp;quot;1.0.0&amp;quot;&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Schema version&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;transaction_id&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Must start with &lt;code&gt;txn_&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Unique transaction identifier&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;message_id&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Must start with &lt;code&gt;msg_&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Unique message identifier&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;issued_at&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;ISO 8601&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;When the receipt was created&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;participants&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;—&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;DIDs of all parties&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;authorization&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;—&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Token and scope information&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;artifacts&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;—&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Hashes of exchanged data&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;outcome&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;—&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Interaction result&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;signature&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;—&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Provider&amp;rsquo;s cryptographic signature&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;participants-object&#34;&gt;Participants Object&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;seeker_did&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;did:web:seeker.example.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;provider_did&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;did:web:provider.example.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;trust_server_did&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;did:web:trust.uai.local&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All three DID fields must start with &lt;code&gt;did:&lt;/code&gt;.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>UAI Risk Policy</title>
+				<link>http://localhost:1313/docs/schemas/uai-risk-policy/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/schemas/uai-risk-policy/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/uai-risk-policy/schema.json&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;The Risk Policy is a JSON file evaluated by the Trust Server for every token request. One file can cover multiple corridors. Adding new corridors or scopes requires only editing this file and restarting the Trust Server — no code changes.&lt;/p&gt;&#xA;&lt;h2 id=&#34;top-level-fields&#34;&gt;Top-Level Fields&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Field&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Type&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;policy_id&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Unique identifier for this policy (e.g., &lt;code&gt;uai-risk-policy:agri:2026-04&lt;/code&gt;)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;version&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Policy version string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;scopes&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;array&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Array of &lt;code&gt;ScopeRule&lt;/code&gt; objects&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;scoperule-fields&#34;&gt;ScopeRule Fields&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Field&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Type&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Required&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;scope&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Exact scope string, or wildcard ending with &lt;code&gt;*&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;tier&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;integer&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Risk tier (1–4)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;consent&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Consent requirements&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;receipts&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Receipt requirements&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;logging&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Audit logging requirements&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;provider_requirements&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Provider-side requirements&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;runtime_controls&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;No&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Human gate and dual control&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h3 id=&#34;consent-object&#34;&gt;Consent Object&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;required&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;allowed_methods&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;otp&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;consent-manager&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;dpdp_properties_required&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;free&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;specific&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;informed&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;unambiguous&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;affirmative&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;revocable&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;purpose_bound&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;receipts-object&#34;&gt;Receipts Object&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;required&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;payload_hashing&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sha256&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;logging-object&#34;&gt;Logging Object&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;min_retention_days&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;180&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;jurisdiction&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;IN&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;provider-requirements-object&#34;&gt;Provider Requirements Object&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;required_vc_types&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;UAIInsuranceCredential&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;insurance_vc_required&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Constraint:&lt;/strong&gt; If &lt;code&gt;tier &amp;gt;= 3&lt;/code&gt;, &lt;code&gt;provider_requirements.insurance_vc_required&lt;/code&gt; must be &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AgentFacts UAI Extension</title>
+				<link>http://localhost:1313/docs/schemas/agentfacts-extension/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/schemas/agentfacts-extension/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/agentfacts-uai-extension/schema.json&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;NANDA (Network of AI Networked Distributed Agents) defines the global &lt;strong&gt;AgentFacts&lt;/strong&gt; document format for AI agent discovery. UAI extends this with a &lt;code&gt;uai&lt;/code&gt; block that carries UAI-specific registration information, enabling global discovery while preserving UAI trust metadata.&lt;/p&gt;&#xA;&lt;h2 id=&#34;purpose&#34;&gt;Purpose&lt;/h2&gt;&#xA;&lt;p&gt;An agent that publishes an AgentFacts document with a valid &lt;code&gt;uai&lt;/code&gt; extension block can be discovered through both the NANDA global directory and the UAI national Registry. The bridge adapter validates this block before publishing.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Consent Artifact</title>
+				<link>http://localhost:1313/docs/schemas/consent-artifact/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/schemas/consent-artifact/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;File:&lt;/strong&gt; &lt;code&gt;schemas/consent-artifact/schema.json&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;A consent artifact is the machine-readable proof that a citizen consented to a specific data access. The Trust Server fetches and validates a consent artifact for every Tier 2+ token request.&lt;/p&gt;&#xA;&lt;h2 id=&#34;required-fields&#34;&gt;Required Fields&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Field&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Type&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Constraint&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;consent_id&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Must start with &lt;code&gt;cns_&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Unique identifier for this consent&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;subject_ref&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Must be masked (e.g., &lt;code&gt;masked_aadhaar_8765&lt;/code&gt;)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Reference to the consenting citizen — never raw PII&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;seeker_did&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Must start with &lt;code&gt;did:&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;DID of the agent requesting the data&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;provider_did&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Must start with &lt;code&gt;did:&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;DID of the agent providing the data&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;purpose&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Machine-readable&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Specific purpose string that binds this consent&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;allowed_scopes&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;array&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Non-empty&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Scope strings this consent covers&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;issued_at&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;ISO 8601&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;When consent was collected&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;expires_at&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;ISO 8601&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;When consent expires&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;collection_method&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;enum&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;See below&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;How consent was collected&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;dpdp_properties&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;object&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;All 6 must be &lt;code&gt;true&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;DPDP Act 2023 compliance properties&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;revocation_status&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Must be &lt;code&gt;&amp;quot;active&amp;quot;&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Current status of this consent&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;conditional-fields&#34;&gt;Conditional Fields&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Field&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Required when&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;revocation_check_url&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;collection_method&lt;/code&gt; is &lt;code&gt;biometric&lt;/code&gt; or &lt;code&gt;manual-approval&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;collection-methods&#34;&gt;Collection Methods&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Value&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Tier&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;otp&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;2&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;OTP-based consent (e.g., mobile OTP)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;biometric&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;3&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Biometric authentication (fingerprint, iris)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;consent-manager&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;2–3&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Account Aggregator / consent manager platform&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;manual-approval&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;4&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Human review and sign-off&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;dpdp-properties&#34;&gt;DPDP Properties&lt;/h2&gt;&#xA;&lt;p&gt;All six DPDP properties must be &lt;code&gt;true&lt;/code&gt; for the consent to be valid:&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

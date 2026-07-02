@@ -1,87 +1,413 @@
-<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><link rel=icon type=image/svg+xml href=/favicons/favicon.svg><title>Receipts and Audit | UAI Protocol Documentation</title><meta name=description content="How UAI creates tamper-proof, privacy-preserving audit records of every interaction."><meta property="og:url" content="http://localhost/docs/concepts/receipts-and-audit/"><meta property="og:site_name" content="UAI Protocol Documentation"><meta property="og:title" content="Receipts and Audit"><meta property="og:description" content="How UAI creates tamper-proof, privacy-preserving audit records of every interaction."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta itemprop=name content="Receipts and Audit"><meta itemprop=description content="How UAI creates tamper-proof, privacy-preserving audit records of every interaction."><meta itemprop=wordCount content="589"><meta name=twitter:card content="summary"><meta name=twitter:title content="Receipts and Audit"><meta name=twitter:description content="How UAI creates tamper-proof, privacy-preserving audit records of every interaction."><link rel=preload href=/scss/main.min.0665b56bafb610637838e99964edd4771ac801de00fc61d3d48c517dce7e58ca.css as=style integrity="sha256-BmW1a6+2EGN4OOmZZO3UdxrIAd4A/GHT1IxRfc5+WMo=" crossorigin=anonymous><link href=/scss/main.min.0665b56bafb610637838e99964edd4771ac801de00fc61d3d48c517dce7e58ca.css rel=stylesheet integrity="sha256-BmW1a6+2EGN4OOmZZO3UdxrIAd4A/GHT1IxRfc5+WMo=" crossorigin=anonymous><script src=https://code.jquery.com/jquery-3.7.1.min.js integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin=anonymous></script><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover"></head><body class=td-page><header><div class="uai-gov-banner d-print-none"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg" srcset="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 360w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 720w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 945w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1080w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1440w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 2880w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1920w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 3840w" sizes="(max-width: 500px) 800px, 100vw" alt="UAI Protocol — Unified AI Interface"></div></header><div class="container-fluid td-outer"><div class=td-main data-bs-spy=scroll data-bs-target=.td-toc data-bs-root-margin="0px 0px -10%"><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><script>$(function(){$("#td-section-nav a").removeClass("active"),$("#td-section-nav #m-docsconceptsreceipts-and-audit").addClass("active"),$("#td-section-nav #m-docsconceptsreceipts-and-audit-li span").addClass("td-sidebar-nav-active-item"),$("#td-section-nav #m-docsconceptsreceipts-and-audit").parents("li").addClass("active-path"),$("#td-section-nav li.active-path").addClass("show"),$("#td-section-nav li.active-path").children("input").prop("checked",!0),$("#td-section-nav #m-docsconceptsreceipts-and-audit-li").siblings("li").addClass("show"),$("#td-section-nav #m-docsconceptsreceipts-and-audit-li").children("ul").children("li").addClass("show"),$("#td-sidebar-menu").toggleClass("d-none")})</script><div id=td-sidebar-menu class="td-sidebar__inner d-none"><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle" type=button data-bs-toggle=collapse data-bs-target=#td-section-nav aria-controls=td-section-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><a href=/docs/ class=uai-sidebar-brand><span class=uai-sidebar-brand__logo><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"/><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0" stop-color="#2666ae"/><stop offset="100%" stop-color="#91bfde"/></linearGradient></defs><g><g fill="#fff" transform="matrix(5.920976549951815,0,0,5.920976549951815,3.906965736174101,141.5077631449799)" stroke="#ec7313" stroke-width="0"><path d="M8.8-14.22h3.43v9.31q0 1.58-.68 2.74-.67 1.15-1.93 1.76Q8.36.2 6.64.2 4.04.2 2.55-1.15 1.05-2.5 1.03-4.84v-9.38H4.47v9.44Q4.53-2.44 6.64-2.44q1.07.0 1.61-.59Q8.8-3.61 8.8-4.93v-9.29zM23.06.0 22.23-2.66h-4.7L16.71.0H13.05l5.21-14.22h3.22L26.74.0H23.06zM19.87-10.23 18.35-5.3h3.06l-1.54-4.93zm11.56-3.99V0H28.01V-14.22h3.42z"/></g></g></svg>
-</span><span class=uai-sidebar-brand__title>UAI Protocol Documentation</span></a><nav class="td-sidebar-nav collapse foldable-nav" id=td-section-nav><ul class="td-sidebar-nav__section pe-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child td-sidebar-tree-root-li" id=m-docs-li><a href=/docs/ title=Documentation class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Docs</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsintroduction-li><input type=checkbox id=m-docsintroduction-check>
-<label for=m-docsintroduction-check><a href=/docs/introduction/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsintroduction><span>Introduction</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintroductionoverview-li><input type=checkbox id=m-docsintroductionoverview-check>
-<label for=m-docsintroductionoverview-check><a href=/docs/introduction/overview/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionoverview><span>Overview</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintroductionarchitecture-li><input type=checkbox id=m-docsintroductionarchitecture-check>
-<label for=m-docsintroductionarchitecture-check><a href=/docs/introduction/architecture/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionarchitecture><span>Architecture</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsconcepts-li><input type=checkbox id=m-docsconcepts-check>
-<label for=m-docsconcepts-check><a href=/docs/concepts/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsconcepts><span>Concepts</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptstrust-tiers-li><input type=checkbox id=m-docsconceptstrust-tiers-check>
-<label for=m-docsconceptstrust-tiers-check><a href=/docs/concepts/trust-tiers/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptstrust-tiers><span>Trust Tiers</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscorridors-li><input type=checkbox id=m-docsconceptscorridors-check>
-<label for=m-docsconceptscorridors-check><a href=/docs/concepts/corridors/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscorridors><span>Corridors</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsdids-and-identity-li><input type=checkbox id=m-docsconceptsdids-and-identity-check>
-<label for=m-docsconceptsdids-and-identity-check><a href=/docs/concepts/dids-and-identity/ title="DIDs and Identity" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsdids-and-identity><span>DIDs & Identity</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsreceipts-and-audit-li><input type=checkbox id=m-docsconceptsreceipts-and-audit-check>
-<label for=m-docsconceptsreceipts-and-audit-check><a href=/docs/concepts/receipts-and-audit/ title="Receipts and Audit" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsreceipts-and-audit><span>Receipts & Audit</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsconsent-li><input type=checkbox id=m-docsconceptsconsent-check>
-<label for=m-docsconceptsconsent-check><a href=/docs/concepts/consent/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsconsent><span>Consent</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsprotocol-li><input type=checkbox id=m-docsprotocol-check>
-<label for=m-docsprotocol-check><a href=/docs/protocol/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsprotocol><span>Protocol</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocolflows-li><input type=checkbox id=m-docsprotocolflows-check>
-<label for=m-docsprotocolflows-check><a href=/docs/protocol/flows/ title="Protocol Flows" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocolflows><span>Flows</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocoljwt-profile-li><input type=checkbox id=m-docsprotocoljwt-profile-check>
-<label for=m-docsprotocoljwt-profile-check><a href=/docs/protocol/jwt-profile/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocoljwt-profile><span>JWT Profile</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocoldpop-li><input type=checkbox id=m-docsprotocoldpop-check>
-<label for=m-docsprotocoldpop-check><a href=/docs/protocol/dpop/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocoldpop><span>DPoP</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsschemas-li><input type=checkbox id=m-docsschemas-check>
-<label for=m-docsschemas-check><a href=/docs/schemas/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsschemas><span>Schemas</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasregistry-agent-record-li><input type=checkbox id=m-docsschemasregistry-agent-record-check>
-<label for=m-docsschemasregistry-agent-record-check><a href=/docs/schemas/registry-agent-record/ title="Registry Agent Record" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasregistry-agent-record><span>Agent Record</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasuai-receipt-li><input type=checkbox id=m-docsschemasuai-receipt-check>
-<label for=m-docsschemasuai-receipt-check><a href=/docs/schemas/uai-receipt/ title="UAI Receipt" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasuai-receipt><span>Receipt</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasuai-risk-policy-li><input type=checkbox id=m-docsschemasuai-risk-policy-check>
-<label for=m-docsschemasuai-risk-policy-check><a href=/docs/schemas/uai-risk-policy/ title="UAI Risk Policy" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasuai-risk-policy><span>Risk Policy</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasagentfacts-extension-li><input type=checkbox id=m-docsschemasagentfacts-extension-check>
-<label for=m-docsschemasagentfacts-extension-check><a href=/docs/schemas/agentfacts-extension/ title="AgentFacts UAI Extension" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasagentfacts-extension><span>AgentFacts Extension</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasconsent-artifact-li><input type=checkbox id=m-docsschemasconsent-artifact-check>
-<label for=m-docsschemasconsent-artifact-check><a href=/docs/schemas/consent-artifact/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasconsent-artifact><span>Consent Artifact</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li><input type=checkbox id=m-docsservices-check>
-<label for=m-docsservices-check><a href=/docs/services/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>Services</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesregistry-li><input type=checkbox id=m-docsservicesregistry-check>
-<label for=m-docsservicesregistry-check><a href=/docs/services/registry/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesregistry><span>Registry</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicestrust-server-li><input type=checkbox id=m-docsservicestrust-server-check>
-<label for=m-docsservicestrust-server-check><a href=/docs/services/trust-server/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicestrust-server><span>Trust Server</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesaudit-ledger-li><input type=checkbox id=m-docsservicesaudit-ledger-check>
-<label for=m-docsservicesaudit-ledger-check><a href=/docs/services/audit-ledger/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesaudit-ledger><span>Audit Ledger</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesdemo-providers-li><input type=checkbox id=m-docsservicesdemo-providers-check>
-<label for=m-docsservicesdemo-providers-check><a href=/docs/services/demo-providers/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdemo-providers><span>Demo Providers</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesadapters-li><input type=checkbox id=m-docsservicesadapters-check>
-<label for=m-docsservicesadapters-check><a href=/docs/services/adapters/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesadapters><span>Adapters</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapi-reference-li><input type=checkbox id=m-docsapi-reference-check>
-<label for=m-docsapi-reference-check><a href=/docs/api-reference/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsapi-reference><span>API Reference</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referenceregistry-api-li><input type=checkbox id=m-docsapi-referenceregistry-api-check>
-<label for=m-docsapi-referenceregistry-api-check><a href=/docs/api-reference/registry-api/ title="Registry API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referenceregistry-api><span>Registry</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referencetrust-server-api-li><input type=checkbox id=m-docsapi-referencetrust-server-api-check>
-<label for=m-docsapi-referencetrust-server-api-check><a href=/docs/api-reference/trust-server-api/ title="Trust Server API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referencetrust-server-api><span>Trust Server</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referenceaudit-ledger-api-li><input type=checkbox id=m-docsapi-referenceaudit-ledger-api-check>
-<label for=m-docsapi-referenceaudit-ledger-api-check><a href=/docs/api-reference/audit-ledger-api/ title="Audit Ledger API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referenceaudit-ledger-api><span>Audit Ledger</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsguides-li><input type=checkbox id=m-docsguides-check>
-<label for=m-docsguides-check><a href=/docs/guides/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsguides><span>Guides</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesgetting-started-li><input type=checkbox id=m-docsguidesgetting-started-check>
-<label for=m-docsguidesgetting-started-check><a href=/docs/guides/getting-started/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesgetting-started><span>Getting Started</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesprovider-implementation-li><input type=checkbox id=m-docsguidesprovider-implementation-check>
-<label for=m-docsguidesprovider-implementation-check><a href=/docs/guides/provider-implementation/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesprovider-implementation><span>Provider Implementation</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesnanda-integration-li><input type=checkbox id=m-docsguidesnanda-integration-check>
-<label for=m-docsguidesnanda-integration-check><a href=/docs/guides/nanda-integration/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesnanda-integration><span>NANDA Integration</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsreference-li><input type=checkbox id=m-docsreference-check>
-<label for=m-docsreference-check><a href=/docs/reference/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsreference><span>Reference</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferencemake-targets-li><input type=checkbox id=m-docsreferencemake-targets-check>
-<label for=m-docsreferencemake-targets-check><a href=/docs/reference/make-targets/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferencemake-targets><span>Make Targets</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferenceenvironment-variables-li><input type=checkbox id=m-docsreferenceenvironment-variables-check>
-<label for=m-docsreferenceenvironment-variables-check><a href=/docs/reference/environment-variables/ title="Environment Variables" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferenceenvironment-variables><span>Env Vars</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferencecompliance-li><input type=checkbox id=m-docsreferencecompliance-check>
-<label for=m-docsreferencecompliance-check><a href=/docs/reference/compliance/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferencecompliance><span>Compliance</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferenceperformance-li><input type=checkbox id=m-docsreferenceperformance-check>
-<label for=m-docsreferenceperformance-check><a href=/docs/reference/performance/ title="Performance Targets" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferenceperformance><span>Performance</span></a></label></li></ul></li></ul></li></ul></nav></div></aside><aside class=td-sidebar-toc><div class="td-page-meta ms-2 pb-1 pt-2 mb-0"></div><div class=td-toc data-proofer-ignore><div class=td-toc-title><span class=td-toc-title__text>On this page</span>
-<a class=td-toc-title__link title="Top of page" href=#></a></div><nav id=TableOfContents><ul><li><a href=#privacy-first-design>Privacy-First Design</a></li><li><a href=#jcs-canonicalization-rfc-8785>JCS Canonicalization (RFC 8785)</a></li><li><a href=#receipt-structure>Receipt Structure</a></li><li><a href=#who-signs-the-receipt>Who Signs the Receipt</a></li><li><a href=#audit-ledger-immutability>Audit Ledger Immutability</a></li><li><a href=#querying-receipts>Querying Receipts</a></li><li><a href=#retention-requirements>Retention Requirements</a></li><li><a href=#receipt-flow-sequence>Receipt Flow (Sequence)</a></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 ps-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=/docs/>Docs</a></li><li class=breadcrumb-item><a href=/docs/concepts/>Concepts</a></li><li class="breadcrumb-item active" aria-current=page>Receipts & Audit</li></ol></nav><div class=td-content><h1>Receipts and Audit</h1><div class=lead>How UAI creates tamper-proof, privacy-preserving audit records of every interaction.</div><header class=article-meta></header><p>Every UAI interaction produces a <strong>receipt</strong> — a cryptographically signed, append-only record that proves the interaction happened, what was authorized, and what the outcome was, without ever storing the raw data exchanged.</p><h2 id=privacy-first-design>Privacy-First Design</h2><p>UAI stores <strong>hashes, not payloads</strong>. The receipt contains:</p><ul><li>SHA-256 hash of the JCS-canonicalized request body</li><li>SHA-256 hash of the JCS-canonicalized response body</li><li>The token hash (not the token itself)</li><li>Participant DIDs</li><li>Scope and tier</li><li>Outcome status</li></ul><p>No citizen data ever enters the Audit Ledger.</p><h2 id=jcs-canonicalization-rfc-8785>JCS Canonicalization (RFC 8785)</h2><p>Before hashing, both request and response bodies are <strong>JCS-canonicalized</strong>:</p><ul><li>Keys sorted lexicographically at every nesting level</li><li>No insignificant whitespace</li><li>Shortest number representation</li><li>The <code>proof</code> field is excluded from the input before canonicalization</li></ul><p>This ensures the same logical document always produces the same hash, regardless of key ordering or whitespace differences in the original JSON.</p><p>Hash format: <code>sha256:{hex-encoded-digest}</code></p><h2 id=receipt-structure>Receipt Structure</h2><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
-</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;receipt_version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;1.0.0&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;transaction_id&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;txn_abc123&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;message_id&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;msg_xyz789&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;issued_at&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2026-06-25T10:00:00Z&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;participants&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;seeker_did&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:seeker.example.com&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;provider_did&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:provider.example.com&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;trust_server_did&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:trust.uai.local&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>},</span>
-</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;authorization&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;token_hash&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;sha256:e3b0c44298fc1c14...&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;scope&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;read:crop_diagnosis&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;tier&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1</span>
-</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>},</span>
-</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;artifacts&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;request_hash&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;sha256:6b86b273ff34fce...&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;response_hash&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;sha256:d4735e3a265e16e...&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;canonicalization&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;jcs:rfc8785&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>},</span>
-</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;outcome&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;status&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;success&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;http_status&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span>
-</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>},</span>
-</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;signature&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;signer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:provider.example.com&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;alg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;EdDSA&#34;</span><span style=color:#000;font-weight:700>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;sig&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;&lt;base64url-encoded-signature&gt;&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>}</span>
-</span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
-</span></span></code></pre></div><p><strong>Field rules:</strong></p><ul><li><code>transaction_id</code> must start with <code>txn_</code></li><li><code>message_id</code> must start with <code>msg_</code></li><li>All DID fields must start with <code>did:</code></li><li>All hash fields must start with <code>sha256:</code></li><li><code>outcome.status</code> is one of: <code>success</code>, <code>failure</code>, <code>partial</code></li><li><code>signature.alg</code> is <code>EdDSA</code> or <code>ES256</code></li></ul><h2 id=who-signs-the-receipt>Who Signs the Receipt</h2><p>The <strong>Provider</strong> signs the receipt with its own Ed25519 private key, using its DID as <code>signature.signer</code>. This means the receipt is the Provider&rsquo;s signed attestation that the interaction occurred and the outcome is as stated. The Seeker cannot forge a receipt.</p><h2 id=audit-ledger-immutability>Audit Ledger Immutability</h2><p>The Audit Ledger (<code>services/audit-ledger/</code>, port 8001) enforces immutability at the database level via PostgreSQL triggers:</p><ul><li><strong>No UPDATE</strong> — once written, a receipt cannot be modified</li><li><strong>No DELETE</strong> — receipts cannot be removed</li><li><strong>Duplicate <code>transaction_id</code></strong> — returns HTTP 409 Conflict</li></ul><p>This means once the Provider submits a receipt, the record is permanent and tamper-proof.</p><h2 id=querying-receipts>Querying Receipts</h2><p>The Audit Ledger enforces participant-only access. To query receipts, a DID holder authenticates with an HS256 JWT signed with the <code>AUDIT_JWT_SECRET</code>:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#8f5902;font-style:italic># Create an auth JWT (sub = your DID)</span>
-</span></span><span style=display:flex><span><span style=color:#000>TOKEN</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87;font-weight:700>$(</span>python3 -c <span style=color:#4e9a06>&#34;
-</span></span></span><span style=display:flex><span><span style=color:#4e9a06>import jwt, time
-</span></span></span><span style=display:flex><span><span style=color:#4e9a06>print(jwt.encode({&#39;sub&#39;:&#39;did:web:your.did&#39;,&#39;iat&#39;:int(time.time()),&#39;exp&#39;:int(time.time())+300}, &#39;dev-secret-change-in-prod&#39;, algorithm=&#39;HS256&#39;))
-</span></span></span><span style=display:flex><span><span style=color:#4e9a06>&#34;</span><span style=color:#204a87;font-weight:700>)</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#8f5902;font-style:italic># Query receipts where you are a participant</span>
-</span></span><span style=display:flex><span>curl -H <span style=color:#4e9a06>&#34;Authorization: Bearer </span><span style=color:#000>$TOKEN</span><span style=color:#4e9a06>&#34;</span> <span style=color:#4e9a06>\
-</span></span></span><span style=display:flex><span>  <span style=color:#4e9a06>&#34;http://localhost:8001/audit/v1/receipts&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#8f5902;font-style:italic># Query a specific transaction</span>
-</span></span><span style=display:flex><span>curl -H <span style=color:#4e9a06>&#34;Authorization: Bearer </span><span style=color:#000>$TOKEN</span><span style=color:#4e9a06>&#34;</span> <span style=color:#4e9a06>\
-</span></span></span><span style=display:flex><span>  <span style=color:#4e9a06>&#34;http://localhost:8001/audit/v1/receipts?transaction_id=txn_abc123&#34;</span>
-</span></span></code></pre></div><p><strong>Access control rules:</strong></p><ul><li>Only receipts where <code>sub</code> (your DID) is the <code>seeker_did</code> or <code>provider_did</code> are returned</li><li>If you query a <code>transaction_id</code> where you are not a participant → 403 (the ledger does not reveal the receipt exists)</li><li>Date range filters: <code>date_from</code>, <code>date_to</code> (ISO 8601)</li></ul><h2 id=retention-requirements>Retention Requirements</h2><p>Per CERT-In compliance, receipts must be retained for a minimum of <strong>180 days</strong> in Indian jurisdiction. The Audit Ledger does not auto-expire receipts — retention policy enforcement is an operational concern.</p><h2 id=receipt-flow-sequence>Receipt Flow (Sequence)</h2><pre tabindex=0><code>Provider processes query
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg">
+
+<title>Receipts and Audit | UAI Protocol Documentation</title>
+<meta name="description" content="How UAI creates tamper-proof, privacy-preserving audit records of every interaction.">
+<meta property="og:url" content="http://localhost:1313/docs/concepts/receipts-and-audit/">
+	<meta property="og:site_name" content="UAI Protocol Documentation">
+	<meta property="og:title" content="Receipts and Audit">
+	<meta property="og:description" content="How UAI creates tamper-proof, privacy-preserving audit records of every interaction.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+	<meta itemprop="name" content="Receipts and Audit">
+	<meta itemprop="description" content="How UAI creates tamper-proof, privacy-preserving audit records of every interaction.">
+	<meta itemprop="wordCount" content="589">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Receipts and Audit">
+	<meta name="twitter:description" content="How UAI creates tamper-proof, privacy-preserving audit records of every interaction.">
+<link href="/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<div class="uai-gov-banner d-print-none">
+  <img
+    src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg"
+    srcset="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 360w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 720w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 945w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1080w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1440w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 2880w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1920w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 3840w"
+    sizes="(max-width: 500px) 800px, 100vw"
+    alt="UAI Protocol — Unified AI Interface"
+  />
+</div>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsconceptsreceipts-and-audit").addClass("active");
+    $("#td-section-nav #m-docsconceptsreceipts-and-audit-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsconceptsreceipts-and-audit").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsconceptsreceipts-and-audit-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsconceptsreceipts-and-audit-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+
+  
+  <a href="/docs/" class="uai-sidebar-brand">
+    <span class="uai-sidebar-brand__logo">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"/><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0" stop-color="#2666ae"/><stop offset="100%" stop-color="#91bfde"/></linearGradient></defs><g><g fill="#fff" transform="matrix(5.920976549951815,0,0,5.920976549951815,3.906965736174101,141.5077631449799)" stroke="#ec7313" stroke-width="0"><path d="M8.8-14.22h3.43v9.31q0 1.58-.68 2.74-.67 1.15-1.93 1.76Q8.36.2 6.64.2 4.04.2 2.55-1.15 1.05-2.5 1.03-4.84v-9.38H4.47v9.44Q4.53-2.44 6.64-2.44q1.07.0 1.61-.59Q8.8-3.61 8.8-4.93v-9.29zM23.06.0 22.23-2.66h-4.7L16.71.0H13.05l5.21-14.22h3.22L26.74.0H23.06zM19.87-10.23 18.35-5.3h3.06l-1.54-4.93zm11.56-3.99V0H28.01V-14.22h3.42z"/></g></g></svg>
+    </span>
+    <span class="uai-sidebar-brand__title">UAI Protocol Documentation</span>
+  </a>
+
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child td-sidebar-tree-root-li" id="m-docs-li">
+    <a href="/docs/" title="Documentation" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Docs</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsintroduction-li">
+    <input type="checkbox" id="m-docsintroduction-check"/>
+    <label for="m-docsintroduction-check"><a href="/docs/introduction/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsintroduction"><span class="">Introduction</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionoverview-li">
+    <input type="checkbox" id="m-docsintroductionoverview-check"/>
+    <label for="m-docsintroductionoverview-check"><a href="/docs/introduction/overview/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsintroductionoverview"><span class="">Overview</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionarchitecture-li">
+    <input type="checkbox" id="m-docsintroductionarchitecture-check"/>
+    <label for="m-docsintroductionarchitecture-check"><a href="/docs/introduction/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsintroductionarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsconcepts-li">
+    <input type="checkbox" id="m-docsconcepts-check"/>
+    <label for="m-docsconcepts-check"><a href="/docs/concepts/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsconcepts"><span class="">Concepts</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptstrust-tiers-li">
+    <input type="checkbox" id="m-docsconceptstrust-tiers-check"/>
+    <label for="m-docsconceptstrust-tiers-check"><a href="/docs/concepts/trust-tiers/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptstrust-tiers"><span class="">Trust Tiers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptscorridors-li">
+    <input type="checkbox" id="m-docsconceptscorridors-check"/>
+    <label for="m-docsconceptscorridors-check"><a href="/docs/concepts/corridors/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptscorridors"><span class="">Corridors</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsdids-and-identity-li">
+    <input type="checkbox" id="m-docsconceptsdids-and-identity-check"/>
+    <label for="m-docsconceptsdids-and-identity-check"><a href="/docs/concepts/dids-and-identity/" title="DIDs and Identity" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsdids-and-identity"><span class="">DIDs &amp; Identity</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsreceipts-and-audit-li">
+    <input type="checkbox" id="m-docsconceptsreceipts-and-audit-check"/>
+    <label for="m-docsconceptsreceipts-and-audit-check"><a href="/docs/concepts/receipts-and-audit/" title="Receipts and Audit" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsreceipts-and-audit"><span class="">Receipts &amp; Audit</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsconsent-li">
+    <input type="checkbox" id="m-docsconceptsconsent-check"/>
+    <label for="m-docsconceptsconsent-check"><a href="/docs/concepts/consent/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsconsent"><span class="">Consent</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsprotocol-li">
+    <input type="checkbox" id="m-docsprotocol-check"/>
+    <label for="m-docsprotocol-check"><a href="/docs/protocol/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsprotocol"><span class="">Protocol</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocolflows-li">
+    <input type="checkbox" id="m-docsprotocolflows-check"/>
+    <label for="m-docsprotocolflows-check"><a href="/docs/protocol/flows/" title="Protocol Flows" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocolflows"><span class="">Flows</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocoljwt-profile-li">
+    <input type="checkbox" id="m-docsprotocoljwt-profile-check"/>
+    <label for="m-docsprotocoljwt-profile-check"><a href="/docs/protocol/jwt-profile/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocoljwt-profile"><span class="">JWT Profile</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocoldpop-li">
+    <input type="checkbox" id="m-docsprotocoldpop-check"/>
+    <label for="m-docsprotocoldpop-check"><a href="/docs/protocol/dpop/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocoldpop"><span class="">DPoP</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsschemas-li">
+    <input type="checkbox" id="m-docsschemas-check"/>
+    <label for="m-docsschemas-check"><a href="/docs/schemas/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsschemas"><span class="">Schemas</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasregistry-agent-record-li">
+    <input type="checkbox" id="m-docsschemasregistry-agent-record-check"/>
+    <label for="m-docsschemasregistry-agent-record-check"><a href="/docs/schemas/registry-agent-record/" title="Registry Agent Record" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasregistry-agent-record"><span class="">Agent Record</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasuai-receipt-li">
+    <input type="checkbox" id="m-docsschemasuai-receipt-check"/>
+    <label for="m-docsschemasuai-receipt-check"><a href="/docs/schemas/uai-receipt/" title="UAI Receipt" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasuai-receipt"><span class="">Receipt</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasuai-risk-policy-li">
+    <input type="checkbox" id="m-docsschemasuai-risk-policy-check"/>
+    <label for="m-docsschemasuai-risk-policy-check"><a href="/docs/schemas/uai-risk-policy/" title="UAI Risk Policy" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasuai-risk-policy"><span class="">Risk Policy</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasagentfacts-extension-li">
+    <input type="checkbox" id="m-docsschemasagentfacts-extension-check"/>
+    <label for="m-docsschemasagentfacts-extension-check"><a href="/docs/schemas/agentfacts-extension/" title="AgentFacts UAI Extension" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasagentfacts-extension"><span class="">AgentFacts Extension</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasconsent-artifact-li">
+    <input type="checkbox" id="m-docsschemasconsent-artifact-check"/>
+    <label for="m-docsschemasconsent-artifact-check"><a href="/docs/schemas/consent-artifact/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasconsent-artifact"><span class="">Consent Artifact</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsservices-li">
+    <input type="checkbox" id="m-docsservices-check"/>
+    <label for="m-docsservices-check"><a href="/docs/services/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsservices"><span class="">Services</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesregistry-li">
+    <input type="checkbox" id="m-docsservicesregistry-check"/>
+    <label for="m-docsservicesregistry-check"><a href="/docs/services/registry/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesregistry"><span class="">Registry</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicestrust-server-li">
+    <input type="checkbox" id="m-docsservicestrust-server-check"/>
+    <label for="m-docsservicestrust-server-check"><a href="/docs/services/trust-server/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicestrust-server"><span class="">Trust Server</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesaudit-ledger-li">
+    <input type="checkbox" id="m-docsservicesaudit-ledger-check"/>
+    <label for="m-docsservicesaudit-ledger-check"><a href="/docs/services/audit-ledger/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesaudit-ledger"><span class="">Audit Ledger</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesdemo-providers-li">
+    <input type="checkbox" id="m-docsservicesdemo-providers-check"/>
+    <label for="m-docsservicesdemo-providers-check"><a href="/docs/services/demo-providers/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesdemo-providers"><span class="">Demo Providers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesadapters-li">
+    <input type="checkbox" id="m-docsservicesadapters-check"/>
+    <label for="m-docsservicesadapters-check"><a href="/docs/services/adapters/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesadapters"><span class="">Adapters</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsapi-reference-li">
+    <input type="checkbox" id="m-docsapi-reference-check"/>
+    <label for="m-docsapi-reference-check"><a href="/docs/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsapi-reference"><span class="">API Reference</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referenceregistry-api-li">
+    <input type="checkbox" id="m-docsapi-referenceregistry-api-check"/>
+    <label for="m-docsapi-referenceregistry-api-check"><a href="/docs/api-reference/registry-api/" title="Registry API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referenceregistry-api"><span class="">Registry</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referencetrust-server-api-li">
+    <input type="checkbox" id="m-docsapi-referencetrust-server-api-check"/>
+    <label for="m-docsapi-referencetrust-server-api-check"><a href="/docs/api-reference/trust-server-api/" title="Trust Server API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referencetrust-server-api"><span class="">Trust Server</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referenceaudit-ledger-api-li">
+    <input type="checkbox" id="m-docsapi-referenceaudit-ledger-api-check"/>
+    <label for="m-docsapi-referenceaudit-ledger-api-check"><a href="/docs/api-reference/audit-ledger-api/" title="Audit Ledger API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referenceaudit-ledger-api"><span class="">Audit Ledger</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsguides-li">
+    <input type="checkbox" id="m-docsguides-check"/>
+    <label for="m-docsguides-check"><a href="/docs/guides/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsguides"><span class="">Guides</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesgetting-started-li">
+    <input type="checkbox" id="m-docsguidesgetting-started-check"/>
+    <label for="m-docsguidesgetting-started-check"><a href="/docs/guides/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesprovider-implementation-li">
+    <input type="checkbox" id="m-docsguidesprovider-implementation-check"/>
+    <label for="m-docsguidesprovider-implementation-check"><a href="/docs/guides/provider-implementation/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesprovider-implementation"><span class="">Provider Implementation</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesnanda-integration-li">
+    <input type="checkbox" id="m-docsguidesnanda-integration-check"/>
+    <label for="m-docsguidesnanda-integration-check"><a href="/docs/guides/nanda-integration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesnanda-integration"><span class="">NANDA Integration</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsreference-li">
+    <input type="checkbox" id="m-docsreference-check"/>
+    <label for="m-docsreference-check"><a href="/docs/reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsreference"><span class="">Reference</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencemake-targets-li">
+    <input type="checkbox" id="m-docsreferencemake-targets-check"/>
+    <label for="m-docsreferencemake-targets-check"><a href="/docs/reference/make-targets/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferencemake-targets"><span class="">Make Targets</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceenvironment-variables-li">
+    <input type="checkbox" id="m-docsreferenceenvironment-variables-check"/>
+    <label for="m-docsreferenceenvironment-variables-check"><a href="/docs/reference/environment-variables/" title="Environment Variables" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferenceenvironment-variables"><span class="">Env Vars</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencecompliance-li">
+    <input type="checkbox" id="m-docsreferencecompliance-check"/>
+    <label for="m-docsreferencecompliance-check"><a href="/docs/reference/compliance/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferencecompliance"><span class="">Compliance</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceperformance-li">
+    <input type="checkbox" id="m-docsreferenceperformance-check"/>
+    <label for="m-docsreferenceperformance-check"><a href="/docs/reference/performance/" title="Performance Targets" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferenceperformance"><span class="">Performance</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="td-sidebar-toc">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#privacy-first-design">Privacy-First Design</a></li>
+    <li><a href="#jcs-canonicalization-rfc-8785">JCS Canonicalization (RFC 8785)</a></li>
+    <li><a href="#receipt-structure">Receipt Structure</a></li>
+    <li><a href="#who-signs-the-receipt">Who Signs the Receipt</a></li>
+    <li><a href="#audit-ledger-immutability">Audit Ledger Immutability</a></li>
+    <li><a href="#querying-receipts">Querying Receipts</a></li>
+    <li><a href="#retention-requirements">Retention Requirements</a></li>
+    <li><a href="#receipt-flow-sequence">Receipt Flow (Sequence)</a></li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/">Docs</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/concepts/">Concepts</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Receipts &amp; Audit</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Receipts and Audit</h1>
+	<div class="lead">How UAI creates tamper-proof, privacy-preserving audit records of every interaction.</div>
+	<header class="article-meta">
+		
+</header>
+	<p>Every UAI interaction produces a <strong>receipt</strong> — a cryptographically signed, append-only record that proves the interaction happened, what was authorized, and what the outcome was, without ever storing the raw data exchanged.</p>
+<h2 id="privacy-first-design">Privacy-First Design</h2>
+<p>UAI stores <strong>hashes, not payloads</strong>. The receipt contains:</p>
+<ul>
+<li>SHA-256 hash of the JCS-canonicalized request body</li>
+<li>SHA-256 hash of the JCS-canonicalized response body</li>
+<li>The token hash (not the token itself)</li>
+<li>Participant DIDs</li>
+<li>Scope and tier</li>
+<li>Outcome status</li>
+</ul>
+<p>No citizen data ever enters the Audit Ledger.</p>
+<h2 id="jcs-canonicalization-rfc-8785">JCS Canonicalization (RFC 8785)</h2>
+<p>Before hashing, both request and response bodies are <strong>JCS-canonicalized</strong>:</p>
+<ul>
+<li>Keys sorted lexicographically at every nesting level</li>
+<li>No insignificant whitespace</li>
+<li>Shortest number representation</li>
+<li>The <code>proof</code> field is excluded from the input before canonicalization</li>
+</ul>
+<p>This ensures the same logical document always produces the same hash, regardless of key ordering or whitespace differences in the original JSON.</p>
+<p>Hash format: <code>sha256:{hex-encoded-digest}</code></p>
+<h2 id="receipt-structure">Receipt Structure</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;receipt_version&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;1.0.0&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;transaction_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;txn_abc123&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;message_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;msg_xyz789&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;issued_at&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;2026-06-25T10:00:00Z&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;participants&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;seeker_did&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:seeker.example.com&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;provider_did&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:provider.example.com&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;trust_server_did&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:trust.uai.local&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;authorization&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;token_hash&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;sha256:e3b0c44298fc1c14...&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;scope&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;read:crop_diagnosis&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;tier&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;artifacts&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;request_hash&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;sha256:6b86b273ff34fce...&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;response_hash&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;sha256:d4735e3a265e16e...&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;canonicalization&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;jcs:rfc8785&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;outcome&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;status&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;success&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;http_status&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">200</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;signature&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;signer&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:provider.example.com&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;alg&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;EdDSA&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;sig&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;&lt;base64url-encoded-signature&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><p><strong>Field rules:</strong></p>
+<ul>
+<li><code>transaction_id</code> must start with <code>txn_</code></li>
+<li><code>message_id</code> must start with <code>msg_</code></li>
+<li>All DID fields must start with <code>did:</code></li>
+<li>All hash fields must start with <code>sha256:</code></li>
+<li><code>outcome.status</code> is one of: <code>success</code>, <code>failure</code>, <code>partial</code></li>
+<li><code>signature.alg</code> is <code>EdDSA</code> or <code>ES256</code></li>
+</ul>
+<h2 id="who-signs-the-receipt">Who Signs the Receipt</h2>
+<p>The <strong>Provider</strong> signs the receipt with its own Ed25519 private key, using its DID as <code>signature.signer</code>. This means the receipt is the Provider&rsquo;s signed attestation that the interaction occurred and the outcome is as stated. The Seeker cannot forge a receipt.</p>
+<h2 id="audit-ledger-immutability">Audit Ledger Immutability</h2>
+<p>The Audit Ledger (<code>services/audit-ledger/</code>, port 8001) enforces immutability at the database level via PostgreSQL triggers:</p>
+<ul>
+<li><strong>No UPDATE</strong> — once written, a receipt cannot be modified</li>
+<li><strong>No DELETE</strong> — receipts cannot be removed</li>
+<li><strong>Duplicate <code>transaction_id</code></strong> — returns HTTP 409 Conflict</li>
+</ul>
+<p>This means once the Provider submits a receipt, the record is permanent and tamper-proof.</p>
+<h2 id="querying-receipts">Querying Receipts</h2>
+<p>The Audit Ledger enforces participant-only access. To query receipts, a DID holder authenticates with an HS256 JWT signed with the <code>AUDIT_JWT_SECRET</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Create an auth JWT (sub = your DID)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">TOKEN</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87;font-weight:bold">$(</span>python3 -c <span style="color:#4e9a06">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">import jwt, time
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">print(jwt.encode({&#39;sub&#39;:&#39;did:web:your.did&#39;,&#39;iat&#39;:int(time.time()),&#39;exp&#39;:int(time.time())+300}, &#39;dev-secret-change-in-prod&#39;, algorithm=&#39;HS256&#39;))
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">&#34;</span><span style="color:#204a87;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Query receipts where you are a participant</span>
+</span></span><span style="display:flex;"><span>curl -H <span style="color:#4e9a06">&#34;Authorization: Bearer </span><span style="color:#000">$TOKEN</span><span style="color:#4e9a06">&#34;</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">&#34;http://localhost:8001/audit/v1/receipts&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Query a specific transaction</span>
+</span></span><span style="display:flex;"><span>curl -H <span style="color:#4e9a06">&#34;Authorization: Bearer </span><span style="color:#000">$TOKEN</span><span style="color:#4e9a06">&#34;</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span>  <span style="color:#4e9a06">&#34;http://localhost:8001/audit/v1/receipts?transaction_id=txn_abc123&#34;</span>
+</span></span></code></pre></div><p><strong>Access control rules:</strong></p>
+<ul>
+<li>Only receipts where <code>sub</code> (your DID) is the <code>seeker_did</code> or <code>provider_did</code> are returned</li>
+<li>If you query a <code>transaction_id</code> where you are not a participant → 403 (the ledger does not reveal the receipt exists)</li>
+<li>Date range filters: <code>date_from</code>, <code>date_to</code> (ISO 8601)</li>
+</ul>
+<h2 id="retention-requirements">Retention Requirements</h2>
+<p>Per CERT-In compliance, receipts must be retained for a minimum of <strong>180 days</strong> in Indian jurisdiction. The Audit Ledger does not auto-expire receipts — retention policy enforcement is an operational concern.</p>
+<h2 id="receipt-flow-sequence">Receipt Flow (Sequence)</h2>
+<pre tabindex="0"><code>Provider processes query
         │
         ├─ Build UAIReceipt:
         │    - JCS-canonicalize request + response
@@ -98,6 +424,29 @@
                 ├─ Check for duplicate transaction_id → 409 if exists
                 └─ INSERT into postgres receipts table
                    (trigger prevents future UPDATE/DELETE)
-</code></pre><p>The Provider fires this request in the background — it does <strong>not</strong> block the response to the Seeker. If the Audit Ledger is temporarily unavailable, the receipt is lost for that transaction. Phase 2 will add a local write-ahead queue.</p></div></main></div></div><footer class="td-footer row d-print-none"><div class=uai-footer-bottom><span class=uai-footer-copyright>&copy; 2026 Unified AI Interface</span>
-<span class=uai-footer-attr><span>Part of IndiaAI Mission under MeitY</span>
-<span>Open Protocol Infrastructure for India's AI Ecosystem</span></span></div></footer></div><script src=/js/main.min.95fb6baaf69b9e0f93b4faa2a3a4943fb4932a8978d8cdec750bacdb3a2f2961.js integrity="sha256-lftrqvabng+TtPqio6SUP7STKol42M3sdQus2zovKWE=" crossorigin=anonymous></script><script defer src=/js/click-to-copy.min.24576ff9fe9f85bb1948ecae52ce227cafce53757a3ad52301f2a79260f6b97d.js integrity="sha256-JFdv+f6fhbsZSOyuUs4ifK/OU3V6OtUjAfKnkmD2uX0=" crossorigin=anonymous></script><script src=/js/tabpane-persist.js></script></body></html>
+</code></pre><p>The Provider fires this request in the background — it does <strong>not</strong> block the response to the Seeker. If the Audit Ledger is temporarily unavailable, the receipt is lost for that transaction. Phase 2 will add a local write-ahead queue.</p>
+
+	
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="uai-footer-bottom">
+    <span class="uai-footer-copyright">&copy; 2026 Unified AI Interface</span>
+    <span class="uai-footer-attr">
+      <span>Part of IndiaAI Mission under MeitY</span>
+      <span>Open Protocol Infrastructure for India's AI Ecosystem</span>
+    </span>
+  </div>
+</footer>
+
+    </div>
+    <script src="/js/main.js"></script>
+<script defer src="/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/js/tabpane-persist.js'></script>
+
+  </body>
+</html>
