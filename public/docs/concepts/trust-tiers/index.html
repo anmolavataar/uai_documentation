@@ -1,457 +1,54 @@
-<!doctype html>
-<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<meta name="robots" content="noindex, nofollow">
-<link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg">
-
-<title>Trust Tiers | UAI Protocol Documentation</title>
-<meta name="description" content="The four risk-based authorization tiers that govern every UAI interaction.">
-<meta property="og:url" content="http://localhost:1313/docs/concepts/trust-tiers/">
-	<meta property="og:site_name" content="UAI Protocol Documentation">
-	<meta property="og:title" content="Trust Tiers">
-	<meta property="og:description" content="The four risk-based authorization tiers that govern every UAI interaction.">
-	<meta property="og:locale" content="en_us">
-	<meta property="og:type" content="article">
-		<meta property="article:section" content="docs">
-
-	<meta itemprop="name" content="Trust Tiers">
-	<meta itemprop="description" content="The four risk-based authorization tiers that govern every UAI interaction.">
-	<meta itemprop="wordCount" content="607">
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="Trust Tiers">
-	<meta name="twitter:description" content="The four risk-based authorization tiers that govern every UAI interaction.">
-<link href="/scss/main.css" rel="stylesheet">
-<script
-  src="https://code.jquery.com/jquery-3.7.1.min.js"
-  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-  crossorigin="anonymous"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-
-  </head>
-  <body class="td-page">
-    <header>
-      
-<div class="uai-gov-banner d-print-none">
-  <img
-    src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg"
-    srcset="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 360w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 720w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 945w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1080w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1440w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 2880w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1920w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 3840w"
-    sizes="(max-width: 500px) 800px, 100vw"
-    alt="UAI Protocol — Unified AI Interface"
-  />
-</div>
-
-    </header>
-    <div class="container-fluid td-outer">
-      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
-        <div class="row flex-xl-nowrap">
-          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-            
-  <script>
-    $(function() {
-    $("#td-section-nav a").removeClass("active");
-    $("#td-section-nav #m-docsconceptstrust-tiers").addClass("active");
-    $("#td-section-nav #m-docsconceptstrust-tiers-li span").addClass("td-sidebar-nav-active-item");
-    $("#td-section-nav #m-docsconceptstrust-tiers").parents("li").addClass("active-path");
-    $("#td-section-nav li.active-path").addClass("show");
-    $("#td-section-nav li.active-path").children("input").prop('checked', true);
-    $("#td-section-nav #m-docsconceptstrust-tiers-li").siblings("li").addClass("show");
-    $("#td-section-nav #m-docsconceptstrust-tiers-li").children("ul").children("li").addClass("show");
-    $("#td-sidebar-menu").toggleClass("d-none");
-    });
-  </script>
-  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
-  <form class="td-sidebar__search d-flex align-items-center">
-    
-    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
-    </button>
-  </form>
-
-  
-  <a href="/docs/" class="uai-sidebar-brand">
-    <span class="uai-sidebar-brand__logo">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"/><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0" stop-color="#2666ae"/><stop offset="100%" stop-color="#91bfde"/></linearGradient></defs><g><g fill="#fff" transform="matrix(5.920976549951815,0,0,5.920976549951815,3.906965736174101,141.5077631449799)" stroke="#ec7313" stroke-width="0"><path d="M8.8-14.22h3.43v9.31q0 1.58-.68 2.74-.67 1.15-1.93 1.76Q8.36.2 6.64.2 4.04.2 2.55-1.15 1.05-2.5 1.03-4.84v-9.38H4.47v9.44Q4.53-2.44 6.64-2.44q1.07.0 1.61-.59Q8.8-3.61 8.8-4.93v-9.29zM23.06.0 22.23-2.66h-4.7L16.71.0H13.05l5.21-14.22h3.22L26.74.0H23.06zM19.87-10.23 18.35-5.3h3.06l-1.54-4.93zm11.56-3.99V0H28.01V-14.22h3.42z"/></g></g></svg>
-    </span>
-    <span class="uai-sidebar-brand__title">UAI Protocol Documentation</span>
-  </a>
-
-  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
-    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child td-sidebar-tree-root-li" id="m-docs-li">
-    <a href="/docs/" title="Documentation" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Docs</span></a>
-    <ul class="ul-1">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsintroduction-li">
-    <input type="checkbox" id="m-docsintroduction-check"/>
-    <label for="m-docsintroduction-check"><a href="/docs/introduction/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsintroduction"><span class="">Introduction</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionoverview-li">
-    <input type="checkbox" id="m-docsintroductionoverview-check"/>
-    <label for="m-docsintroductionoverview-check"><a href="/docs/introduction/overview/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsintroductionoverview"><span class="">Overview</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionarchitecture-li">
-    <input type="checkbox" id="m-docsintroductionarchitecture-check"/>
-    <label for="m-docsintroductionarchitecture-check"><a href="/docs/introduction/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsintroductionarchitecture"><span class="">Architecture</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsconcepts-li">
-    <input type="checkbox" id="m-docsconcepts-check"/>
-    <label for="m-docsconcepts-check"><a href="/docs/concepts/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsconcepts"><span class="">Concepts</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptstrust-tiers-li">
-    <input type="checkbox" id="m-docsconceptstrust-tiers-check"/>
-    <label for="m-docsconceptstrust-tiers-check"><a href="/docs/concepts/trust-tiers/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptstrust-tiers"><span class="">Trust Tiers</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptscorridors-li">
-    <input type="checkbox" id="m-docsconceptscorridors-check"/>
-    <label for="m-docsconceptscorridors-check"><a href="/docs/concepts/corridors/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptscorridors"><span class="">Corridors</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsdids-and-identity-li">
-    <input type="checkbox" id="m-docsconceptsdids-and-identity-check"/>
-    <label for="m-docsconceptsdids-and-identity-check"><a href="/docs/concepts/dids-and-identity/" title="DIDs and Identity" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsdids-and-identity"><span class="">DIDs &amp; Identity</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsreceipts-and-audit-li">
-    <input type="checkbox" id="m-docsconceptsreceipts-and-audit-check"/>
-    <label for="m-docsconceptsreceipts-and-audit-check"><a href="/docs/concepts/receipts-and-audit/" title="Receipts and Audit" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsreceipts-and-audit"><span class="">Receipts &amp; Audit</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsconsent-li">
-    <input type="checkbox" id="m-docsconceptsconsent-check"/>
-    <label for="m-docsconceptsconsent-check"><a href="/docs/concepts/consent/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsconsent"><span class="">Consent</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsprotocol-li">
-    <input type="checkbox" id="m-docsprotocol-check"/>
-    <label for="m-docsprotocol-check"><a href="/docs/protocol/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsprotocol"><span class="">Protocol</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocolflows-li">
-    <input type="checkbox" id="m-docsprotocolflows-check"/>
-    <label for="m-docsprotocolflows-check"><a href="/docs/protocol/flows/" title="Protocol Flows" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocolflows"><span class="">Flows</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocoljwt-profile-li">
-    <input type="checkbox" id="m-docsprotocoljwt-profile-check"/>
-    <label for="m-docsprotocoljwt-profile-check"><a href="/docs/protocol/jwt-profile/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocoljwt-profile"><span class="">JWT Profile</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocoldpop-li">
-    <input type="checkbox" id="m-docsprotocoldpop-check"/>
-    <label for="m-docsprotocoldpop-check"><a href="/docs/protocol/dpop/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocoldpop"><span class="">DPoP</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsschemas-li">
-    <input type="checkbox" id="m-docsschemas-check"/>
-    <label for="m-docsschemas-check"><a href="/docs/schemas/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsschemas"><span class="">Schemas</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasregistry-agent-record-li">
-    <input type="checkbox" id="m-docsschemasregistry-agent-record-check"/>
-    <label for="m-docsschemasregistry-agent-record-check"><a href="/docs/schemas/registry-agent-record/" title="Registry Agent Record" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasregistry-agent-record"><span class="">Agent Record</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasuai-receipt-li">
-    <input type="checkbox" id="m-docsschemasuai-receipt-check"/>
-    <label for="m-docsschemasuai-receipt-check"><a href="/docs/schemas/uai-receipt/" title="UAI Receipt" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasuai-receipt"><span class="">Receipt</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasuai-risk-policy-li">
-    <input type="checkbox" id="m-docsschemasuai-risk-policy-check"/>
-    <label for="m-docsschemasuai-risk-policy-check"><a href="/docs/schemas/uai-risk-policy/" title="UAI Risk Policy" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasuai-risk-policy"><span class="">Risk Policy</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasagentfacts-extension-li">
-    <input type="checkbox" id="m-docsschemasagentfacts-extension-check"/>
-    <label for="m-docsschemasagentfacts-extension-check"><a href="/docs/schemas/agentfacts-extension/" title="AgentFacts UAI Extension" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasagentfacts-extension"><span class="">AgentFacts Extension</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasconsent-artifact-li">
-    <input type="checkbox" id="m-docsschemasconsent-artifact-check"/>
-    <label for="m-docsschemasconsent-artifact-check"><a href="/docs/schemas/consent-artifact/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasconsent-artifact"><span class="">Consent Artifact</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsservices-li">
-    <input type="checkbox" id="m-docsservices-check"/>
-    <label for="m-docsservices-check"><a href="/docs/services/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsservices"><span class="">Services</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesregistry-li">
-    <input type="checkbox" id="m-docsservicesregistry-check"/>
-    <label for="m-docsservicesregistry-check"><a href="/docs/services/registry/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesregistry"><span class="">Registry</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicestrust-server-li">
-    <input type="checkbox" id="m-docsservicestrust-server-check"/>
-    <label for="m-docsservicestrust-server-check"><a href="/docs/services/trust-server/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicestrust-server"><span class="">Trust Server</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesaudit-ledger-li">
-    <input type="checkbox" id="m-docsservicesaudit-ledger-check"/>
-    <label for="m-docsservicesaudit-ledger-check"><a href="/docs/services/audit-ledger/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesaudit-ledger"><span class="">Audit Ledger</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesdemo-providers-li">
-    <input type="checkbox" id="m-docsservicesdemo-providers-check"/>
-    <label for="m-docsservicesdemo-providers-check"><a href="/docs/services/demo-providers/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesdemo-providers"><span class="">Demo Providers</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesadapters-li">
-    <input type="checkbox" id="m-docsservicesadapters-check"/>
-    <label for="m-docsservicesadapters-check"><a href="/docs/services/adapters/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesadapters"><span class="">Adapters</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsapi-reference-li">
-    <input type="checkbox" id="m-docsapi-reference-check"/>
-    <label for="m-docsapi-reference-check"><a href="/docs/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsapi-reference"><span class="">API Reference</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referenceregistry-api-li">
-    <input type="checkbox" id="m-docsapi-referenceregistry-api-check"/>
-    <label for="m-docsapi-referenceregistry-api-check"><a href="/docs/api-reference/registry-api/" title="Registry API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referenceregistry-api"><span class="">Registry</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referencetrust-server-api-li">
-    <input type="checkbox" id="m-docsapi-referencetrust-server-api-check"/>
-    <label for="m-docsapi-referencetrust-server-api-check"><a href="/docs/api-reference/trust-server-api/" title="Trust Server API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referencetrust-server-api"><span class="">Trust Server</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referenceaudit-ledger-api-li">
-    <input type="checkbox" id="m-docsapi-referenceaudit-ledger-api-check"/>
-    <label for="m-docsapi-referenceaudit-ledger-api-check"><a href="/docs/api-reference/audit-ledger-api/" title="Audit Ledger API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referenceaudit-ledger-api"><span class="">Audit Ledger</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsguides-li">
-    <input type="checkbox" id="m-docsguides-check"/>
-    <label for="m-docsguides-check"><a href="/docs/guides/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsguides"><span class="">Guides</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesgetting-started-li">
-    <input type="checkbox" id="m-docsguidesgetting-started-check"/>
-    <label for="m-docsguidesgetting-started-check"><a href="/docs/guides/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesgetting-started"><span class="">Getting Started</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesprovider-implementation-li">
-    <input type="checkbox" id="m-docsguidesprovider-implementation-check"/>
-    <label for="m-docsguidesprovider-implementation-check"><a href="/docs/guides/provider-implementation/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesprovider-implementation"><span class="">Provider Implementation</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesnanda-integration-li">
-    <input type="checkbox" id="m-docsguidesnanda-integration-check"/>
-    <label for="m-docsguidesnanda-integration-check"><a href="/docs/guides/nanda-integration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesnanda-integration"><span class="">NANDA Integration</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsreference-li">
-    <input type="checkbox" id="m-docsreference-check"/>
-    <label for="m-docsreference-check"><a href="/docs/reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsreference"><span class="">Reference</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencemake-targets-li">
-    <input type="checkbox" id="m-docsreferencemake-targets-check"/>
-    <label for="m-docsreferencemake-targets-check"><a href="/docs/reference/make-targets/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferencemake-targets"><span class="">Make Targets</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceenvironment-variables-li">
-    <input type="checkbox" id="m-docsreferenceenvironment-variables-check"/>
-    <label for="m-docsreferenceenvironment-variables-check"><a href="/docs/reference/environment-variables/" title="Environment Variables" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferenceenvironment-variables"><span class="">Env Vars</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencecompliance-li">
-    <input type="checkbox" id="m-docsreferencecompliance-check"/>
-    <label for="m-docsreferencecompliance-check"><a href="/docs/reference/compliance/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferencecompliance"><span class="">Compliance</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceperformance-li">
-    <input type="checkbox" id="m-docsreferenceperformance-check"/>
-    <label for="m-docsreferenceperformance-check"><a href="/docs/reference/performance/" title="Performance Targets" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferenceperformance"><span class="">Performance</span></a></label>
-    
-  </li>
-    </ul>
-  </li>
-    </ul>
-  </li>
-    </ul>
-  </nav>
-</div>
-
-          </aside>
-          <aside class="td-sidebar-toc">
-            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
-
-</div>
-
-            <div class="td-toc" data-proofer-ignore>
-<div class="td-toc-title">
-      <span class="td-toc-title__text">On this page</span>
-      <a class="td-toc-title__link" title="Top of page" href="#"></a>
-    </div>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#tier-summary">Tier Summary</a></li>
-    <li><a href="#tier-1--low-risk-open-public-data">Tier 1 — Low Risk (Open Public Data)</a></li>
-    <li><a href="#tier-2--medium-risk-personal-data-with-consent">Tier 2 — Medium Risk (Personal Data with Consent)</a></li>
-    <li><a href="#tier-3--high-risk-sensitive-data--proof-of-possession">Tier 3 — High Risk (Sensitive Data + Proof-of-Possession)</a></li>
-    <li><a href="#tier-4--critical-risk-system-level-operations">Tier 4 — Critical Risk (System-Level Operations)</a></li>
-    <li><a href="#how-tiers-are-assigned">How Tiers Are Assigned</a></li>
-    <li><a href="#provider-ceiling">Provider Ceiling</a></li>
-  </ul>
-</nav>
-  </div>
-
-            
-
-          </aside>
-          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
-            
-            <nav aria-label="breadcrumb" class="td-breadcrumbs">
-  <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <a href="/docs/">Docs</a></li>
-  <li class="breadcrumb-item">
-    <a href="/docs/concepts/">Concepts</a></li>
-  <li class="breadcrumb-item active" aria-current="page">
-    Trust Tiers</li>
-  </ol>
-</nav>
-<div class="td-content">
-	<h1>Trust Tiers</h1>
-	<div class="lead">The four risk-based authorization tiers that govern every UAI interaction.</div>
-	<header class="article-meta">
-		
-</header>
-	<p>Every scope in UAI is assigned a <strong>trust tier</strong> (1–4) that determines the authentication requirements, token lifetime, consent type, and additional controls required before the Trust Server will issue a delegation token.</p>
-<h2 id="tier-summary">Tier Summary</h2>
-<table>
-	<thead>
-			<tr>
-					<th>Tier</th>
-					<th>Risk</th>
-					<th>Auth Required</th>
-					<th>Token TTL</th>
-					<th>Consent</th>
-					<th>DPoP</th>
-					<th>Insurance VC</th>
-					<th>Human Gate</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>1</td>
-					<td>Low</td>
-					<td>None</td>
-					<td>5 min</td>
-					<td>Not required</td>
-					<td>No</td>
-					<td>No</td>
-					<td>No</td>
-			</tr>
-			<tr>
-					<td>2</td>
-					<td>Medium</td>
-					<td>Consent (OTP or consent-manager)</td>
-					<td>2 min</td>
-					<td>Required</td>
-					<td>No</td>
-					<td>No</td>
-					<td>No</td>
-			</tr>
-			<tr>
-					<td>3</td>
-					<td>High</td>
-					<td>MFA + Insurance VC</td>
-					<td>30 sec</td>
-					<td>Required (biometric or consent-manager)</td>
-					<td>Required</td>
-					<td>Required</td>
-					<td>No</td>
-			</tr>
-			<tr>
-					<td>4</td>
-					<td>Critical</td>
-					<td>Manual + dual-control</td>
-					<td>Session only</td>
-					<td>Required (manual-approval)</td>
-					<td>Required</td>
-					<td>Required</td>
-					<td>Yes (2 approvers)</td>
-			</tr>
-	</tbody>
-</table>
-<h2 id="tier-1--low-risk-open-public-data">Tier 1 — Low Risk (Open Public Data)</h2>
-<p>Tier 1 covers public or aggregated data that does not require citizen consent. Anyone with a registered DID can call a Tier 1 scope.</p>
-<p><strong>Examples:</strong> <code>read:crop_diagnosis</code>, <code>read:mandi_prices</code>, <code>read:fpo_info</code>, <code>read:translation</code>, <code>read:curriculum_data</code></p>
-<p><strong>What the Trust Server checks:</strong></p>
-<ul>
-<li>Seeker DID is registered in the Registry</li>
-<li>Provider DID is registered and supports the requested scope</li>
-<li>Scope exists in the active risk policy</li>
-</ul>
-<p><strong>No consent artifact required. No DPoP required.</strong></p>
-<h2 id="tier-2--medium-risk-personal-data-with-consent">Tier 2 — Medium Risk (Personal Data with Consent)</h2>
-<p>Tier 2 covers personal data access where the citizen has provided verifiable consent through OTP or a consent manager.</p>
-<p><strong>Examples:</strong> <code>read:pmkisan_status</code>, <code>read:land_records</code>, <code>read:credit_data</code>, <code>read:student_progress</code>, <code>read:health_profile</code></p>
-<p><strong>Additional requirements beyond Tier 1:</strong></p>
-<ul>
-<li>A valid <code>consent_id</code> must be provided in the token request</li>
-<li>The Trust Server fetches the consent artifact from the Seeker&rsquo;s registered <code>consent_endpoint</code></li>
-<li>The artifact must pass all five DPDP validation checks (see <a href="/docs/concepts/consent/">Consent</a>)</li>
-<li>The Seeker must have a <code>consent_endpoint</code> registered in the Registry</li>
-</ul>
-<p><strong>Token TTL is shortened to 2 minutes to limit exposure.</strong></p>
-<h2 id="tier-3--high-risk-sensitive-data--proof-of-possession">Tier 3 — High Risk (Sensitive Data + Proof-of-Possession)</h2>
-<p>Tier 3 covers highly sensitive data such as health records and financial transactions. It adds sender-constraining via DPoP so that a stolen token cannot be replayed by a different party.</p>
-<p><strong>Examples:</strong> <code>read:health_records</code>, <code>read:diagnostic_result</code>, <code>write:loan_application</code>, <code>write:insurance_claim</code></p>
-<p><strong>Additional requirements beyond Tier 2:</strong></p>
-<ul>
-<li>The Seeker must send a <code>DPoP</code> proof header with the token request</li>
-<li>The Trust Server embeds <code>cnf.jkt</code> (JWK thumbprint) in the issued JWT</li>
-<li>The Provider must verify the DPoP proof on every P2P call</li>
-<li>The Provider must have <code>vc_refs</code> containing a valid <code>UAIInsuranceCredential</code> in its Registry record</li>
-<li>Consent collection method must be <code>biometric</code> or <code>consent-manager</code> (not just OTP)</li>
-</ul>
-<p><strong>Token TTL is 30 seconds.</strong></p>
-<h2 id="tier-4--critical-risk-system-level-operations">Tier 4 — Critical Risk (System-Level Operations)</h2>
-<p>Tier 4 covers irreversible system-level operations. These require a human in the loop with dual-control sign-off from two independent approvers before a token is issued.</p>
-<p><strong>Examples:</strong> <code>write:system_config</code>, <code>admin:*</code>, <code>write:benefit_disbursal</code></p>
-<p><strong>Additional requirements beyond Tier 3:</strong></p>
-<ul>
-<li>Human approval gate — no automated issuance</li>
-<li>Dual-control sign-off from two independent approvers</li>
-<li>Consent collection method must be <code>manual-approval</code></li>
-<li>Session-scoped token (no fixed TTL)</li>
-</ul>
-<div class="alert alert-warning" role="alert"><div class="h4 alert-heading" role="heading">Implementation Status</div>
-<p>Tier 4 manual approval workflow is planned for Phase 2. The policy schema supports it, but the Trust Server does not yet implement the human gate.</p>
-</div>
-<h2 id="how-tiers-are-assigned">How Tiers Are Assigned</h2>
-<p>Tiers are assigned per scope in the Risk Policy JSON file — not per agent. The same agent can provide both Tier 1 and Tier 3 scopes.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;scopes&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;scope&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;read:crop_diagnosis&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;tier&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;consent&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;required&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">false</span> <span style="color:#000;font-weight:bold">}</span> <span style="color:#000;font-weight:bold">},</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;scope&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;read:pmkisan_status&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;tier&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;consent&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;required&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;allowed_methods&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;otp&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;consent-manager&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">}</span> <span style="color:#000;font-weight:bold">},</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;scope&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;read:diagnostic_result&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;tier&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;consent&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;required&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;allowed_methods&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;biometric&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;consent-manager&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">&#34;provider_requirements&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;insurance_vc_required&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span> <span style="color:#000;font-weight:bold">}</span> <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">]</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><h2 id="provider-ceiling">Provider Ceiling</h2>
-<p>Every provider declares <code>risk_tier_max</code> in its Registry record. The Trust Server will not issue a token for a scope whose tier exceeds the provider&rsquo;s declared ceiling — even if the scope exists in the policy.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;risk_tier_max&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;supported_scopes&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;read:crop_diagnosis&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;read:pmkisan_status&#34;</span><span style="color:#000;font-weight:bold">]</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>A provider with <code>risk_tier_max: 2</code> cannot serve Tier 3 scopes, regardless of what the policy says.</p>
-
-	
-</div>
-
-
-          </main>
-        </div>
-      </div>
-      <footer class="td-footer row d-print-none">
-  <div class="uai-footer-bottom">
-    <span class="uai-footer-copyright">&copy; 2026 Unified AI Interface</span>
-    <span class="uai-footer-attr">
-      <span>Part of IndiaAI Mission under MeitY</span>
-      <span>Open Protocol Infrastructure for India's AI Ecosystem</span>
-    </span>
-  </div>
-</footer>
-
-    </div>
-    <script src="/js/main.js"></script>
-<script defer src="/js/click-to-copy.js" crossorigin="anonymous"></script>
-<script src='/js/tabpane-persist.js'></script>
-
-  </body>
-</html>
+<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><link rel=icon type=image/svg+xml href=/favicons/favicon.svg><title>Trust Tiers | UAI Protocol Documentation</title><meta name=description content="The four risk-based authorization tiers that govern every UAI interaction."><meta property="og:url" content="http://localhost/docs/concepts/trust-tiers/"><meta property="og:site_name" content="UAI Protocol Documentation"><meta property="og:title" content="Trust Tiers"><meta property="og:description" content="The four risk-based authorization tiers that govern every UAI interaction."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta itemprop=name content="Trust Tiers"><meta itemprop=description content="The four risk-based authorization tiers that govern every UAI interaction."><meta itemprop=wordCount content="607"><meta name=twitter:card content="summary"><meta name=twitter:title content="Trust Tiers"><meta name=twitter:description content="The four risk-based authorization tiers that govern every UAI interaction."><link rel=preload href=/scss/main.min.0665b56bafb610637838e99964edd4771ac801de00fc61d3d48c517dce7e58ca.css as=style integrity="sha256-BmW1a6+2EGN4OOmZZO3UdxrIAd4A/GHT1IxRfc5+WMo=" crossorigin=anonymous><link href=/scss/main.min.0665b56bafb610637838e99964edd4771ac801de00fc61d3d48c517dce7e58ca.css rel=stylesheet integrity="sha256-BmW1a6+2EGN4OOmZZO3UdxrIAd4A/GHT1IxRfc5+WMo=" crossorigin=anonymous><script src=https://code.jquery.com/jquery-3.7.1.min.js integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin=anonymous></script><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover"></head><body class=td-page><header><div class="uai-gov-banner d-print-none"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg" srcset="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 360w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 720w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 945w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1080w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1440w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 2880w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1920w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 3840w" sizes="(max-width: 500px) 800px, 100vw" alt="UAI Protocol — Unified AI Interface"></div></header><div class="container-fluid td-outer"><div class=td-main data-bs-spy=scroll data-bs-target=.td-toc data-bs-root-margin="0px 0px -10%"><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><script>$(function(){$("#td-section-nav a").removeClass("active"),$("#td-section-nav #m-docsconceptstrust-tiers").addClass("active"),$("#td-section-nav #m-docsconceptstrust-tiers-li span").addClass("td-sidebar-nav-active-item"),$("#td-section-nav #m-docsconceptstrust-tiers").parents("li").addClass("active-path"),$("#td-section-nav li.active-path").addClass("show"),$("#td-section-nav li.active-path").children("input").prop("checked",!0),$("#td-section-nav #m-docsconceptstrust-tiers-li").siblings("li").addClass("show"),$("#td-section-nav #m-docsconceptstrust-tiers-li").children("ul").children("li").addClass("show"),$("#td-sidebar-menu").toggleClass("d-none")})</script><div id=td-sidebar-menu class="td-sidebar__inner d-none"><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle" type=button data-bs-toggle=collapse data-bs-target=#td-section-nav aria-controls=td-section-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><a href=/docs/ class=uai-sidebar-brand><span class=uai-sidebar-brand__logo><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"/><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0" stop-color="#2666ae"/><stop offset="100%" stop-color="#91bfde"/></linearGradient></defs><g><g fill="#fff" transform="matrix(5.920976549951815,0,0,5.920976549951815,3.906965736174101,141.5077631449799)" stroke="#ec7313" stroke-width="0"><path d="M8.8-14.22h3.43v9.31q0 1.58-.68 2.74-.67 1.15-1.93 1.76Q8.36.2 6.64.2 4.04.2 2.55-1.15 1.05-2.5 1.03-4.84v-9.38H4.47v9.44Q4.53-2.44 6.64-2.44q1.07.0 1.61-.59Q8.8-3.61 8.8-4.93v-9.29zM23.06.0 22.23-2.66h-4.7L16.71.0H13.05l5.21-14.22h3.22L26.74.0H23.06zM19.87-10.23 18.35-5.3h3.06l-1.54-4.93zm11.56-3.99V0H28.01V-14.22h3.42z"/></g></g></svg>
+</span><span class=uai-sidebar-brand__title>UAI Protocol Documentation</span></a><nav class="td-sidebar-nav collapse foldable-nav" id=td-section-nav><ul class="td-sidebar-nav__section pe-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child td-sidebar-tree-root-li" id=m-docs-li><a href=/docs/ title=Documentation class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Docs</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsintroduction-li><input type=checkbox id=m-docsintroduction-check>
+<label for=m-docsintroduction-check><a href=/docs/introduction/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsintroduction><span>Introduction</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintroductionoverview-li><input type=checkbox id=m-docsintroductionoverview-check>
+<label for=m-docsintroductionoverview-check><a href=/docs/introduction/overview/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionoverview><span>Overview</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintroductionarchitecture-li><input type=checkbox id=m-docsintroductionarchitecture-check>
+<label for=m-docsintroductionarchitecture-check><a href=/docs/introduction/architecture/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionarchitecture><span>Architecture</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsconcepts-li><input type=checkbox id=m-docsconcepts-check>
+<label for=m-docsconcepts-check><a href=/docs/concepts/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsconcepts><span>Concepts</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptstrust-tiers-li><input type=checkbox id=m-docsconceptstrust-tiers-check>
+<label for=m-docsconceptstrust-tiers-check><a href=/docs/concepts/trust-tiers/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptstrust-tiers><span>Trust Tiers</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscorridors-li><input type=checkbox id=m-docsconceptscorridors-check>
+<label for=m-docsconceptscorridors-check><a href=/docs/concepts/corridors/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscorridors><span>Corridors</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsdids-and-identity-li><input type=checkbox id=m-docsconceptsdids-and-identity-check>
+<label for=m-docsconceptsdids-and-identity-check><a href=/docs/concepts/dids-and-identity/ title="DIDs and Identity" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsdids-and-identity><span>DIDs & Identity</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsreceipts-and-audit-li><input type=checkbox id=m-docsconceptsreceipts-and-audit-check>
+<label for=m-docsconceptsreceipts-and-audit-check><a href=/docs/concepts/receipts-and-audit/ title="Receipts and Audit" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsreceipts-and-audit><span>Receipts & Audit</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsconsent-li><input type=checkbox id=m-docsconceptsconsent-check>
+<label for=m-docsconceptsconsent-check><a href=/docs/concepts/consent/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsconsent><span>Consent</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsprotocol-li><input type=checkbox id=m-docsprotocol-check>
+<label for=m-docsprotocol-check><a href=/docs/protocol/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsprotocol><span>Protocol</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocolflows-li><input type=checkbox id=m-docsprotocolflows-check>
+<label for=m-docsprotocolflows-check><a href=/docs/protocol/flows/ title="Protocol Flows" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocolflows><span>Flows</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocoljwt-profile-li><input type=checkbox id=m-docsprotocoljwt-profile-check>
+<label for=m-docsprotocoljwt-profile-check><a href=/docs/protocol/jwt-profile/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocoljwt-profile><span>JWT Profile</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocoldpop-li><input type=checkbox id=m-docsprotocoldpop-check>
+<label for=m-docsprotocoldpop-check><a href=/docs/protocol/dpop/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocoldpop><span>DPoP</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsschemas-li><input type=checkbox id=m-docsschemas-check>
+<label for=m-docsschemas-check><a href=/docs/schemas/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsschemas><span>Schemas</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasregistry-agent-record-li><input type=checkbox id=m-docsschemasregistry-agent-record-check>
+<label for=m-docsschemasregistry-agent-record-check><a href=/docs/schemas/registry-agent-record/ title="Registry Agent Record" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasregistry-agent-record><span>Agent Record</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasuai-receipt-li><input type=checkbox id=m-docsschemasuai-receipt-check>
+<label for=m-docsschemasuai-receipt-check><a href=/docs/schemas/uai-receipt/ title="UAI Receipt" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasuai-receipt><span>Receipt</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasuai-risk-policy-li><input type=checkbox id=m-docsschemasuai-risk-policy-check>
+<label for=m-docsschemasuai-risk-policy-check><a href=/docs/schemas/uai-risk-policy/ title="UAI Risk Policy" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasuai-risk-policy><span>Risk Policy</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasagentfacts-extension-li><input type=checkbox id=m-docsschemasagentfacts-extension-check>
+<label for=m-docsschemasagentfacts-extension-check><a href=/docs/schemas/agentfacts-extension/ title="AgentFacts UAI Extension" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasagentfacts-extension><span>AgentFacts Extension</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasconsent-artifact-li><input type=checkbox id=m-docsschemasconsent-artifact-check>
+<label for=m-docsschemasconsent-artifact-check><a href=/docs/schemas/consent-artifact/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasconsent-artifact><span>Consent Artifact</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li><input type=checkbox id=m-docsservices-check>
+<label for=m-docsservices-check><a href=/docs/services/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>Services</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesregistry-li><input type=checkbox id=m-docsservicesregistry-check>
+<label for=m-docsservicesregistry-check><a href=/docs/services/registry/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesregistry><span>Registry</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicestrust-server-li><input type=checkbox id=m-docsservicestrust-server-check>
+<label for=m-docsservicestrust-server-check><a href=/docs/services/trust-server/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicestrust-server><span>Trust Server</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesaudit-ledger-li><input type=checkbox id=m-docsservicesaudit-ledger-check>
+<label for=m-docsservicesaudit-ledger-check><a href=/docs/services/audit-ledger/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesaudit-ledger><span>Audit Ledger</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesdemo-providers-li><input type=checkbox id=m-docsservicesdemo-providers-check>
+<label for=m-docsservicesdemo-providers-check><a href=/docs/services/demo-providers/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdemo-providers><span>Demo Providers</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesadapters-li><input type=checkbox id=m-docsservicesadapters-check>
+<label for=m-docsservicesadapters-check><a href=/docs/services/adapters/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesadapters><span>Adapters</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapi-reference-li><input type=checkbox id=m-docsapi-reference-check>
+<label for=m-docsapi-reference-check><a href=/docs/api-reference/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsapi-reference><span>API Reference</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referenceregistry-api-li><input type=checkbox id=m-docsapi-referenceregistry-api-check>
+<label for=m-docsapi-referenceregistry-api-check><a href=/docs/api-reference/registry-api/ title="Registry API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referenceregistry-api><span>Registry</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referencetrust-server-api-li><input type=checkbox id=m-docsapi-referencetrust-server-api-check>
+<label for=m-docsapi-referencetrust-server-api-check><a href=/docs/api-reference/trust-server-api/ title="Trust Server API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referencetrust-server-api><span>Trust Server</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referenceaudit-ledger-api-li><input type=checkbox id=m-docsapi-referenceaudit-ledger-api-check>
+<label for=m-docsapi-referenceaudit-ledger-api-check><a href=/docs/api-reference/audit-ledger-api/ title="Audit Ledger API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referenceaudit-ledger-api><span>Audit Ledger</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsguides-li><input type=checkbox id=m-docsguides-check>
+<label for=m-docsguides-check><a href=/docs/guides/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsguides><span>Guides</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesgetting-started-li><input type=checkbox id=m-docsguidesgetting-started-check>
+<label for=m-docsguidesgetting-started-check><a href=/docs/guides/getting-started/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesgetting-started><span>Getting Started</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesprovider-implementation-li><input type=checkbox id=m-docsguidesprovider-implementation-check>
+<label for=m-docsguidesprovider-implementation-check><a href=/docs/guides/provider-implementation/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesprovider-implementation><span>Provider Implementation</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesnanda-integration-li><input type=checkbox id=m-docsguidesnanda-integration-check>
+<label for=m-docsguidesnanda-integration-check><a href=/docs/guides/nanda-integration/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesnanda-integration><span>NANDA Integration</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsreference-li><input type=checkbox id=m-docsreference-check>
+<label for=m-docsreference-check><a href=/docs/reference/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsreference><span>Reference</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferencemake-targets-li><input type=checkbox id=m-docsreferencemake-targets-check>
+<label for=m-docsreferencemake-targets-check><a href=/docs/reference/make-targets/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferencemake-targets><span>Make Targets</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferenceenvironment-variables-li><input type=checkbox id=m-docsreferenceenvironment-variables-check>
+<label for=m-docsreferenceenvironment-variables-check><a href=/docs/reference/environment-variables/ title="Environment Variables" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferenceenvironment-variables><span>Env Vars</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferencecompliance-li><input type=checkbox id=m-docsreferencecompliance-check>
+<label for=m-docsreferencecompliance-check><a href=/docs/reference/compliance/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferencecompliance><span>Compliance</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferenceperformance-li><input type=checkbox id=m-docsreferenceperformance-check>
+<label for=m-docsreferenceperformance-check><a href=/docs/reference/performance/ title="Performance Targets" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferenceperformance><span>Performance</span></a></label></li></ul></li></ul></li></ul></nav></div></aside><aside class=td-sidebar-toc><div class="td-page-meta ms-2 pb-1 pt-2 mb-0"></div><div class=td-toc data-proofer-ignore><div class=td-toc-title><span class=td-toc-title__text>On this page</span>
+<a class=td-toc-title__link title="Top of page" href=#></a></div><nav id=TableOfContents><ul><li><a href=#tier-summary>Tier Summary</a></li><li><a href=#tier-1--low-risk-open-public-data>Tier 1 — Low Risk (Open Public Data)</a></li><li><a href=#tier-2--medium-risk-personal-data-with-consent>Tier 2 — Medium Risk (Personal Data with Consent)</a></li><li><a href=#tier-3--high-risk-sensitive-data--proof-of-possession>Tier 3 — High Risk (Sensitive Data + Proof-of-Possession)</a></li><li><a href=#tier-4--critical-risk-system-level-operations>Tier 4 — Critical Risk (System-Level Operations)</a></li><li><a href=#how-tiers-are-assigned>How Tiers Are Assigned</a></li><li><a href=#provider-ceiling>Provider Ceiling</a></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 ps-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=/docs/>Docs</a></li><li class=breadcrumb-item><a href=/docs/concepts/>Concepts</a></li><li class="breadcrumb-item active" aria-current=page>Trust Tiers</li></ol></nav><div class=td-content><h1>Trust Tiers</h1><div class=lead>The four risk-based authorization tiers that govern every UAI interaction.</div><header class=article-meta></header><p>Every scope in UAI is assigned a <strong>trust tier</strong> (1–4) that determines the authentication requirements, token lifetime, consent type, and additional controls required before the Trust Server will issue a delegation token.</p><h2 id=tier-summary>Tier Summary</h2><table><thead><tr><th>Tier</th><th>Risk</th><th>Auth Required</th><th>Token TTL</th><th>Consent</th><th>DPoP</th><th>Insurance VC</th><th>Human Gate</th></tr></thead><tbody><tr><td>1</td><td>Low</td><td>None</td><td>5 min</td><td>Not required</td><td>No</td><td>No</td><td>No</td></tr><tr><td>2</td><td>Medium</td><td>Consent (OTP or consent-manager)</td><td>2 min</td><td>Required</td><td>No</td><td>No</td><td>No</td></tr><tr><td>3</td><td>High</td><td>MFA + Insurance VC</td><td>30 sec</td><td>Required (biometric or consent-manager)</td><td>Required</td><td>Required</td><td>No</td></tr><tr><td>4</td><td>Critical</td><td>Manual + dual-control</td><td>Session only</td><td>Required (manual-approval)</td><td>Required</td><td>Required</td><td>Yes (2 approvers)</td></tr></tbody></table><h2 id=tier-1--low-risk-open-public-data>Tier 1 — Low Risk (Open Public Data)</h2><p>Tier 1 covers public or aggregated data that does not require citizen consent. Anyone with a registered DID can call a Tier 1 scope.</p><p><strong>Examples:</strong> <code>read:crop_diagnosis</code>, <code>read:mandi_prices</code>, <code>read:fpo_info</code>, <code>read:translation</code>, <code>read:curriculum_data</code></p><p><strong>What the Trust Server checks:</strong></p><ul><li>Seeker DID is registered in the Registry</li><li>Provider DID is registered and supports the requested scope</li><li>Scope exists in the active risk policy</li></ul><p><strong>No consent artifact required. No DPoP required.</strong></p><h2 id=tier-2--medium-risk-personal-data-with-consent>Tier 2 — Medium Risk (Personal Data with Consent)</h2><p>Tier 2 covers personal data access where the citizen has provided verifiable consent through OTP or a consent manager.</p><p><strong>Examples:</strong> <code>read:pmkisan_status</code>, <code>read:land_records</code>, <code>read:credit_data</code>, <code>read:student_progress</code>, <code>read:health_profile</code></p><p><strong>Additional requirements beyond Tier 1:</strong></p><ul><li>A valid <code>consent_id</code> must be provided in the token request</li><li>The Trust Server fetches the consent artifact from the Seeker&rsquo;s registered <code>consent_endpoint</code></li><li>The artifact must pass all five DPDP validation checks (see <a href=/docs/concepts/consent/>Consent</a>)</li><li>The Seeker must have a <code>consent_endpoint</code> registered in the Registry</li></ul><p><strong>Token TTL is shortened to 2 minutes to limit exposure.</strong></p><h2 id=tier-3--high-risk-sensitive-data--proof-of-possession>Tier 3 — High Risk (Sensitive Data + Proof-of-Possession)</h2><p>Tier 3 covers highly sensitive data such as health records and financial transactions. It adds sender-constraining via DPoP so that a stolen token cannot be replayed by a different party.</p><p><strong>Examples:</strong> <code>read:health_records</code>, <code>read:diagnostic_result</code>, <code>write:loan_application</code>, <code>write:insurance_claim</code></p><p><strong>Additional requirements beyond Tier 2:</strong></p><ul><li>The Seeker must send a <code>DPoP</code> proof header with the token request</li><li>The Trust Server embeds <code>cnf.jkt</code> (JWK thumbprint) in the issued JWT</li><li>The Provider must verify the DPoP proof on every P2P call</li><li>The Provider must have <code>vc_refs</code> containing a valid <code>UAIInsuranceCredential</code> in its Registry record</li><li>Consent collection method must be <code>biometric</code> or <code>consent-manager</code> (not just OTP)</li></ul><p><strong>Token TTL is 30 seconds.</strong></p><h2 id=tier-4--critical-risk-system-level-operations>Tier 4 — Critical Risk (System-Level Operations)</h2><p>Tier 4 covers irreversible system-level operations. These require a human in the loop with dual-control sign-off from two independent approvers before a token is issued.</p><p><strong>Examples:</strong> <code>write:system_config</code>, <code>admin:*</code>, <code>write:benefit_disbursal</code></p><p><strong>Additional requirements beyond Tier 3:</strong></p><ul><li>Human approval gate — no automated issuance</li><li>Dual-control sign-off from two independent approvers</li><li>Consent collection method must be <code>manual-approval</code></li><li>Session-scoped token (no fixed TTL)</li></ul><div class="alert alert-warning" role=alert><div class="h4 alert-heading" role=heading>Implementation Status</div><p>Tier 4 manual approval workflow is planned for Phase 2. The policy schema supports it, but the Trust Server does not yet implement the human gate.</p></div><h2 id=how-tiers-are-assigned>How Tiers Are Assigned</h2><p>Tiers are assigned per scope in the Risk Policy JSON file — not per agent. The same agent can provide both Tier 1 and Tier 3 scopes.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;scopes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+</span></span><span style=display:flex><span>    <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;scope&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;read:crop_diagnosis&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;tier&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;consent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;required&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>false</span> <span style=color:#000;font-weight:700>}</span> <span style=color:#000;font-weight:700>},</span>
+</span></span><span style=display:flex><span>    <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;scope&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;read:pmkisan_status&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;tier&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>2</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;consent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;required&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;allowed_methods&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;otp&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;consent-manager&#34;</span><span style=color:#000;font-weight:700>]</span> <span style=color:#000;font-weight:700>}</span> <span style=color:#000;font-weight:700>},</span>
+</span></span><span style=display:flex><span>    <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;scope&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;read:diagnostic_result&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;tier&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>3</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;consent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;required&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;allowed_methods&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;biometric&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;consent-manager&#34;</span><span style=color:#000;font-weight:700>]</span> <span style=color:#000;font-weight:700>},</span> <span style=color:#204a87;font-weight:700>&#34;provider_requirements&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;insurance_vc_required&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span> <span style=color:#000;font-weight:700>}</span> <span style=color:#000;font-weight:700>}</span>
+</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>]</span>
+</span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
+</span></span></code></pre></div><h2 id=provider-ceiling>Provider Ceiling</h2><p>Every provider declares <code>risk_tier_max</code> in its Registry record. The Trust Server will not issue a token for a scope whose tier exceeds the provider&rsquo;s declared ceiling — even if the scope exists in the policy.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;risk_tier_max&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>2</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;supported_scopes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;read:crop_diagnosis&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;read:pmkisan_status&#34;</span><span style=color:#000;font-weight:700>]</span>
+</span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
+</span></span></code></pre></div><p>A provider with <code>risk_tier_max: 2</code> cannot serve Tier 3 scopes, regardless of what the policy says.</p></div></main></div></div><footer class="td-footer row d-print-none"><div class=uai-footer-bottom><span class=uai-footer-copyright>&copy; 2026 Unified AI Interface</span>
+<span class=uai-footer-attr><span>Part of IndiaAI Mission under MeitY</span>
+<span>Open Protocol Infrastructure for India's AI Ecosystem</span></span></div></footer></div><script src=/js/main.min.95fb6baaf69b9e0f93b4faa2a3a4943fb4932a8978d8cdec750bacdb3a2f2961.js integrity="sha256-lftrqvabng+TtPqio6SUP7STKol42M3sdQus2zovKWE=" crossorigin=anonymous></script><script defer src=/js/click-to-copy.min.24576ff9fe9f85bb1948ecae52ce227cafce53757a3ad52301f2a79260f6b97d.js integrity="sha256-JFdv+f6fhbsZSOyuUs4ifK/OU3V6OtUjAfKnkmD2uX0=" crossorigin=anonymous></script><script src=/js/tabpane-persist.js></script></body></html>
