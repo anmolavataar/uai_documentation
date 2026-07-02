@@ -5,9 +5,13 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,9 +36,15 @@ jobs:
           node-version: "22"
 
       - name: Install PostCSS dependencies
-        run: npm install -D autoprefixer postcss postcss-cli
+        run: npm ci
 
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
-        run: hugo --minify
+        run: hugo --minify --panicOnWarning --printPathWarnings
+
+      - name: Check links (internal only)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --base ./public --offline --exclude-mail './public/**/*.html'
+          fail: true

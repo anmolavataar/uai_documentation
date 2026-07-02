@@ -1,0 +1,6 @@
+# Local dev server URL baked into hugo.toml baseURL
+http://localhost
+
+# Fonts — Google rate-limits unauthenticated HEAD requests in CI
+https://fonts.googleapis.com
+https://fonts.gstatic.com

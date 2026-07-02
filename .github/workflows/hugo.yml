@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,7 +42,7 @@ jobs:
           node-version: "22"
 
       - name: Install PostCSS dependencies
-        run: npm install -D autoprefixer postcss postcss-cli
+        run: npm ci
 
       - name: Setup Pages
         id: pages
@@ -50,7 +51,13 @@ jobs:
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
-        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --panicOnWarning --printPathWarnings
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --base ./public --timeout 10 --max-retries 3 --exclude-mail './public/**/*.html'
+          fail: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -62,6 +69,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: build
     steps:
       - name: Deploy to GitHub Pages
