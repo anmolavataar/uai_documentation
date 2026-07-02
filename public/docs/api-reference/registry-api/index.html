@@ -1,502 +1,87 @@
-<!doctype html>
-<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<meta name="robots" content="noindex, nofollow">
-<link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg">
-
-<title>Registry API | UAI Protocol Documentation</title>
-<meta name="description" content="Complete endpoint reference for the UAI Registry service (port 8000).">
-<meta property="og:url" content="http://localhost:1313/docs/api-reference/registry-api/">
-	<meta property="og:site_name" content="UAI Protocol Documentation">
-	<meta property="og:title" content="Registry API">
-	<meta property="og:description" content="Complete endpoint reference for the UAI Registry service (port 8000).">
-	<meta property="og:locale" content="en_us">
-	<meta property="og:type" content="article">
-		<meta property="article:section" content="docs">
-
-	<meta itemprop="name" content="Registry API">
-	<meta itemprop="description" content="Complete endpoint reference for the UAI Registry service (port 8000).">
-	<meta itemprop="wordCount" content="378">
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="Registry API">
-	<meta name="twitter:description" content="Complete endpoint reference for the UAI Registry service (port 8000).">
-<link href="/scss/main.css" rel="stylesheet">
-<script
-  src="https://code.jquery.com/jquery-3.7.1.min.js"
-  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-  crossorigin="anonymous"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-
-  </head>
-  <body class="td-page">
-    <header>
-      
-<div class="uai-gov-banner d-print-none">
-  <img
-    src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg"
-    srcset="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 360w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 720w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 945w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1080w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1440w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 2880w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1920w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 3840w"
-    sizes="(max-width: 500px) 800px, 100vw"
-    alt="UAI Protocol — Unified AI Interface"
-  />
-</div>
-
-    </header>
-    <div class="container-fluid td-outer">
-      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
-        <div class="row flex-xl-nowrap">
-          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-            
-  <script>
-    $(function() {
-    $("#td-section-nav a").removeClass("active");
-    $("#td-section-nav #m-docsapi-referenceregistry-api").addClass("active");
-    $("#td-section-nav #m-docsapi-referenceregistry-api-li span").addClass("td-sidebar-nav-active-item");
-    $("#td-section-nav #m-docsapi-referenceregistry-api").parents("li").addClass("active-path");
-    $("#td-section-nav li.active-path").addClass("show");
-    $("#td-section-nav li.active-path").children("input").prop('checked', true);
-    $("#td-section-nav #m-docsapi-referenceregistry-api-li").siblings("li").addClass("show");
-    $("#td-section-nav #m-docsapi-referenceregistry-api-li").children("ul").children("li").addClass("show");
-    $("#td-sidebar-menu").toggleClass("d-none");
-    });
-  </script>
-  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
-  <form class="td-sidebar__search d-flex align-items-center">
-    
-    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
-    </button>
-  </form>
-
-  
-  <a href="/docs/" class="uai-sidebar-brand">
-    <span class="uai-sidebar-brand__logo">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"/><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0" stop-color="#2666ae"/><stop offset="100%" stop-color="#91bfde"/></linearGradient></defs><g><g fill="#fff" transform="matrix(5.920976549951815,0,0,5.920976549951815,3.906965736174101,141.5077631449799)" stroke="#ec7313" stroke-width="0"><path d="M8.8-14.22h3.43v9.31q0 1.58-.68 2.74-.67 1.15-1.93 1.76Q8.36.2 6.64.2 4.04.2 2.55-1.15 1.05-2.5 1.03-4.84v-9.38H4.47v9.44Q4.53-2.44 6.64-2.44q1.07.0 1.61-.59Q8.8-3.61 8.8-4.93v-9.29zM23.06.0 22.23-2.66h-4.7L16.71.0H13.05l5.21-14.22h3.22L26.74.0H23.06zM19.87-10.23 18.35-5.3h3.06l-1.54-4.93zm11.56-3.99V0H28.01V-14.22h3.42z"/></g></g></svg>
-    </span>
-    <span class="uai-sidebar-brand__title">UAI Protocol Documentation</span>
-  </a>
-
-  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
-    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child td-sidebar-tree-root-li" id="m-docs-li">
-    <a href="/docs/" title="Documentation" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Docs</span></a>
-    <ul class="ul-1">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsintroduction-li">
-    <input type="checkbox" id="m-docsintroduction-check"/>
-    <label for="m-docsintroduction-check"><a href="/docs/introduction/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsintroduction"><span class="">Introduction</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionoverview-li">
-    <input type="checkbox" id="m-docsintroductionoverview-check"/>
-    <label for="m-docsintroductionoverview-check"><a href="/docs/introduction/overview/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsintroductionoverview"><span class="">Overview</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionarchitecture-li">
-    <input type="checkbox" id="m-docsintroductionarchitecture-check"/>
-    <label for="m-docsintroductionarchitecture-check"><a href="/docs/introduction/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsintroductionarchitecture"><span class="">Architecture</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsconcepts-li">
-    <input type="checkbox" id="m-docsconcepts-check"/>
-    <label for="m-docsconcepts-check"><a href="/docs/concepts/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsconcepts"><span class="">Concepts</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptstrust-tiers-li">
-    <input type="checkbox" id="m-docsconceptstrust-tiers-check"/>
-    <label for="m-docsconceptstrust-tiers-check"><a href="/docs/concepts/trust-tiers/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptstrust-tiers"><span class="">Trust Tiers</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptscorridors-li">
-    <input type="checkbox" id="m-docsconceptscorridors-check"/>
-    <label for="m-docsconceptscorridors-check"><a href="/docs/concepts/corridors/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptscorridors"><span class="">Corridors</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsdids-and-identity-li">
-    <input type="checkbox" id="m-docsconceptsdids-and-identity-check"/>
-    <label for="m-docsconceptsdids-and-identity-check"><a href="/docs/concepts/dids-and-identity/" title="DIDs and Identity" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsdids-and-identity"><span class="">DIDs &amp; Identity</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsreceipts-and-audit-li">
-    <input type="checkbox" id="m-docsconceptsreceipts-and-audit-check"/>
-    <label for="m-docsconceptsreceipts-and-audit-check"><a href="/docs/concepts/receipts-and-audit/" title="Receipts and Audit" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsreceipts-and-audit"><span class="">Receipts &amp; Audit</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsconsent-li">
-    <input type="checkbox" id="m-docsconceptsconsent-check"/>
-    <label for="m-docsconceptsconsent-check"><a href="/docs/concepts/consent/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsconsent"><span class="">Consent</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsprotocol-li">
-    <input type="checkbox" id="m-docsprotocol-check"/>
-    <label for="m-docsprotocol-check"><a href="/docs/protocol/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsprotocol"><span class="">Protocol</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocolflows-li">
-    <input type="checkbox" id="m-docsprotocolflows-check"/>
-    <label for="m-docsprotocolflows-check"><a href="/docs/protocol/flows/" title="Protocol Flows" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocolflows"><span class="">Flows</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocoljwt-profile-li">
-    <input type="checkbox" id="m-docsprotocoljwt-profile-check"/>
-    <label for="m-docsprotocoljwt-profile-check"><a href="/docs/protocol/jwt-profile/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocoljwt-profile"><span class="">JWT Profile</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocoldpop-li">
-    <input type="checkbox" id="m-docsprotocoldpop-check"/>
-    <label for="m-docsprotocoldpop-check"><a href="/docs/protocol/dpop/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocoldpop"><span class="">DPoP</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsschemas-li">
-    <input type="checkbox" id="m-docsschemas-check"/>
-    <label for="m-docsschemas-check"><a href="/docs/schemas/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsschemas"><span class="">Schemas</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasregistry-agent-record-li">
-    <input type="checkbox" id="m-docsschemasregistry-agent-record-check"/>
-    <label for="m-docsschemasregistry-agent-record-check"><a href="/docs/schemas/registry-agent-record/" title="Registry Agent Record" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasregistry-agent-record"><span class="">Agent Record</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasuai-receipt-li">
-    <input type="checkbox" id="m-docsschemasuai-receipt-check"/>
-    <label for="m-docsschemasuai-receipt-check"><a href="/docs/schemas/uai-receipt/" title="UAI Receipt" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasuai-receipt"><span class="">Receipt</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasuai-risk-policy-li">
-    <input type="checkbox" id="m-docsschemasuai-risk-policy-check"/>
-    <label for="m-docsschemasuai-risk-policy-check"><a href="/docs/schemas/uai-risk-policy/" title="UAI Risk Policy" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasuai-risk-policy"><span class="">Risk Policy</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasagentfacts-extension-li">
-    <input type="checkbox" id="m-docsschemasagentfacts-extension-check"/>
-    <label for="m-docsschemasagentfacts-extension-check"><a href="/docs/schemas/agentfacts-extension/" title="AgentFacts UAI Extension" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasagentfacts-extension"><span class="">AgentFacts Extension</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasconsent-artifact-li">
-    <input type="checkbox" id="m-docsschemasconsent-artifact-check"/>
-    <label for="m-docsschemasconsent-artifact-check"><a href="/docs/schemas/consent-artifact/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasconsent-artifact"><span class="">Consent Artifact</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsservices-li">
-    <input type="checkbox" id="m-docsservices-check"/>
-    <label for="m-docsservices-check"><a href="/docs/services/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsservices"><span class="">Services</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesregistry-li">
-    <input type="checkbox" id="m-docsservicesregistry-check"/>
-    <label for="m-docsservicesregistry-check"><a href="/docs/services/registry/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesregistry"><span class="">Registry</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicestrust-server-li">
-    <input type="checkbox" id="m-docsservicestrust-server-check"/>
-    <label for="m-docsservicestrust-server-check"><a href="/docs/services/trust-server/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicestrust-server"><span class="">Trust Server</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesaudit-ledger-li">
-    <input type="checkbox" id="m-docsservicesaudit-ledger-check"/>
-    <label for="m-docsservicesaudit-ledger-check"><a href="/docs/services/audit-ledger/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesaudit-ledger"><span class="">Audit Ledger</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesdemo-providers-li">
-    <input type="checkbox" id="m-docsservicesdemo-providers-check"/>
-    <label for="m-docsservicesdemo-providers-check"><a href="/docs/services/demo-providers/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesdemo-providers"><span class="">Demo Providers</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesadapters-li">
-    <input type="checkbox" id="m-docsservicesadapters-check"/>
-    <label for="m-docsservicesadapters-check"><a href="/docs/services/adapters/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesadapters"><span class="">Adapters</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsapi-reference-li">
-    <input type="checkbox" id="m-docsapi-reference-check"/>
-    <label for="m-docsapi-reference-check"><a href="/docs/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsapi-reference"><span class="">API Reference</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referenceregistry-api-li">
-    <input type="checkbox" id="m-docsapi-referenceregistry-api-check"/>
-    <label for="m-docsapi-referenceregistry-api-check"><a href="/docs/api-reference/registry-api/" title="Registry API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referenceregistry-api"><span class="">Registry</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referencetrust-server-api-li">
-    <input type="checkbox" id="m-docsapi-referencetrust-server-api-check"/>
-    <label for="m-docsapi-referencetrust-server-api-check"><a href="/docs/api-reference/trust-server-api/" title="Trust Server API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referencetrust-server-api"><span class="">Trust Server</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referenceaudit-ledger-api-li">
-    <input type="checkbox" id="m-docsapi-referenceaudit-ledger-api-check"/>
-    <label for="m-docsapi-referenceaudit-ledger-api-check"><a href="/docs/api-reference/audit-ledger-api/" title="Audit Ledger API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referenceaudit-ledger-api"><span class="">Audit Ledger</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsguides-li">
-    <input type="checkbox" id="m-docsguides-check"/>
-    <label for="m-docsguides-check"><a href="/docs/guides/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsguides"><span class="">Guides</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesgetting-started-li">
-    <input type="checkbox" id="m-docsguidesgetting-started-check"/>
-    <label for="m-docsguidesgetting-started-check"><a href="/docs/guides/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesgetting-started"><span class="">Getting Started</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesprovider-implementation-li">
-    <input type="checkbox" id="m-docsguidesprovider-implementation-check"/>
-    <label for="m-docsguidesprovider-implementation-check"><a href="/docs/guides/provider-implementation/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesprovider-implementation"><span class="">Provider Implementation</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesnanda-integration-li">
-    <input type="checkbox" id="m-docsguidesnanda-integration-check"/>
-    <label for="m-docsguidesnanda-integration-check"><a href="/docs/guides/nanda-integration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesnanda-integration"><span class="">NANDA Integration</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsreference-li">
-    <input type="checkbox" id="m-docsreference-check"/>
-    <label for="m-docsreference-check"><a href="/docs/reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsreference"><span class="">Reference</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencemake-targets-li">
-    <input type="checkbox" id="m-docsreferencemake-targets-check"/>
-    <label for="m-docsreferencemake-targets-check"><a href="/docs/reference/make-targets/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferencemake-targets"><span class="">Make Targets</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceenvironment-variables-li">
-    <input type="checkbox" id="m-docsreferenceenvironment-variables-check"/>
-    <label for="m-docsreferenceenvironment-variables-check"><a href="/docs/reference/environment-variables/" title="Environment Variables" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferenceenvironment-variables"><span class="">Env Vars</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencecompliance-li">
-    <input type="checkbox" id="m-docsreferencecompliance-check"/>
-    <label for="m-docsreferencecompliance-check"><a href="/docs/reference/compliance/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferencecompliance"><span class="">Compliance</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceperformance-li">
-    <input type="checkbox" id="m-docsreferenceperformance-check"/>
-    <label for="m-docsreferenceperformance-check"><a href="/docs/reference/performance/" title="Performance Targets" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferenceperformance"><span class="">Performance</span></a></label>
-    
-  </li>
-    </ul>
-  </li>
-    </ul>
-  </li>
-    </ul>
-  </nav>
-</div>
-
-          </aside>
-          <aside class="td-sidebar-toc">
-            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
-
-</div>
-
-            <div class="td-toc" data-proofer-ignore>
-<div class="td-toc-title">
-      <span class="td-toc-title__text">On this page</span>
-      <a class="td-toc-title__link" title="Top of page" href="#"></a>
-    </div>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#post-adminclear-did-cache">POST /admin/clear-did-cache</a></li>
-    <li><a href="#get-registryv1challenge">GET /registry/v1/challenge</a></li>
-    <li><a href="#post-registryv1agents">POST /registry/v1/agents</a></li>
-    <li><a href="#get-registryv1agentsdid">GET /registry/v1/agents/{did}</a></li>
-    <li><a href="#patch-registryv1agentsdid">PATCH /registry/v1/agents/{did}</a></li>
-    <li><a href="#get-registryv1discover">GET /registry/v1/discover</a></li>
-  </ul>
-</nav>
-  </div>
-
-            
-
-          </aside>
-          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
-            
-            <nav aria-label="breadcrumb" class="td-breadcrumbs">
-  <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <a href="/docs/">Docs</a></li>
-  <li class="breadcrumb-item">
-    <a href="/docs/api-reference/">API Reference</a></li>
-  <li class="breadcrumb-item active" aria-current="page">
-    Registry</li>
-  </ol>
-</nav>
-<div class="td-content">
-	<h1>Registry API</h1>
-	<div class="lead">Complete endpoint reference for the UAI Registry service (port 8000).</div>
-	<header class="article-meta">
-		
-</header>
-	<p>Base URL: <code>http://localhost:8000</code> (development)</p>
-<hr>
-<h2 id="post-adminclear-did-cache">POST /admin/clear-did-cache</h2>
-<p>Clears the in-process DID resolver cache for all cached DID Documents.</p>
-<p><strong>Auth:</strong> None<br>
-<strong>Request body:</strong> None<br>
-<strong>Response:</strong> <code>200 OK</code></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST http://localhost:8000/admin/clear-did-cache
-</span></span></code></pre></div><hr>
-<h2 id="get-registryv1challenge">GET /registry/v1/challenge</h2>
-<p>Returns a one-time nonce for the proof-of-control registration flow.</p>
-<p><strong>Auth:</strong> None<br>
-<strong>Query parameters:</strong></p>
-<table>
-	<thead>
-			<tr>
-					<th>Parameter</th>
-					<th>Type</th>
-					<th>Required</th>
-					<th>Description</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><code>did</code></td>
-					<td>string</td>
-					<td>Yes</td>
-					<td>The DID of the agent requesting registration</td>
-			</tr>
-	</tbody>
-</table>
-<p><strong>Response: <code>200 OK</code></strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;nonce&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;abc123def456&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;expires_in&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">300</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;challenge&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;register:did:web:agent.gov.in:nonce:abc123def456&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p><strong>Error responses:</strong></p>
-<ul>
-<li><code>400</code> — missing or invalid <code>did</code> parameter</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#4e9a06">&#34;http://localhost:8000/registry/v1/challenge?did=did:web:my-agent.gov.in&#34;</span>
-</span></span></code></pre></div><hr>
-<h2 id="post-registryv1agents">POST /registry/v1/agents</h2>
-<p>Registers a new agent. Requires proof-of-control via Ed25519 signature.</p>
-<p><strong>Auth:</strong> Ed25519 proof-of-control (in request body)<br>
-<strong>Content-Type:</strong> <code>application/json</code></p>
-<p><strong>Request body:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;did&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:my-agent.gov.in&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;role&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;provider&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;endpoints&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;uri&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://my-agent.gov.in/uai/v1/query&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;transport&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;auth&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;bearer&#34;</span> <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;capabilities&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;urn:capability:crop-disease-detection:v1&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;version&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;1.0&#34;</span> <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;supported_scopes&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;read:crop_diagnosis&#34;</span><span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;risk_tier_max&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;registered_at&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;2026-06-25T10:00:00Z&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;proof&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;type&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;Ed25519Signature2020&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;verificationMethod&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:my-agent.gov.in#key-1&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;signature&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;&lt;base64url-encoded-Ed25519-signature-over-challenge&gt;&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p><strong>Response: <code>201 Created</code></strong> — returns the stored agent record with <code>ETag</code> header.</p>
-<p><strong>Error responses:</strong></p>
-<ul>
-<li><code>400</code> — nonce expired, nonce replayed, or invalid signature</li>
-<li><code>409</code> — DID already registered</li>
-<li><code>422</code> — record fails JSON Schema validation</li>
-</ul>
-<hr>
-<h2 id="get-registryv1agentsdid">GET /registry/v1/agents/{did}</h2>
-<p>Retrieves an agent record by DID.</p>
-<p><strong>Auth:</strong> None<br>
-<strong>Path parameter:</strong> <code>did</code> — the agent DID (URL-encoded if it contains colons)</p>
-<p><strong>Response: <code>200 OK</code></strong> — agent record with <code>ETag</code> header.</p>
-<p><strong>Error responses:</strong></p>
-<ul>
-<li><code>404</code> — DID not found in Registry</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#4e9a06">&#34;http://localhost:8000/registry/v1/agents/did:web:my-agent.gov.in&#34;</span>
-</span></span></code></pre></div><hr>
-<h2 id="patch-registryv1agentsdid">PATCH /registry/v1/agents/{did}</h2>
-<p>Updates patchable fields on an existing agent record.</p>
-<p><strong>Auth:</strong> None (Phase 1)<br>
-<strong>Content-Type:</strong> <code>application/json</code></p>
-<p><strong>Patchable fields only:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;facts_ref&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://my-agent.gov.in/.well-known/agentfacts.json&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;india_compliance&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">&#34;dpdp_category&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;agricultural&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">&#34;data_residency&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;IN&#34;</span> <span style="color:#000;font-weight:bold">},</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;consent_endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://my-agent.gov.in/consent&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p><strong>Response: <code>200 OK</code></strong> — updated agent record.</p>
-<p><strong>Error responses:</strong></p>
-<ul>
-<li><code>404</code> — DID not found</li>
-<li><code>422</code> — attempted to patch a non-patchable field (e.g., <code>supported_scopes</code>, <code>risk_tier_max</code>)</li>
-</ul>
-<hr>
-<h2 id="get-registryv1discover">GET /registry/v1/discover</h2>
-<p>Discovers agents matching optional filters.</p>
-<p><strong>Auth:</strong> None<br>
-<strong>Query parameters:</strong></p>
-<table>
-	<thead>
-			<tr>
-					<th>Parameter</th>
-					<th>Type</th>
-					<th>Description</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><code>scope</code></td>
-					<td>string</td>
-					<td>Filter by supported scope (e.g., <code>read:crop_diagnosis</code>)</td>
-			</tr>
-			<tr>
-					<td><code>capability</code></td>
-					<td>string</td>
-					<td>Filter by capability URN</td>
-			</tr>
-			<tr>
-					<td><code>tier_max</code></td>
-					<td>integer</td>
-					<td>Maximum risk tier (inclusive)</td>
-			</tr>
-			<tr>
-					<td><code>data_residency</code></td>
-					<td>string</td>
-					<td>Filter by data residency (e.g., <code>IN</code>)</td>
-			</tr>
-			<tr>
-					<td><code>page_size</code></td>
-					<td>integer</td>
-					<td>Results per page (default: 10)</td>
-			</tr>
-			<tr>
-					<td><code>cursor</code></td>
-					<td>string</td>
-					<td>Pagination cursor from previous response</td>
-			</tr>
-	</tbody>
-</table>
-<p><strong>Headers:</strong></p>
-<ul>
-<li><code>If-None-Match: {etag}</code> — returns <code>304 Not Modified</code> if result set unchanged</li>
-</ul>
-<p><strong>Response: <code>200 OK</code></strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;results&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;did&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:my-agent.gov.in&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;role&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;provider&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;supported_scopes&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;read:crop_diagnosis&#34;</span><span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#204a87;font-weight:bold">&#34;risk_tier_max&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a40000">...</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;next_cursor&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">null</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p><strong>Response: <code>304 Not Modified</code></strong> — when <code>If-None-Match</code> header matches current ETag.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#4e9a06">&#34;http://localhost:8000/registry/v1/discover?scope=read:crop_diagnosis&amp;tier_max=1&#34;</span>
-</span></span></code></pre></div>
-	
-</div>
-
-
-          </main>
-        </div>
-      </div>
-      <footer class="td-footer row d-print-none">
-  <div class="uai-footer-bottom">
-    <span class="uai-footer-copyright">&copy; 2026 Unified AI Interface</span>
-    <span class="uai-footer-attr">
-      <span>Part of IndiaAI Mission under MeitY</span>
-      <span>Open Protocol Infrastructure for India's AI Ecosystem</span>
-    </span>
-  </div>
-</footer>
-
-    </div>
-    <script src="/js/main.js"></script>
-<script defer src="/js/click-to-copy.js" crossorigin="anonymous"></script>
-<script src='/js/tabpane-persist.js'></script>
-
-  </body>
-</html>
+<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><link rel=icon type=image/svg+xml href=/favicons/favicon.svg><title>Registry API | UAI Protocol Documentation</title><meta name=description content="Complete endpoint reference for the UAI Registry service (port 8000)."><meta property="og:url" content="http://localhost/docs/api-reference/registry-api/"><meta property="og:site_name" content="UAI Protocol Documentation"><meta property="og:title" content="Registry API"><meta property="og:description" content="Complete endpoint reference for the UAI Registry service (port 8000)."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta itemprop=name content="Registry API"><meta itemprop=description content="Complete endpoint reference for the UAI Registry service (port 8000)."><meta itemprop=wordCount content="378"><meta name=twitter:card content="summary"><meta name=twitter:title content="Registry API"><meta name=twitter:description content="Complete endpoint reference for the UAI Registry service (port 8000)."><link rel=preload href=/scss/main.min.0665b56bafb610637838e99964edd4771ac801de00fc61d3d48c517dce7e58ca.css as=style integrity="sha256-BmW1a6+2EGN4OOmZZO3UdxrIAd4A/GHT1IxRfc5+WMo=" crossorigin=anonymous><link href=/scss/main.min.0665b56bafb610637838e99964edd4771ac801de00fc61d3d48c517dce7e58ca.css rel=stylesheet integrity="sha256-BmW1a6+2EGN4OOmZZO3UdxrIAd4A/GHT1IxRfc5+WMo=" crossorigin=anonymous><script src=https://code.jquery.com/jquery-3.7.1.min.js integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin=anonymous></script><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover"></head><body class=td-page><header><div class="uai-gov-banner d-print-none"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg" srcset="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 360w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 720w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 945w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1080w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1440w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 2880w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1920w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 3840w" sizes="(max-width: 500px) 800px, 100vw" alt="UAI Protocol — Unified AI Interface"></div></header><div class="container-fluid td-outer"><div class=td-main data-bs-spy=scroll data-bs-target=.td-toc data-bs-root-margin="0px 0px -10%"><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><script>$(function(){$("#td-section-nav a").removeClass("active"),$("#td-section-nav #m-docsapi-referenceregistry-api").addClass("active"),$("#td-section-nav #m-docsapi-referenceregistry-api-li span").addClass("td-sidebar-nav-active-item"),$("#td-section-nav #m-docsapi-referenceregistry-api").parents("li").addClass("active-path"),$("#td-section-nav li.active-path").addClass("show"),$("#td-section-nav li.active-path").children("input").prop("checked",!0),$("#td-section-nav #m-docsapi-referenceregistry-api-li").siblings("li").addClass("show"),$("#td-section-nav #m-docsapi-referenceregistry-api-li").children("ul").children("li").addClass("show"),$("#td-sidebar-menu").toggleClass("d-none")})</script><div id=td-sidebar-menu class="td-sidebar__inner d-none"><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle" type=button data-bs-toggle=collapse data-bs-target=#td-section-nav aria-controls=td-section-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><a href=/docs/ class=uai-sidebar-brand><span class=uai-sidebar-brand__logo><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"/><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0" stop-color="#2666ae"/><stop offset="100%" stop-color="#91bfde"/></linearGradient></defs><g><g fill="#fff" transform="matrix(5.920976549951815,0,0,5.920976549951815,3.906965736174101,141.5077631449799)" stroke="#ec7313" stroke-width="0"><path d="M8.8-14.22h3.43v9.31q0 1.58-.68 2.74-.67 1.15-1.93 1.76Q8.36.2 6.64.2 4.04.2 2.55-1.15 1.05-2.5 1.03-4.84v-9.38H4.47v9.44Q4.53-2.44 6.64-2.44q1.07.0 1.61-.59Q8.8-3.61 8.8-4.93v-9.29zM23.06.0 22.23-2.66h-4.7L16.71.0H13.05l5.21-14.22h3.22L26.74.0H23.06zM19.87-10.23 18.35-5.3h3.06l-1.54-4.93zm11.56-3.99V0H28.01V-14.22h3.42z"/></g></g></svg>
+</span><span class=uai-sidebar-brand__title>UAI Protocol Documentation</span></a><nav class="td-sidebar-nav collapse foldable-nav" id=td-section-nav><ul class="td-sidebar-nav__section pe-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child td-sidebar-tree-root-li" id=m-docs-li><a href=/docs/ title=Documentation class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Docs</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsintroduction-li><input type=checkbox id=m-docsintroduction-check>
+<label for=m-docsintroduction-check><a href=/docs/introduction/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsintroduction><span>Introduction</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintroductionoverview-li><input type=checkbox id=m-docsintroductionoverview-check>
+<label for=m-docsintroductionoverview-check><a href=/docs/introduction/overview/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionoverview><span>Overview</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintroductionarchitecture-li><input type=checkbox id=m-docsintroductionarchitecture-check>
+<label for=m-docsintroductionarchitecture-check><a href=/docs/introduction/architecture/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionarchitecture><span>Architecture</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsconcepts-li><input type=checkbox id=m-docsconcepts-check>
+<label for=m-docsconcepts-check><a href=/docs/concepts/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsconcepts><span>Concepts</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptstrust-tiers-li><input type=checkbox id=m-docsconceptstrust-tiers-check>
+<label for=m-docsconceptstrust-tiers-check><a href=/docs/concepts/trust-tiers/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptstrust-tiers><span>Trust Tiers</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscorridors-li><input type=checkbox id=m-docsconceptscorridors-check>
+<label for=m-docsconceptscorridors-check><a href=/docs/concepts/corridors/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscorridors><span>Corridors</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsdids-and-identity-li><input type=checkbox id=m-docsconceptsdids-and-identity-check>
+<label for=m-docsconceptsdids-and-identity-check><a href=/docs/concepts/dids-and-identity/ title="DIDs and Identity" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsdids-and-identity><span>DIDs & Identity</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsreceipts-and-audit-li><input type=checkbox id=m-docsconceptsreceipts-and-audit-check>
+<label for=m-docsconceptsreceipts-and-audit-check><a href=/docs/concepts/receipts-and-audit/ title="Receipts and Audit" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsreceipts-and-audit><span>Receipts & Audit</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsconsent-li><input type=checkbox id=m-docsconceptsconsent-check>
+<label for=m-docsconceptsconsent-check><a href=/docs/concepts/consent/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsconsent><span>Consent</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsprotocol-li><input type=checkbox id=m-docsprotocol-check>
+<label for=m-docsprotocol-check><a href=/docs/protocol/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsprotocol><span>Protocol</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocolflows-li><input type=checkbox id=m-docsprotocolflows-check>
+<label for=m-docsprotocolflows-check><a href=/docs/protocol/flows/ title="Protocol Flows" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocolflows><span>Flows</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocoljwt-profile-li><input type=checkbox id=m-docsprotocoljwt-profile-check>
+<label for=m-docsprotocoljwt-profile-check><a href=/docs/protocol/jwt-profile/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocoljwt-profile><span>JWT Profile</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocoldpop-li><input type=checkbox id=m-docsprotocoldpop-check>
+<label for=m-docsprotocoldpop-check><a href=/docs/protocol/dpop/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocoldpop><span>DPoP</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsschemas-li><input type=checkbox id=m-docsschemas-check>
+<label for=m-docsschemas-check><a href=/docs/schemas/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsschemas><span>Schemas</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasregistry-agent-record-li><input type=checkbox id=m-docsschemasregistry-agent-record-check>
+<label for=m-docsschemasregistry-agent-record-check><a href=/docs/schemas/registry-agent-record/ title="Registry Agent Record" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasregistry-agent-record><span>Agent Record</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasuai-receipt-li><input type=checkbox id=m-docsschemasuai-receipt-check>
+<label for=m-docsschemasuai-receipt-check><a href=/docs/schemas/uai-receipt/ title="UAI Receipt" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasuai-receipt><span>Receipt</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasuai-risk-policy-li><input type=checkbox id=m-docsschemasuai-risk-policy-check>
+<label for=m-docsschemasuai-risk-policy-check><a href=/docs/schemas/uai-risk-policy/ title="UAI Risk Policy" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasuai-risk-policy><span>Risk Policy</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasagentfacts-extension-li><input type=checkbox id=m-docsschemasagentfacts-extension-check>
+<label for=m-docsschemasagentfacts-extension-check><a href=/docs/schemas/agentfacts-extension/ title="AgentFacts UAI Extension" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasagentfacts-extension><span>AgentFacts Extension</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasconsent-artifact-li><input type=checkbox id=m-docsschemasconsent-artifact-check>
+<label for=m-docsschemasconsent-artifact-check><a href=/docs/schemas/consent-artifact/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasconsent-artifact><span>Consent Artifact</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li><input type=checkbox id=m-docsservices-check>
+<label for=m-docsservices-check><a href=/docs/services/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>Services</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesregistry-li><input type=checkbox id=m-docsservicesregistry-check>
+<label for=m-docsservicesregistry-check><a href=/docs/services/registry/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesregistry><span>Registry</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicestrust-server-li><input type=checkbox id=m-docsservicestrust-server-check>
+<label for=m-docsservicestrust-server-check><a href=/docs/services/trust-server/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicestrust-server><span>Trust Server</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesaudit-ledger-li><input type=checkbox id=m-docsservicesaudit-ledger-check>
+<label for=m-docsservicesaudit-ledger-check><a href=/docs/services/audit-ledger/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesaudit-ledger><span>Audit Ledger</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesdemo-providers-li><input type=checkbox id=m-docsservicesdemo-providers-check>
+<label for=m-docsservicesdemo-providers-check><a href=/docs/services/demo-providers/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdemo-providers><span>Demo Providers</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesadapters-li><input type=checkbox id=m-docsservicesadapters-check>
+<label for=m-docsservicesadapters-check><a href=/docs/services/adapters/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesadapters><span>Adapters</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapi-reference-li><input type=checkbox id=m-docsapi-reference-check>
+<label for=m-docsapi-reference-check><a href=/docs/api-reference/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsapi-reference><span>API Reference</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referenceregistry-api-li><input type=checkbox id=m-docsapi-referenceregistry-api-check>
+<label for=m-docsapi-referenceregistry-api-check><a href=/docs/api-reference/registry-api/ title="Registry API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referenceregistry-api><span>Registry</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referencetrust-server-api-li><input type=checkbox id=m-docsapi-referencetrust-server-api-check>
+<label for=m-docsapi-referencetrust-server-api-check><a href=/docs/api-reference/trust-server-api/ title="Trust Server API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referencetrust-server-api><span>Trust Server</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referenceaudit-ledger-api-li><input type=checkbox id=m-docsapi-referenceaudit-ledger-api-check>
+<label for=m-docsapi-referenceaudit-ledger-api-check><a href=/docs/api-reference/audit-ledger-api/ title="Audit Ledger API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referenceaudit-ledger-api><span>Audit Ledger</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsguides-li><input type=checkbox id=m-docsguides-check>
+<label for=m-docsguides-check><a href=/docs/guides/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsguides><span>Guides</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesgetting-started-li><input type=checkbox id=m-docsguidesgetting-started-check>
+<label for=m-docsguidesgetting-started-check><a href=/docs/guides/getting-started/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesgetting-started><span>Getting Started</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesprovider-implementation-li><input type=checkbox id=m-docsguidesprovider-implementation-check>
+<label for=m-docsguidesprovider-implementation-check><a href=/docs/guides/provider-implementation/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesprovider-implementation><span>Provider Implementation</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesnanda-integration-li><input type=checkbox id=m-docsguidesnanda-integration-check>
+<label for=m-docsguidesnanda-integration-check><a href=/docs/guides/nanda-integration/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesnanda-integration><span>NANDA Integration</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsreference-li><input type=checkbox id=m-docsreference-check>
+<label for=m-docsreference-check><a href=/docs/reference/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsreference><span>Reference</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferencemake-targets-li><input type=checkbox id=m-docsreferencemake-targets-check>
+<label for=m-docsreferencemake-targets-check><a href=/docs/reference/make-targets/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferencemake-targets><span>Make Targets</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferenceenvironment-variables-li><input type=checkbox id=m-docsreferenceenvironment-variables-check>
+<label for=m-docsreferenceenvironment-variables-check><a href=/docs/reference/environment-variables/ title="Environment Variables" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferenceenvironment-variables><span>Env Vars</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferencecompliance-li><input type=checkbox id=m-docsreferencecompliance-check>
+<label for=m-docsreferencecompliance-check><a href=/docs/reference/compliance/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferencecompliance><span>Compliance</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferenceperformance-li><input type=checkbox id=m-docsreferenceperformance-check>
+<label for=m-docsreferenceperformance-check><a href=/docs/reference/performance/ title="Performance Targets" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferenceperformance><span>Performance</span></a></label></li></ul></li></ul></li></ul></nav></div></aside><aside class=td-sidebar-toc><div class="td-page-meta ms-2 pb-1 pt-2 mb-0"></div><div class=td-toc data-proofer-ignore><div class=td-toc-title><span class=td-toc-title__text>On this page</span>
+<a class=td-toc-title__link title="Top of page" href=#></a></div><nav id=TableOfContents><ul><li><a href=#post-adminclear-did-cache>POST /admin/clear-did-cache</a></li><li><a href=#get-registryv1challenge>GET /registry/v1/challenge</a></li><li><a href=#post-registryv1agents>POST /registry/v1/agents</a></li><li><a href=#get-registryv1agentsdid>GET /registry/v1/agents/{did}</a></li><li><a href=#patch-registryv1agentsdid>PATCH /registry/v1/agents/{did}</a></li><li><a href=#get-registryv1discover>GET /registry/v1/discover</a></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 ps-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=/docs/>Docs</a></li><li class=breadcrumb-item><a href=/docs/api-reference/>API Reference</a></li><li class="breadcrumb-item active" aria-current=page>Registry</li></ol></nav><div class=td-content><h1>Registry API</h1><div class=lead>Complete endpoint reference for the UAI Registry service (port 8000).</div><header class=article-meta></header><p>Base URL: <code>http://localhost:8000</code> (development)</p><hr><h2 id=post-adminclear-did-cache>POST /admin/clear-did-cache</h2><p>Clears the in-process DID resolver cache for all cached DID Documents.</p><p><strong>Auth:</strong> None<br><strong>Request body:</strong> None<br><strong>Response:</strong> <code>200 OK</code></p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>curl -X POST http://localhost:8000/admin/clear-did-cache
+</span></span></code></pre></div><hr><h2 id=get-registryv1challenge>GET /registry/v1/challenge</h2><p>Returns a one-time nonce for the proof-of-control registration flow.</p><p><strong>Auth:</strong> None<br><strong>Query parameters:</strong></p><table><thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>did</code></td><td>string</td><td>Yes</td><td>The DID of the agent requesting registration</td></tr></tbody></table><p><strong>Response: <code>200 OK</code></strong></p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;nonce&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;abc123def456&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;expires_in&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>300</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;challenge&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;register:did:web:agent.gov.in:nonce:abc123def456&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
+</span></span></code></pre></div><p><strong>Error responses:</strong></p><ul><li><code>400</code> — missing or invalid <code>did</code> parameter</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>curl <span style=color:#4e9a06>&#34;http://localhost:8000/registry/v1/challenge?did=did:web:my-agent.gov.in&#34;</span>
+</span></span></code></pre></div><hr><h2 id=post-registryv1agents>POST /registry/v1/agents</h2><p>Registers a new agent. Requires proof-of-control via Ed25519 signature.</p><p><strong>Auth:</strong> Ed25519 proof-of-control (in request body)<br><strong>Content-Type:</strong> <code>application/json</code></p><p><strong>Request body:</strong></p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;did&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:my-agent.gov.in&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;role&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;provider&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;endpoints&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+</span></span><span style=display:flex><span>    <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;uri&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;https://my-agent.gov.in/uai/v1/query&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;transport&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;https&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;auth&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bearer&#34;</span> <span style=color:#000;font-weight:700>}</span>
+</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>],</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;capabilities&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+</span></span><span style=display:flex><span>    <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;id&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;urn:capability:crop-disease-detection:v1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;1.0&#34;</span> <span style=color:#000;font-weight:700>}</span>
+</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>],</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;supported_scopes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;read:crop_diagnosis&#34;</span><span style=color:#000;font-weight:700>],</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;risk_tier_max&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;registered_at&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2026-06-25T10:00:00Z&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;proof&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Ed25519Signature2020&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;verificationMethod&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:my-agent.gov.in#key-1&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;signature&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;&lt;base64url-encoded-Ed25519-signature-over-challenge&gt;&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>}</span>
+</span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
+</span></span></code></pre></div><p><strong>Response: <code>201 Created</code></strong> — returns the stored agent record with <code>ETag</code> header.</p><p><strong>Error responses:</strong></p><ul><li><code>400</code> — nonce expired, nonce replayed, or invalid signature</li><li><code>409</code> — DID already registered</li><li><code>422</code> — record fails JSON Schema validation</li></ul><hr><h2 id=get-registryv1agentsdid>GET /registry/v1/agents/{did}</h2><p>Retrieves an agent record by DID.</p><p><strong>Auth:</strong> None<br><strong>Path parameter:</strong> <code>did</code> — the agent DID (URL-encoded if it contains colons)</p><p><strong>Response: <code>200 OK</code></strong> — agent record with <code>ETag</code> header.</p><p><strong>Error responses:</strong></p><ul><li><code>404</code> — DID not found in Registry</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>curl <span style=color:#4e9a06>&#34;http://localhost:8000/registry/v1/agents/did:web:my-agent.gov.in&#34;</span>
+</span></span></code></pre></div><hr><h2 id=patch-registryv1agentsdid>PATCH /registry/v1/agents/{did}</h2><p>Updates patchable fields on an existing agent record.</p><p><strong>Auth:</strong> None (Phase 1)<br><strong>Content-Type:</strong> <code>application/json</code></p><p><strong>Patchable fields only:</strong></p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;facts_ref&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;https://my-agent.gov.in/.well-known/agentfacts.json&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;india_compliance&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span> <span style=color:#204a87;font-weight:700>&#34;dpdp_category&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;agricultural&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>&#34;data_residency&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;IN&#34;</span> <span style=color:#000;font-weight:700>},</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;consent_endpoint&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;https://my-agent.gov.in/consent&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
+</span></span></code></pre></div><p><strong>Response: <code>200 OK</code></strong> — updated agent record.</p><p><strong>Error responses:</strong></p><ul><li><code>404</code> — DID not found</li><li><code>422</code> — attempted to patch a non-patchable field (e.g., <code>supported_scopes</code>, <code>risk_tier_max</code>)</li></ul><hr><h2 id=get-registryv1discover>GET /registry/v1/discover</h2><p>Discovers agents matching optional filters.</p><p><strong>Auth:</strong> None<br><strong>Query parameters:</strong></p><table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>scope</code></td><td>string</td><td>Filter by supported scope (e.g., <code>read:crop_diagnosis</code>)</td></tr><tr><td><code>capability</code></td><td>string</td><td>Filter by capability URN</td></tr><tr><td><code>tier_max</code></td><td>integer</td><td>Maximum risk tier (inclusive)</td></tr><tr><td><code>data_residency</code></td><td>string</td><td>Filter by data residency (e.g., <code>IN</code>)</td></tr><tr><td><code>page_size</code></td><td>integer</td><td>Results per page (default: 10)</td></tr><tr><td><code>cursor</code></td><td>string</td><td>Pagination cursor from previous response</td></tr></tbody></table><p><strong>Headers:</strong></p><ul><li><code>If-None-Match: {etag}</code> — returns <code>304 Not Modified</code> if result set unchanged</li></ul><p><strong>Response: <code>200 OK</code></strong></p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;results&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+</span></span><span style=display:flex><span>    <span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>      <span style=color:#204a87;font-weight:700>&#34;did&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:my-agent.gov.in&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>      <span style=color:#204a87;font-weight:700>&#34;role&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;provider&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>      <span style=color:#204a87;font-weight:700>&#34;supported_scopes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;read:crop_diagnosis&#34;</span><span style=color:#000;font-weight:700>],</span>
+</span></span><span style=display:flex><span>      <span style=color:#204a87;font-weight:700>&#34;risk_tier_max&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>      <span style=color:#a40000>...</span>
+</span></span><span style=display:flex><span>    <span style=color:#000;font-weight:700>}</span>
+</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>],</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;next_cursor&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>null</span>
+</span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
+</span></span></code></pre></div><p><strong>Response: <code>304 Not Modified</code></strong> — when <code>If-None-Match</code> header matches current ETag.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>curl <span style=color:#4e9a06>&#34;http://localhost:8000/registry/v1/discover?scope=read:crop_diagnosis&amp;tier_max=1&#34;</span>
+</span></span></code></pre></div></div></main></div></div><footer class="td-footer row d-print-none"><div class=uai-footer-bottom><span class=uai-footer-copyright>&copy; 2026 Unified AI Interface</span>
+<span class=uai-footer-attr><span>Part of IndiaAI Mission under MeitY</span>
+<span>Open Protocol Infrastructure for India's AI Ecosystem</span></span></div></footer></div><script src=/js/main.min.95fb6baaf69b9e0f93b4faa2a3a4943fb4932a8978d8cdec750bacdb3a2f2961.js integrity="sha256-lftrqvabng+TtPqio6SUP7STKol42M3sdQus2zovKWE=" crossorigin=anonymous></script><script defer src=/js/click-to-copy.min.24576ff9fe9f85bb1948ecae52ce227cafce53757a3ad52301f2a79260f6b97d.js integrity="sha256-JFdv+f6fhbsZSOyuUs4ifK/OU3V6OtUjAfKnkmD2uX0=" crossorigin=anonymous></script><script src=/js/tabpane-persist.js></script></body></html>

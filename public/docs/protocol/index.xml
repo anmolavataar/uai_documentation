@@ -1,36 +1,150 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Protocol on UAI Protocol Documentation</title>
-		<link>http://localhost:1313/docs/protocol/</link>
-		<description>Recent content in Protocol on UAI Protocol Documentation</description>
-		<generator>Hugo</generator>
-		<language>en-us</language>
-		
-		
-		
-		
-			<atom:link href="http://localhost:1313/docs/protocol/index.xml" rel="self" type="application/rss+xml" />
-			<item>
-				<title>Protocol Flows</title>
-				<link>http://localhost:1313/docs/protocol/flows/</link>
-				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/docs/protocol/flows/</guid>
-				<description>&lt;h2 id=&#34;1-registration-flow-proof-of-control&#34;&gt;1. Registration Flow (Proof-of-Control)&lt;/h2&gt;&#xA;&lt;p&gt;Before an agent can participate in any UAI interaction, it must register in the Registry and prove it controls its DID.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Agent                          Registry (8000)&#xA;  │                                 │&#xA;  │── GET /registry/v1/challenge ──&amp;gt;│&#xA;  │   ?did=did:web:agent.example    │&#xA;  │                                 │── store nonce (5 min TTL)&#xA;  │&amp;lt;── { nonce, challenge } ────────│&#xA;  │                                 │&#xA;  │  sign(&amp;#34;register:{did}:nonce:{nonce}&amp;#34;, privkey)&#xA;  │                                 │&#xA;  │── POST /registry/v1/agents ────&amp;gt;│&#xA;  │   { agent record + proof }      │── verify nonce (not replayed)&#xA;  │                                 │── resolve did:web → DID Document&#xA;  │                                 │── verify Ed25519 signature&#xA;  │                                 │── validate against JSON Schema&#xA;  │&amp;lt;── 201 { stored record } ───────│── store in Elasticsearch&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Steps:&lt;/strong&gt;&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>JWT Profile</title>
-				<link>http://localhost:1313/docs/protocol/jwt-profile/</link>
-				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/docs/protocol/jwt-profile/</guid>
-				<description>&lt;h2 id=&#34;token-format&#34;&gt;Token Format&lt;/h2&gt;&#xA;&lt;p&gt;UAI delegation tokens are &lt;strong&gt;JSON Web Tokens (JWT)&lt;/strong&gt; signed with &lt;strong&gt;EdDSA (Ed25519)&lt;/strong&gt;. They are issued by the Trust Server and presented by the Seeker to the Provider in the &lt;code&gt;Authorization: Bearer&lt;/code&gt; header.&lt;/p&gt;&#xA;&lt;h2 id=&#34;jwt-header&#34;&gt;JWT Header&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;alg&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;EdDSA&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;kid&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;did:web:trust.uai.local#key-1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;typ&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;JWT&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;alg&lt;/code&gt;: Always &lt;code&gt;EdDSA&lt;/code&gt; (Ed25519 curve)&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;kid&lt;/code&gt;: Full DID URL of the signing key in the Trust Server&amp;rsquo;s DID Document&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;jwt-payload-claims&#34;&gt;JWT Payload Claims&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Claim&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Type&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Required&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;iss&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Trust Server DID (e.g., &lt;code&gt;did:web:trust.uai.local&lt;/code&gt;)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;sub&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Seeker agent DID&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;aud&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Provider agent DID — token is only valid for this exact provider&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;iat&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;number&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Issued-at timestamp (Unix epoch)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;nbf&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;number&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Not-before timestamp (same as &lt;code&gt;iat&lt;/code&gt; in practice)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;exp&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;number&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Expiry timestamp — determined by tier TTL&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;jti&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;UUID v4 — unique per token, used for replay detection&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;scope&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Exactly one scope string (e.g., &lt;code&gt;read:crop_diagnosis&lt;/code&gt;)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;txn&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Transaction ID starting with &lt;code&gt;txn_&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;tier&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;number&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Yes&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Trust tier (1–4)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;consent_id&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Tier 2+&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Consent artifact ID (starting with &lt;code&gt;cns_&lt;/code&gt;)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;cnf.jkt&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;string&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Tier 3+&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;JWK thumbprint (RFC 7638) of the Seeker&amp;rsquo;s DPoP key&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;token-lifetimes&#34;&gt;Token Lifetimes&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Tier&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;TTL&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;1&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;300 seconds (5 minutes)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;2&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;120 seconds (2 minutes)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;3&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;60 seconds (1 minute)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;4&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;30 seconds (session-managed)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;example-token&#34;&gt;Example Token&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDp3ZWI6dHJ1c3QudWFpLmxvY2FsI2tleS0xIiwidHlwIjoiSldUIn0&#xA;.&#xA;eyJpc3MiOiJkaWQ6d2ViOnRydXN0LnVhaS5sb2NhbCIsInN1YiI6ImRpZDp3ZWI6c2Vla2VyLmV4YW1wbGUuY29tIiwiYXVkIjoiZGlkOndlYjpwcm92aWRlci5leGFtcGxlLmNvbSIsImlhdCI6MTcxOTMwMjQwMCwibmJmIjoxNzE5MzAyNDAwLCJleHAiOjE3MTkzMDI3MDAsImp0aSI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCIsInNjb3BlIjoicmVhZDpjcm9wX2RpYWdub3NpcyIsInR4biI6InR4bl9hYmMxMjMiLCJ0aWVyIjoxfQ&#xA;.&#xA;&amp;lt;Ed25519-signature&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Decoded payload:&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>DPoP</title>
-				<link>http://localhost:1313/docs/protocol/dpop/</link>
-				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/docs/protocol/dpop/</guid>
-				<description>&lt;p&gt;&lt;strong&gt;DPoP (Demonstrating Proof-of-Possession)&lt;/strong&gt; is a mechanism defined in RFC 9449 that binds a token to a specific key pair, making it useless if stolen by a third party. UAI requires DPoP for all Tier 3+ interactions.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-dpop&#34;&gt;Why DPoP?&lt;/h2&gt;&#xA;&lt;p&gt;A Bearer token alone is a &amp;ldquo;bearer instrument&amp;rdquo; — anyone who gets hold of it can use it. For Tier 3 sensitive data (health records, financial transactions), this is insufficient. DPoP adds &lt;strong&gt;sender-constraining&lt;/strong&gt;: only the party that holds the private key used to create the DPoP proof can use the token, even if the token itself is intercepted.&lt;/p&gt;</description>
-			</item>
-	</channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol on UAI Protocol Documentation</title><link>http://localhost/docs/protocol/</link><description>Recent content in Protocol on UAI Protocol Documentation</description><generator>Hugo</generator><language>en-us</language><atom:link href="http://localhost/docs/protocol/index.xml" rel="self" type="application/rss+xml"/><item><title>Protocol Flows</title><link>http://localhost/docs/protocol/flows/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/protocol/flows/</guid><description>&lt;h2 id="1-registration-flow-proof-of-control"&gt;1. Registration Flow (Proof-of-Control)&lt;/h2&gt;
+&lt;p&gt;Before an agent can participate in any UAI interaction, it must register in the Registry and prove it controls its DID.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Agent Registry (8000)
+ │ │
+ │── GET /registry/v1/challenge ──&amp;gt;│
+ │ ?did=did:web:agent.example │
+ │ │── store nonce (5 min TTL)
+ │&amp;lt;── { nonce, challenge } ────────│
+ │ │
+ │ sign(&amp;#34;register:{did}:nonce:{nonce}&amp;#34;, privkey)
+ │ │
+ │── POST /registry/v1/agents ────&amp;gt;│
+ │ { agent record + proof } │── verify nonce (not replayed)
+ │ │── resolve did:web → DID Document
+ │ │── verify Ed25519 signature
+ │ │── validate against JSON Schema
+ │&amp;lt;── 201 { stored record } ───────│── store in Elasticsearch
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Steps:&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>JWT Profile</title><link>http://localhost/docs/protocol/jwt-profile/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/protocol/jwt-profile/</guid><description>&lt;h2 id="token-format"&gt;Token Format&lt;/h2&gt;
+&lt;p&gt;UAI delegation tokens are &lt;strong&gt;JSON Web Tokens (JWT)&lt;/strong&gt; signed with &lt;strong&gt;EdDSA (Ed25519)&lt;/strong&gt;. They are issued by the Trust Server and presented by the Seeker to the Provider in the &lt;code&gt;Authorization: Bearer&lt;/code&gt; header.&lt;/p&gt;
+&lt;h2 id="jwt-header"&gt;JWT Header&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;alg&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;EdDSA&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;kid&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;did:web:trust.uai.local#key-1&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#204a87;font-weight:bold"&gt;&amp;#34;typ&amp;#34;&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;&amp;#34;JWT&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#000;font-weight:bold"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;alg&lt;/code&gt;: Always &lt;code&gt;EdDSA&lt;/code&gt; (Ed25519 curve)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kid&lt;/code&gt;: Full DID URL of the signing key in the Trust Server&amp;rsquo;s DID Document&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="jwt-payload-claims"&gt;JWT Payload Claims&lt;/h2&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;Claim&lt;/th&gt;
+					&lt;th&gt;Type&lt;/th&gt;
+					&lt;th&gt;Required&lt;/th&gt;
+					&lt;th&gt;Description&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;iss&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;string&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;Trust Server DID (e.g., &lt;code&gt;did:web:trust.uai.local&lt;/code&gt;)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;sub&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;string&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;Seeker agent DID&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;aud&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;string&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;Provider agent DID — token is only valid for this exact provider&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;iat&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;number&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;Issued-at timestamp (Unix epoch)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;nbf&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;number&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;Not-before timestamp (same as &lt;code&gt;iat&lt;/code&gt; in practice)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;exp&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;number&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;Expiry timestamp — determined by tier TTL&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;jti&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;string&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;UUID v4 — unique per token, used for replay detection&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;scope&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;string&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;Exactly one scope string (e.g., &lt;code&gt;read:crop_diagnosis&lt;/code&gt;)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;txn&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;string&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;Transaction ID starting with &lt;code&gt;txn_&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;tier&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;number&lt;/td&gt;
+					&lt;td&gt;Yes&lt;/td&gt;
+					&lt;td&gt;Trust tier (1–4)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;consent_id&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;string&lt;/td&gt;
+					&lt;td&gt;Tier 2+&lt;/td&gt;
+					&lt;td&gt;Consent artifact ID (starting with &lt;code&gt;cns_&lt;/code&gt;)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;cnf.jkt&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;string&lt;/td&gt;
+					&lt;td&gt;Tier 3+&lt;/td&gt;
+					&lt;td&gt;JWK thumbprint (RFC 7638) of the Seeker&amp;rsquo;s DPoP key&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="token-lifetimes"&gt;Token Lifetimes&lt;/h2&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;Tier&lt;/th&gt;
+					&lt;th&gt;TTL&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;1&lt;/td&gt;
+					&lt;td&gt;300 seconds (5 minutes)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;2&lt;/td&gt;
+					&lt;td&gt;120 seconds (2 minutes)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;3&lt;/td&gt;
+					&lt;td&gt;60 seconds (1 minute)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;4&lt;/td&gt;
+					&lt;td&gt;30 seconds (session-managed)&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="example-token"&gt;Example Token&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDp3ZWI6dHJ1c3QudWFpLmxvY2FsI2tleS0xIiwidHlwIjoiSldUIn0
+.
+eyJpc3MiOiJkaWQ6d2ViOnRydXN0LnVhaS5sb2NhbCIsInN1YiI6ImRpZDp3ZWI6c2Vla2VyLmV4YW1wbGUuY29tIiwiYXVkIjoiZGlkOndlYjpwcm92aWRlci5leGFtcGxlLmNvbSIsImlhdCI6MTcxOTMwMjQwMCwibmJmIjoxNzE5MzAyNDAwLCJleHAiOjE3MTkzMDI3MDAsImp0aSI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCIsInNjb3BlIjoicmVhZDpjcm9wX2RpYWdub3NpcyIsInR4biI6InR4bl9hYmMxMjMiLCJ0aWVyIjoxfQ
+.
+&amp;lt;Ed25519-signature&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Decoded payload:&lt;/p&gt;</description></item><item><title>DPoP</title><link>http://localhost/docs/protocol/dpop/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/protocol/dpop/</guid><description>&lt;p&gt;&lt;strong&gt;DPoP (Demonstrating Proof-of-Possession)&lt;/strong&gt; is a mechanism defined in RFC 9449 that binds a token to a specific key pair, making it useless if stolen by a third party. UAI requires DPoP for all Tier 3+ interactions.&lt;/p&gt;
+&lt;h2 id="why-dpop"&gt;Why DPoP?&lt;/h2&gt;
+&lt;p&gt;A Bearer token alone is a &amp;ldquo;bearer instrument&amp;rdquo; — anyone who gets hold of it can use it. For Tier 3 sensitive data (health records, financial transactions), this is insufficient. DPoP adds &lt;strong&gt;sender-constraining&lt;/strong&gt;: only the party that holds the private key used to create the DPoP proof can use the token, even if the token itself is intercepted.&lt;/p&gt;</description></item></channel></rss>

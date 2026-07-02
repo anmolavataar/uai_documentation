@@ -1,424 +1,64 @@
-<!doctype html>
-<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<meta name="robots" content="noindex, nofollow">
-<link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg">
-
-<title>Consent | UAI Protocol Documentation</title>
-<meta name="description" content="DPDP Act 2023-compliant consent artifacts and how UAI validates them.">
-<meta property="og:url" content="http://localhost:1313/docs/concepts/consent/">
-	<meta property="og:site_name" content="UAI Protocol Documentation">
-	<meta property="og:title" content="Consent">
-	<meta property="og:description" content="DPDP Act 2023-compliant consent artifacts and how UAI validates them.">
-	<meta property="og:locale" content="en_us">
-	<meta property="og:type" content="article">
-		<meta property="article:section" content="docs">
-
-	<meta itemprop="name" content="Consent">
-	<meta itemprop="description" content="DPDP Act 2023-compliant consent artifacts and how UAI validates them.">
-	<meta itemprop="wordCount" content="518">
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="Consent">
-	<meta name="twitter:description" content="DPDP Act 2023-compliant consent artifacts and how UAI validates them.">
-<link href="/scss/main.css" rel="stylesheet">
-<script
-  src="https://code.jquery.com/jquery-3.7.1.min.js"
-  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-  crossorigin="anonymous"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-
-  </head>
-  <body class="td-page">
-    <header>
-      
-<div class="uai-gov-banner d-print-none">
-  <img
-    src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg"
-    srcset="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 360w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 720w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 945w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1080w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1440w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 2880w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1920w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 3840w"
-    sizes="(max-width: 500px) 800px, 100vw"
-    alt="UAI Protocol — Unified AI Interface"
-  />
-</div>
-
-    </header>
-    <div class="container-fluid td-outer">
-      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
-        <div class="row flex-xl-nowrap">
-          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-            
-  <script>
-    $(function() {
-    $("#td-section-nav a").removeClass("active");
-    $("#td-section-nav #m-docsconceptsconsent").addClass("active");
-    $("#td-section-nav #m-docsconceptsconsent-li span").addClass("td-sidebar-nav-active-item");
-    $("#td-section-nav #m-docsconceptsconsent").parents("li").addClass("active-path");
-    $("#td-section-nav li.active-path").addClass("show");
-    $("#td-section-nav li.active-path").children("input").prop('checked', true);
-    $("#td-section-nav #m-docsconceptsconsent-li").siblings("li").addClass("show");
-    $("#td-section-nav #m-docsconceptsconsent-li").children("ul").children("li").addClass("show");
-    $("#td-sidebar-menu").toggleClass("d-none");
-    });
-  </script>
-  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
-  <form class="td-sidebar__search d-flex align-items-center">
-    
-    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
-    </button>
-  </form>
-
-  
-  <a href="/docs/" class="uai-sidebar-brand">
-    <span class="uai-sidebar-brand__logo">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"/><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0" stop-color="#2666ae"/><stop offset="100%" stop-color="#91bfde"/></linearGradient></defs><g><g fill="#fff" transform="matrix(5.920976549951815,0,0,5.920976549951815,3.906965736174101,141.5077631449799)" stroke="#ec7313" stroke-width="0"><path d="M8.8-14.22h3.43v9.31q0 1.58-.68 2.74-.67 1.15-1.93 1.76Q8.36.2 6.64.2 4.04.2 2.55-1.15 1.05-2.5 1.03-4.84v-9.38H4.47v9.44Q4.53-2.44 6.64-2.44q1.07.0 1.61-.59Q8.8-3.61 8.8-4.93v-9.29zM23.06.0 22.23-2.66h-4.7L16.71.0H13.05l5.21-14.22h3.22L26.74.0H23.06zM19.87-10.23 18.35-5.3h3.06l-1.54-4.93zm11.56-3.99V0H28.01V-14.22h3.42z"/></g></g></svg>
-    </span>
-    <span class="uai-sidebar-brand__title">UAI Protocol Documentation</span>
-  </a>
-
-  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
-    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child td-sidebar-tree-root-li" id="m-docs-li">
-    <a href="/docs/" title="Documentation" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Docs</span></a>
-    <ul class="ul-1">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsintroduction-li">
-    <input type="checkbox" id="m-docsintroduction-check"/>
-    <label for="m-docsintroduction-check"><a href="/docs/introduction/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsintroduction"><span class="">Introduction</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionoverview-li">
-    <input type="checkbox" id="m-docsintroductionoverview-check"/>
-    <label for="m-docsintroductionoverview-check"><a href="/docs/introduction/overview/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsintroductionoverview"><span class="">Overview</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionarchitecture-li">
-    <input type="checkbox" id="m-docsintroductionarchitecture-check"/>
-    <label for="m-docsintroductionarchitecture-check"><a href="/docs/introduction/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsintroductionarchitecture"><span class="">Architecture</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsconcepts-li">
-    <input type="checkbox" id="m-docsconcepts-check"/>
-    <label for="m-docsconcepts-check"><a href="/docs/concepts/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsconcepts"><span class="">Concepts</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptstrust-tiers-li">
-    <input type="checkbox" id="m-docsconceptstrust-tiers-check"/>
-    <label for="m-docsconceptstrust-tiers-check"><a href="/docs/concepts/trust-tiers/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptstrust-tiers"><span class="">Trust Tiers</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptscorridors-li">
-    <input type="checkbox" id="m-docsconceptscorridors-check"/>
-    <label for="m-docsconceptscorridors-check"><a href="/docs/concepts/corridors/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptscorridors"><span class="">Corridors</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsdids-and-identity-li">
-    <input type="checkbox" id="m-docsconceptsdids-and-identity-check"/>
-    <label for="m-docsconceptsdids-and-identity-check"><a href="/docs/concepts/dids-and-identity/" title="DIDs and Identity" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsdids-and-identity"><span class="">DIDs &amp; Identity</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsreceipts-and-audit-li">
-    <input type="checkbox" id="m-docsconceptsreceipts-and-audit-check"/>
-    <label for="m-docsconceptsreceipts-and-audit-check"><a href="/docs/concepts/receipts-and-audit/" title="Receipts and Audit" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsreceipts-and-audit"><span class="">Receipts &amp; Audit</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconceptsconsent-li">
-    <input type="checkbox" id="m-docsconceptsconsent-check"/>
-    <label for="m-docsconceptsconsent-check"><a href="/docs/concepts/consent/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsconceptsconsent"><span class="">Consent</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsprotocol-li">
-    <input type="checkbox" id="m-docsprotocol-check"/>
-    <label for="m-docsprotocol-check"><a href="/docs/protocol/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsprotocol"><span class="">Protocol</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocolflows-li">
-    <input type="checkbox" id="m-docsprotocolflows-check"/>
-    <label for="m-docsprotocolflows-check"><a href="/docs/protocol/flows/" title="Protocol Flows" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocolflows"><span class="">Flows</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocoljwt-profile-li">
-    <input type="checkbox" id="m-docsprotocoljwt-profile-check"/>
-    <label for="m-docsprotocoljwt-profile-check"><a href="/docs/protocol/jwt-profile/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocoljwt-profile"><span class="">JWT Profile</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprotocoldpop-li">
-    <input type="checkbox" id="m-docsprotocoldpop-check"/>
-    <label for="m-docsprotocoldpop-check"><a href="/docs/protocol/dpop/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsprotocoldpop"><span class="">DPoP</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsschemas-li">
-    <input type="checkbox" id="m-docsschemas-check"/>
-    <label for="m-docsschemas-check"><a href="/docs/schemas/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsschemas"><span class="">Schemas</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasregistry-agent-record-li">
-    <input type="checkbox" id="m-docsschemasregistry-agent-record-check"/>
-    <label for="m-docsschemasregistry-agent-record-check"><a href="/docs/schemas/registry-agent-record/" title="Registry Agent Record" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasregistry-agent-record"><span class="">Agent Record</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasuai-receipt-li">
-    <input type="checkbox" id="m-docsschemasuai-receipt-check"/>
-    <label for="m-docsschemasuai-receipt-check"><a href="/docs/schemas/uai-receipt/" title="UAI Receipt" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasuai-receipt"><span class="">Receipt</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasuai-risk-policy-li">
-    <input type="checkbox" id="m-docsschemasuai-risk-policy-check"/>
-    <label for="m-docsschemasuai-risk-policy-check"><a href="/docs/schemas/uai-risk-policy/" title="UAI Risk Policy" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasuai-risk-policy"><span class="">Risk Policy</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasagentfacts-extension-li">
-    <input type="checkbox" id="m-docsschemasagentfacts-extension-check"/>
-    <label for="m-docsschemasagentfacts-extension-check"><a href="/docs/schemas/agentfacts-extension/" title="AgentFacts UAI Extension" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasagentfacts-extension"><span class="">AgentFacts Extension</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsschemasconsent-artifact-li">
-    <input type="checkbox" id="m-docsschemasconsent-artifact-check"/>
-    <label for="m-docsschemasconsent-artifact-check"><a href="/docs/schemas/consent-artifact/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsschemasconsent-artifact"><span class="">Consent Artifact</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsservices-li">
-    <input type="checkbox" id="m-docsservices-check"/>
-    <label for="m-docsservices-check"><a href="/docs/services/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsservices"><span class="">Services</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesregistry-li">
-    <input type="checkbox" id="m-docsservicesregistry-check"/>
-    <label for="m-docsservicesregistry-check"><a href="/docs/services/registry/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesregistry"><span class="">Registry</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicestrust-server-li">
-    <input type="checkbox" id="m-docsservicestrust-server-check"/>
-    <label for="m-docsservicestrust-server-check"><a href="/docs/services/trust-server/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicestrust-server"><span class="">Trust Server</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesaudit-ledger-li">
-    <input type="checkbox" id="m-docsservicesaudit-ledger-check"/>
-    <label for="m-docsservicesaudit-ledger-check"><a href="/docs/services/audit-ledger/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesaudit-ledger"><span class="">Audit Ledger</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesdemo-providers-li">
-    <input type="checkbox" id="m-docsservicesdemo-providers-check"/>
-    <label for="m-docsservicesdemo-providers-check"><a href="/docs/services/demo-providers/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesdemo-providers"><span class="">Demo Providers</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsservicesadapters-li">
-    <input type="checkbox" id="m-docsservicesadapters-check"/>
-    <label for="m-docsservicesadapters-check"><a href="/docs/services/adapters/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsservicesadapters"><span class="">Adapters</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsapi-reference-li">
-    <input type="checkbox" id="m-docsapi-reference-check"/>
-    <label for="m-docsapi-reference-check"><a href="/docs/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsapi-reference"><span class="">API Reference</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referenceregistry-api-li">
-    <input type="checkbox" id="m-docsapi-referenceregistry-api-check"/>
-    <label for="m-docsapi-referenceregistry-api-check"><a href="/docs/api-reference/registry-api/" title="Registry API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referenceregistry-api"><span class="">Registry</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referencetrust-server-api-li">
-    <input type="checkbox" id="m-docsapi-referencetrust-server-api-check"/>
-    <label for="m-docsapi-referencetrust-server-api-check"><a href="/docs/api-reference/trust-server-api/" title="Trust Server API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referencetrust-server-api"><span class="">Trust Server</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsapi-referenceaudit-ledger-api-li">
-    <input type="checkbox" id="m-docsapi-referenceaudit-ledger-api-check"/>
-    <label for="m-docsapi-referenceaudit-ledger-api-check"><a href="/docs/api-reference/audit-ledger-api/" title="Audit Ledger API" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsapi-referenceaudit-ledger-api"><span class="">Audit Ledger</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsguides-li">
-    <input type="checkbox" id="m-docsguides-check"/>
-    <label for="m-docsguides-check"><a href="/docs/guides/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsguides"><span class="">Guides</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesgetting-started-li">
-    <input type="checkbox" id="m-docsguidesgetting-started-check"/>
-    <label for="m-docsguidesgetting-started-check"><a href="/docs/guides/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesgetting-started"><span class="">Getting Started</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesprovider-implementation-li">
-    <input type="checkbox" id="m-docsguidesprovider-implementation-check"/>
-    <label for="m-docsguidesprovider-implementation-check"><a href="/docs/guides/provider-implementation/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesprovider-implementation"><span class="">Provider Implementation</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesnanda-integration-li">
-    <input type="checkbox" id="m-docsguidesnanda-integration-check"/>
-    <label for="m-docsguidesnanda-integration-check"><a href="/docs/guides/nanda-integration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsguidesnanda-integration"><span class="">NANDA Integration</span></a></label>
-    
-  </li>
-    </ul>
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsreference-li">
-    <input type="checkbox" id="m-docsreference-check"/>
-    <label for="m-docsreference-check"><a href="/docs/reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsreference"><span class="">Reference</span></a></label>
-    
-    <ul class="ul-2 foldable">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencemake-targets-li">
-    <input type="checkbox" id="m-docsreferencemake-targets-check"/>
-    <label for="m-docsreferencemake-targets-check"><a href="/docs/reference/make-targets/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferencemake-targets"><span class="">Make Targets</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceenvironment-variables-li">
-    <input type="checkbox" id="m-docsreferenceenvironment-variables-check"/>
-    <label for="m-docsreferenceenvironment-variables-check"><a href="/docs/reference/environment-variables/" title="Environment Variables" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferenceenvironment-variables"><span class="">Env Vars</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencecompliance-li">
-    <input type="checkbox" id="m-docsreferencecompliance-check"/>
-    <label for="m-docsreferencecompliance-check"><a href="/docs/reference/compliance/" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferencecompliance"><span class="">Compliance</span></a></label>
-    
-  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceperformance-li">
-    <input type="checkbox" id="m-docsreferenceperformance-check"/>
-    <label for="m-docsreferenceperformance-check"><a href="/docs/reference/performance/" title="Performance Targets" class="align-left ps-0  td-sidebar-link td-sidebar-link__page" id="m-docsreferenceperformance"><span class="">Performance</span></a></label>
-    
-  </li>
-    </ul>
-  </li>
-    </ul>
-  </li>
-    </ul>
-  </nav>
-</div>
-
-          </aside>
-          <aside class="td-sidebar-toc">
-            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
-
-</div>
-
-            <div class="td-toc" data-proofer-ignore>
-<div class="td-toc-title">
-      <span class="td-toc-title__text">On this page</span>
-      <a class="td-toc-title__link" title="Top of page" href="#"></a>
-    </div>
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#legal-basis">Legal Basis</a></li>
-    <li><a href="#consent-artifact-structure">Consent Artifact Structure</a></li>
-    <li><a href="#the-five-validation-checks">The Five Validation Checks</a></li>
-    <li><a href="#how-consent-flows">How Consent Flows</a></li>
-    <li><a href="#consent-endpoint-registration">Consent Endpoint Registration</a></li>
-    <li><a href="#mock-consent-service-development">Mock Consent Service (Development)</a></li>
-    <li><a href="#tier-specific-consent-requirements">Tier-Specific Consent Requirements</a></li>
-  </ul>
-</nav>
-  </div>
-
-            
-
-          </aside>
-          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
-            
-            <nav aria-label="breadcrumb" class="td-breadcrumbs">
-  <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <a href="/docs/">Docs</a></li>
-  <li class="breadcrumb-item">
-    <a href="/docs/concepts/">Concepts</a></li>
-  <li class="breadcrumb-item active" aria-current="page">
-    Consent</li>
-  </ol>
-</nav>
-<div class="td-content">
-	<h1>Consent</h1>
-	<div class="lead">DPDP Act 2023-compliant consent artifacts and how UAI validates them.</div>
-	<header class="article-meta">
-		
-</header>
-	<p>Every Tier 2+ data access in UAI requires a <strong>consent artifact</strong> — a machine-readable document proving that the data principal (citizen) gave informed, free, specific, unambiguous, and revocable consent for this exact data access.</p>
-<h2 id="legal-basis">Legal Basis</h2>
-<p>UAI consent artifacts are designed to comply with the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong> (India). The act requires that consent for processing personal data be:</p>
-<table>
-	<thead>
-			<tr>
-					<th>DPDP Property</th>
-					<th>Meaning</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><code>free</code></td>
-					<td>Not coerced or conditional on a service</td>
-			</tr>
-			<tr>
-					<td><code>specific</code></td>
-					<td>Tied to a specific purpose</td>
-			</tr>
-			<tr>
-					<td><code>informed</code></td>
-					<td>The citizen understands what they are consenting to</td>
-			</tr>
-			<tr>
-					<td><code>unambiguous</code></td>
-					<td>A clear affirmative action (not a default)</td>
-			</tr>
-			<tr>
-					<td><code>affirmative</code></td>
-					<td>Explicit opt-in (not implied)</td>
-			</tr>
-			<tr>
-					<td><code>revocable</code></td>
-					<td>Can be withdrawn at any time</td>
-			</tr>
-	</tbody>
-</table>
-<p>All six properties must be <code>true</code> in every consent artifact UAI validates.</p>
-<h2 id="consent-artifact-structure">Consent Artifact Structure</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;consent_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;cns_valid_tier2_agri_001&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;subject_ref&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;masked_aadhaar_8765&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;seeker_did&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:seeker.example.com&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;provider_did&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:agriculture.example.gov.in&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;purpose&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;crop_disease_diagnosis_pmkisan_check&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;allowed_scopes&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;read:pmkisan_status&#34;</span><span style="color:#000;font-weight:bold">],</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;issued_at&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;2026-06-01T00:00:00Z&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;expires_at&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;2026-12-31T23:59:59Z&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;collection_method&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;otp&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;dpdp_properties&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;free&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;specific&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;informed&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;unambiguous&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;affirmative&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;revocable&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">},</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;revocation_status&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;active&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p><strong>Key field rules:</strong></p>
-<ul>
-<li><code>consent_id</code> must start with <code>cns_</code></li>
-<li><code>subject_ref</code> must be a <strong>masked</strong> reference (e.g., masked Aadhaar) — never raw PII</li>
-<li><code>seeker_did</code> and <code>provider_did</code> must start with <code>did:</code></li>
-<li><code>allowed_scopes</code> is a non-empty array of scope strings</li>
-<li><code>collection_method</code> is one of: <code>otp</code>, <code>biometric</code>, <code>consent-manager</code>, <code>manual-approval</code></li>
-<li><code>revocation_status</code> must be <code>&quot;active&quot;</code> (revoked artifacts are schema-invalid)</li>
-<li><code>revocation_check_url</code> is required when <code>collection_method</code> is <code>biometric</code> or <code>manual-approval</code></li>
-</ul>
-<h2 id="the-five-validation-checks">The Five Validation Checks</h2>
-<p>When the Trust Server receives a token request for a Tier 2+ scope, it fetches the consent artifact from the Seeker&rsquo;s <code>consent_endpoint</code> and runs five checks. <strong>All five must pass</strong> or the token request is rejected.</p>
-<table>
-	<thead>
-			<tr>
-					<th>Check</th>
-					<th>What is verified</th>
-					<th>Error code on failure</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>1. Not expired</td>
-					<td><code>expires_at &gt; now</code></td>
-					<td><code>consent_expired</code></td>
-			</tr>
-			<tr>
-					<td>2. Not revoked</td>
-					<td><code>revocation_status == &quot;active&quot;</code></td>
-					<td><code>consent_revoked</code></td>
-			</tr>
-			<tr>
-					<td>3. Scope match</td>
-					<td><code>requested_scope in allowed_scopes</code></td>
-					<td><code>consent_scope_mismatch</code></td>
-			</tr>
-			<tr>
-					<td>4. DID match</td>
-					<td><code>artifact.seeker_did == request.seeker_did</code> AND <code>artifact.provider_did == request.provider_did</code></td>
-					<td><code>consent_did_mismatch</code></td>
-			</tr>
-			<tr>
-					<td>5. DPDP validity</td>
-					<td>All 6 <code>dpdp_properties</code> are <code>true</code></td>
-					<td><code>consent_dpdp_invalid</code></td>
-			</tr>
-	</tbody>
-</table>
-<h2 id="how-consent-flows">How Consent Flows</h2>
-<pre tabindex="0"><code>Citizen grants consent (OTP / biometric / consent-manager)
+<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><link rel=icon type=image/svg+xml href=/favicons/favicon.svg><title>Consent | UAI Protocol Documentation</title><meta name=description content="DPDP Act 2023-compliant consent artifacts and how UAI validates them."><meta property="og:url" content="http://localhost/docs/concepts/consent/"><meta property="og:site_name" content="UAI Protocol Documentation"><meta property="og:title" content="Consent"><meta property="og:description" content="DPDP Act 2023-compliant consent artifacts and how UAI validates them."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta itemprop=name content="Consent"><meta itemprop=description content="DPDP Act 2023-compliant consent artifacts and how UAI validates them."><meta itemprop=wordCount content="518"><meta name=twitter:card content="summary"><meta name=twitter:title content="Consent"><meta name=twitter:description content="DPDP Act 2023-compliant consent artifacts and how UAI validates them."><link rel=preload href=/scss/main.min.0665b56bafb610637838e99964edd4771ac801de00fc61d3d48c517dce7e58ca.css as=style integrity="sha256-BmW1a6+2EGN4OOmZZO3UdxrIAd4A/GHT1IxRfc5+WMo=" crossorigin=anonymous><link href=/scss/main.min.0665b56bafb610637838e99964edd4771ac801de00fc61d3d48c517dce7e58ca.css rel=stylesheet integrity="sha256-BmW1a6+2EGN4OOmZZO3UdxrIAd4A/GHT1IxRfc5+WMo=" crossorigin=anonymous><script src=https://code.jquery.com/jquery-3.7.1.min.js integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin=anonymous></script><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover"></head><body class=td-page><header><div class="uai-gov-banner d-print-none"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg" srcset="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 360w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 720w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 945w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1080w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1440w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 2880w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 1920w,https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2800,fit=crop/zN94qRCMST8ghlm9/asset-12-rnVcHM0HLpKOGZCs.jpg 3840w" sizes="(max-width: 500px) 800px, 100vw" alt="UAI Protocol — Unified AI Interface"></div></header><div class="container-fluid td-outer"><div class=td-main data-bs-spy=scroll data-bs-target=.td-toc data-bs-root-margin="0px 0px -10%"><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><script>$(function(){$("#td-section-nav a").removeClass("active"),$("#td-section-nav #m-docsconceptsconsent").addClass("active"),$("#td-section-nav #m-docsconceptsconsent-li span").addClass("td-sidebar-nav-active-item"),$("#td-section-nav #m-docsconceptsconsent").parents("li").addClass("active-path"),$("#td-section-nav li.active-path").addClass("show"),$("#td-section-nav li.active-path").children("input").prop("checked",!0),$("#td-section-nav #m-docsconceptsconsent-li").siblings("li").addClass("show"),$("#td-section-nav #m-docsconceptsconsent-li").children("ul").children("li").addClass("show"),$("#td-sidebar-menu").toggleClass("d-none")})</script><div id=td-sidebar-menu class="td-sidebar__inner d-none"><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle" type=button data-bs-toggle=collapse data-bs-target=#td-section-nav aria-controls=td-section-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><a href=/docs/ class=uai-sidebar-brand><span class=uai-sidebar-brand__logo><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"/><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0" stop-color="#2666ae"/><stop offset="100%" stop-color="#91bfde"/></linearGradient></defs><g><g fill="#fff" transform="matrix(5.920976549951815,0,0,5.920976549951815,3.906965736174101,141.5077631449799)" stroke="#ec7313" stroke-width="0"><path d="M8.8-14.22h3.43v9.31q0 1.58-.68 2.74-.67 1.15-1.93 1.76Q8.36.2 6.64.2 4.04.2 2.55-1.15 1.05-2.5 1.03-4.84v-9.38H4.47v9.44Q4.53-2.44 6.64-2.44q1.07.0 1.61-.59Q8.8-3.61 8.8-4.93v-9.29zM23.06.0 22.23-2.66h-4.7L16.71.0H13.05l5.21-14.22h3.22L26.74.0H23.06zM19.87-10.23 18.35-5.3h3.06l-1.54-4.93zm11.56-3.99V0H28.01V-14.22h3.42z"/></g></g></svg>
+</span><span class=uai-sidebar-brand__title>UAI Protocol Documentation</span></a><nav class="td-sidebar-nav collapse foldable-nav" id=td-section-nav><ul class="td-sidebar-nav__section pe-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child td-sidebar-tree-root-li" id=m-docs-li><a href=/docs/ title=Documentation class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>Docs</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsintroduction-li><input type=checkbox id=m-docsintroduction-check>
+<label for=m-docsintroduction-check><a href=/docs/introduction/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsintroduction><span>Introduction</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintroductionoverview-li><input type=checkbox id=m-docsintroductionoverview-check>
+<label for=m-docsintroductionoverview-check><a href=/docs/introduction/overview/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionoverview><span>Overview</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsintroductionarchitecture-li><input type=checkbox id=m-docsintroductionarchitecture-check>
+<label for=m-docsintroductionarchitecture-check><a href=/docs/introduction/architecture/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionarchitecture><span>Architecture</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsconcepts-li><input type=checkbox id=m-docsconcepts-check>
+<label for=m-docsconcepts-check><a href=/docs/concepts/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsconcepts><span>Concepts</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptstrust-tiers-li><input type=checkbox id=m-docsconceptstrust-tiers-check>
+<label for=m-docsconceptstrust-tiers-check><a href=/docs/concepts/trust-tiers/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptstrust-tiers><span>Trust Tiers</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptscorridors-li><input type=checkbox id=m-docsconceptscorridors-check>
+<label for=m-docsconceptscorridors-check><a href=/docs/concepts/corridors/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptscorridors><span>Corridors</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsdids-and-identity-li><input type=checkbox id=m-docsconceptsdids-and-identity-check>
+<label for=m-docsconceptsdids-and-identity-check><a href=/docs/concepts/dids-and-identity/ title="DIDs and Identity" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsdids-and-identity><span>DIDs & Identity</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsreceipts-and-audit-li><input type=checkbox id=m-docsconceptsreceipts-and-audit-check>
+<label for=m-docsconceptsreceipts-and-audit-check><a href=/docs/concepts/receipts-and-audit/ title="Receipts and Audit" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsreceipts-and-audit><span>Receipts & Audit</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconceptsconsent-li><input type=checkbox id=m-docsconceptsconsent-check>
+<label for=m-docsconceptsconsent-check><a href=/docs/concepts/consent/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsconceptsconsent><span>Consent</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsprotocol-li><input type=checkbox id=m-docsprotocol-check>
+<label for=m-docsprotocol-check><a href=/docs/protocol/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsprotocol><span>Protocol</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocolflows-li><input type=checkbox id=m-docsprotocolflows-check>
+<label for=m-docsprotocolflows-check><a href=/docs/protocol/flows/ title="Protocol Flows" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocolflows><span>Flows</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocoljwt-profile-li><input type=checkbox id=m-docsprotocoljwt-profile-check>
+<label for=m-docsprotocoljwt-profile-check><a href=/docs/protocol/jwt-profile/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocoljwt-profile><span>JWT Profile</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsprotocoldpop-li><input type=checkbox id=m-docsprotocoldpop-check>
+<label for=m-docsprotocoldpop-check><a href=/docs/protocol/dpop/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsprotocoldpop><span>DPoP</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsschemas-li><input type=checkbox id=m-docsschemas-check>
+<label for=m-docsschemas-check><a href=/docs/schemas/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsschemas><span>Schemas</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasregistry-agent-record-li><input type=checkbox id=m-docsschemasregistry-agent-record-check>
+<label for=m-docsschemasregistry-agent-record-check><a href=/docs/schemas/registry-agent-record/ title="Registry Agent Record" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasregistry-agent-record><span>Agent Record</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasuai-receipt-li><input type=checkbox id=m-docsschemasuai-receipt-check>
+<label for=m-docsschemasuai-receipt-check><a href=/docs/schemas/uai-receipt/ title="UAI Receipt" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasuai-receipt><span>Receipt</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasuai-risk-policy-li><input type=checkbox id=m-docsschemasuai-risk-policy-check>
+<label for=m-docsschemasuai-risk-policy-check><a href=/docs/schemas/uai-risk-policy/ title="UAI Risk Policy" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasuai-risk-policy><span>Risk Policy</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasagentfacts-extension-li><input type=checkbox id=m-docsschemasagentfacts-extension-check>
+<label for=m-docsschemasagentfacts-extension-check><a href=/docs/schemas/agentfacts-extension/ title="AgentFacts UAI Extension" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasagentfacts-extension><span>AgentFacts Extension</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsschemasconsent-artifact-li><input type=checkbox id=m-docsschemasconsent-artifact-check>
+<label for=m-docsschemasconsent-artifact-check><a href=/docs/schemas/consent-artifact/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsschemasconsent-artifact><span>Consent Artifact</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li><input type=checkbox id=m-docsservices-check>
+<label for=m-docsservices-check><a href=/docs/services/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>Services</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesregistry-li><input type=checkbox id=m-docsservicesregistry-check>
+<label for=m-docsservicesregistry-check><a href=/docs/services/registry/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesregistry><span>Registry</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicestrust-server-li><input type=checkbox id=m-docsservicestrust-server-check>
+<label for=m-docsservicestrust-server-check><a href=/docs/services/trust-server/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicestrust-server><span>Trust Server</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesaudit-ledger-li><input type=checkbox id=m-docsservicesaudit-ledger-check>
+<label for=m-docsservicesaudit-ledger-check><a href=/docs/services/audit-ledger/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesaudit-ledger><span>Audit Ledger</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesdemo-providers-li><input type=checkbox id=m-docsservicesdemo-providers-check>
+<label for=m-docsservicesdemo-providers-check><a href=/docs/services/demo-providers/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdemo-providers><span>Demo Providers</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsservicesadapters-li><input type=checkbox id=m-docsservicesadapters-check>
+<label for=m-docsservicesadapters-check><a href=/docs/services/adapters/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesadapters><span>Adapters</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsapi-reference-li><input type=checkbox id=m-docsapi-reference-check>
+<label for=m-docsapi-reference-check><a href=/docs/api-reference/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsapi-reference><span>API Reference</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referenceregistry-api-li><input type=checkbox id=m-docsapi-referenceregistry-api-check>
+<label for=m-docsapi-referenceregistry-api-check><a href=/docs/api-reference/registry-api/ title="Registry API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referenceregistry-api><span>Registry</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referencetrust-server-api-li><input type=checkbox id=m-docsapi-referencetrust-server-api-check>
+<label for=m-docsapi-referencetrust-server-api-check><a href=/docs/api-reference/trust-server-api/ title="Trust Server API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referencetrust-server-api><span>Trust Server</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsapi-referenceaudit-ledger-api-li><input type=checkbox id=m-docsapi-referenceaudit-ledger-api-check>
+<label for=m-docsapi-referenceaudit-ledger-api-check><a href=/docs/api-reference/audit-ledger-api/ title="Audit Ledger API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsapi-referenceaudit-ledger-api><span>Audit Ledger</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsguides-li><input type=checkbox id=m-docsguides-check>
+<label for=m-docsguides-check><a href=/docs/guides/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsguides><span>Guides</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesgetting-started-li><input type=checkbox id=m-docsguidesgetting-started-check>
+<label for=m-docsguidesgetting-started-check><a href=/docs/guides/getting-started/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesgetting-started><span>Getting Started</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesprovider-implementation-li><input type=checkbox id=m-docsguidesprovider-implementation-check>
+<label for=m-docsguidesprovider-implementation-check><a href=/docs/guides/provider-implementation/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesprovider-implementation><span>Provider Implementation</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsguidesnanda-integration-li><input type=checkbox id=m-docsguidesnanda-integration-check>
+<label for=m-docsguidesnanda-integration-check><a href=/docs/guides/nanda-integration/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsguidesnanda-integration><span>NANDA Integration</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsreference-li><input type=checkbox id=m-docsreference-check>
+<label for=m-docsreference-check><a href=/docs/reference/ class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id=m-docsreference><span>Reference</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferencemake-targets-li><input type=checkbox id=m-docsreferencemake-targets-check>
+<label for=m-docsreferencemake-targets-check><a href=/docs/reference/make-targets/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferencemake-targets><span>Make Targets</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferenceenvironment-variables-li><input type=checkbox id=m-docsreferenceenvironment-variables-check>
+<label for=m-docsreferenceenvironment-variables-check><a href=/docs/reference/environment-variables/ title="Environment Variables" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferenceenvironment-variables><span>Env Vars</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferencecompliance-li><input type=checkbox id=m-docsreferencecompliance-check>
+<label for=m-docsreferencecompliance-check><a href=/docs/reference/compliance/ class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferencecompliance><span>Compliance</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsreferenceperformance-li><input type=checkbox id=m-docsreferenceperformance-check>
+<label for=m-docsreferenceperformance-check><a href=/docs/reference/performance/ title="Performance Targets" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id=m-docsreferenceperformance><span>Performance</span></a></label></li></ul></li></ul></li></ul></nav></div></aside><aside class=td-sidebar-toc><div class="td-page-meta ms-2 pb-1 pt-2 mb-0"></div><div class=td-toc data-proofer-ignore><div class=td-toc-title><span class=td-toc-title__text>On this page</span>
+<a class=td-toc-title__link title="Top of page" href=#></a></div><nav id=TableOfContents><ul><li><a href=#legal-basis>Legal Basis</a></li><li><a href=#consent-artifact-structure>Consent Artifact Structure</a></li><li><a href=#the-five-validation-checks>The Five Validation Checks</a></li><li><a href=#how-consent-flows>How Consent Flows</a></li><li><a href=#consent-endpoint-registration>Consent Endpoint Registration</a></li><li><a href=#mock-consent-service-development>Mock Consent Service (Development)</a></li><li><a href=#tier-specific-consent-requirements>Tier-Specific Consent Requirements</a></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 ps-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=/docs/>Docs</a></li><li class=breadcrumb-item><a href=/docs/concepts/>Concepts</a></li><li class="breadcrumb-item active" aria-current=page>Consent</li></ol></nav><div class=td-content><h1>Consent</h1><div class=lead>DPDP Act 2023-compliant consent artifacts and how UAI validates them.</div><header class=article-meta></header><p>Every Tier 2+ data access in UAI requires a <strong>consent artifact</strong> — a machine-readable document proving that the data principal (citizen) gave informed, free, specific, unambiguous, and revocable consent for this exact data access.</p><h2 id=legal-basis>Legal Basis</h2><p>UAI consent artifacts are designed to comply with the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong> (India). The act requires that consent for processing personal data be:</p><table><thead><tr><th>DPDP Property</th><th>Meaning</th></tr></thead><tbody><tr><td><code>free</code></td><td>Not coerced or conditional on a service</td></tr><tr><td><code>specific</code></td><td>Tied to a specific purpose</td></tr><tr><td><code>informed</code></td><td>The citizen understands what they are consenting to</td></tr><tr><td><code>unambiguous</code></td><td>A clear affirmative action (not a default)</td></tr><tr><td><code>affirmative</code></td><td>Explicit opt-in (not implied)</td></tr><tr><td><code>revocable</code></td><td>Can be withdrawn at any time</td></tr></tbody></table><p>All six properties must be <code>true</code> in every consent artifact UAI validates.</p><h2 id=consent-artifact-structure>Consent Artifact Structure</h2><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;consent_id&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;cns_valid_tier2_agri_001&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;subject_ref&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;masked_aadhaar_8765&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;seeker_did&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:seeker.example.com&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;provider_did&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:agriculture.example.gov.in&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;purpose&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;crop_disease_diagnosis_pmkisan_check&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;allowed_scopes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;read:pmkisan_status&#34;</span><span style=color:#000;font-weight:700>],</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;issued_at&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2026-06-01T00:00:00Z&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;expires_at&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2026-12-31T23:59:59Z&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;collection_method&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;otp&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;dpdp_properties&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;free&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;specific&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;informed&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;unambiguous&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;affirmative&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;revocable&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span>
+</span></span><span style=display:flex><span>  <span style=color:#000;font-weight:700>},</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;revocation_status&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;active&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
+</span></span></code></pre></div><p><strong>Key field rules:</strong></p><ul><li><code>consent_id</code> must start with <code>cns_</code></li><li><code>subject_ref</code> must be a <strong>masked</strong> reference (e.g., masked Aadhaar) — never raw PII</li><li><code>seeker_did</code> and <code>provider_did</code> must start with <code>did:</code></li><li><code>allowed_scopes</code> is a non-empty array of scope strings</li><li><code>collection_method</code> is one of: <code>otp</code>, <code>biometric</code>, <code>consent-manager</code>, <code>manual-approval</code></li><li><code>revocation_status</code> must be <code>"active"</code> (revoked artifacts are schema-invalid)</li><li><code>revocation_check_url</code> is required when <code>collection_method</code> is <code>biometric</code> or <code>manual-approval</code></li></ul><h2 id=the-five-validation-checks>The Five Validation Checks</h2><p>When the Trust Server receives a token request for a Tier 2+ scope, it fetches the consent artifact from the Seeker&rsquo;s <code>consent_endpoint</code> and runs five checks. <strong>All five must pass</strong> or the token request is rejected.</p><table><thead><tr><th>Check</th><th>What is verified</th><th>Error code on failure</th></tr></thead><tbody><tr><td>1. Not expired</td><td><code>expires_at > now</code></td><td><code>consent_expired</code></td></tr><tr><td>2. Not revoked</td><td><code>revocation_status == "active"</code></td><td><code>consent_revoked</code></td></tr><tr><td>3. Scope match</td><td><code>requested_scope in allowed_scopes</code></td><td><code>consent_scope_mismatch</code></td></tr><tr><td>4. DID match</td><td><code>artifact.seeker_did == request.seeker_did</code> AND <code>artifact.provider_did == request.provider_did</code></td><td><code>consent_did_mismatch</code></td></tr><tr><td>5. DPDP validity</td><td>All 6 <code>dpdp_properties</code> are <code>true</code></td><td><code>consent_dpdp_invalid</code></td></tr></tbody></table><h2 id=how-consent-flows>How Consent Flows</h2><pre tabindex=0><code>Citizen grants consent (OTP / biometric / consent-manager)
         │
         ▼
 Consent artifact created with consent_id (e.g., cns_xxx)
@@ -438,72 +78,16 @@ Trust Server fetches artifact:
         │
         ▼
 Token issued (if all checks pass)
-</code></pre><h2 id="consent-endpoint-registration">Consent Endpoint Registration</h2>
-<p>For a Seeker to use Tier 2+ scopes, it must register a <code>consent_endpoint</code> in the UAI Registry. This is the URL the Trust Server will call to fetch consent artifacts:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;did&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;did:web:seeker.example.com&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;role&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;seeker&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;consent_endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://seeker.example.com/consent&#34;</span><span style="color:#000;font-weight:bold">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">&#34;risk_tier_max&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">2</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>The Trust Server calls: <code>GET https://seeker.example.com/consent/{consent_id}</code></p>
-<h2 id="mock-consent-service-development">Mock Consent Service (Development)</h2>
-<p>For development and testing, the Mock Consent service (port 8004) serves pre-seeded consent artifacts:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># The Mock Consent service pre-seeds known consent IDs</span>
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Register your seeker with consent_endpoint = http://localhost:8004/consent</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>curl http://localhost:8004/consent/cns_valid_tier2_agri
-</span></span></code></pre></div><p>The <code>seed_demo_corridor_policies.py</code> script populates consent IDs like <code>cns_valid_tier2_agri</code>, <code>cns_valid_tier2_health</code>, etc.</p>
-<h2 id="tier-specific-consent-requirements">Tier-Specific Consent Requirements</h2>
-<table>
-	<thead>
-			<tr>
-					<th>Tier</th>
-					<th><code>collection_method</code> allowed</th>
-					<th>Additional requirement</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>2</td>
-					<td><code>otp</code>, <code>consent-manager</code></td>
-					<td>None</td>
-			</tr>
-			<tr>
-					<td>3</td>
-					<td><code>biometric</code>, <code>consent-manager</code></td>
-					<td><code>revocation_check_url</code> required</td>
-			</tr>
-			<tr>
-					<td>4</td>
-					<td><code>manual-approval</code></td>
-					<td><code>revocation_check_url</code> required; human approval gate</td>
-			</tr>
-	</tbody>
-</table>
-<p>For Tier 3 (<code>biometric</code>/<code>consent-manager</code>), the Trust Server may check the <code>revocation_check_url</code> in real-time to verify the consent has not been withdrawn since it was issued.</p>
-
-	
-</div>
-
-
-          </main>
-        </div>
-      </div>
-      <footer class="td-footer row d-print-none">
-  <div class="uai-footer-bottom">
-    <span class="uai-footer-copyright">&copy; 2026 Unified AI Interface</span>
-    <span class="uai-footer-attr">
-      <span>Part of IndiaAI Mission under MeitY</span>
-      <span>Open Protocol Infrastructure for India's AI Ecosystem</span>
-    </span>
-  </div>
-</footer>
-
-    </div>
-    <script src="/js/main.js"></script>
-<script defer src="/js/click-to-copy.js" crossorigin="anonymous"></script>
-<script src='/js/tabpane-persist.js'></script>
-
-  </body>
-</html>
+</code></pre><h2 id=consent-endpoint-registration>Consent Endpoint Registration</h2><p>For a Seeker to use Tier 2+ scopes, it must register a <code>consent_endpoint</code> in the UAI Registry. This is the URL the Trust Server will call to fetch consent artifacts:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;did&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;did:web:seeker.example.com&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;role&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;seeker&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;consent_endpoint&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;https://seeker.example.com/consent&#34;</span><span style=color:#000;font-weight:700>,</span>
+</span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>&#34;risk_tier_max&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>2</span>
+</span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
+</span></span></code></pre></div><p>The Trust Server calls: <code>GET https://seeker.example.com/consent/{consent_id}</code></p><h2 id=mock-consent-service-development>Mock Consent Service (Development)</h2><p>For development and testing, the Mock Consent service (port 8004) serves pre-seeded consent artifacts:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#8f5902;font-style:italic># The Mock Consent service pre-seeds known consent IDs</span>
+</span></span><span style=display:flex><span><span style=color:#8f5902;font-style:italic># Register your seeker with consent_endpoint = http://localhost:8004/consent</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>curl http://localhost:8004/consent/cns_valid_tier2_agri
+</span></span></code></pre></div><p>The <code>seed_demo_corridor_policies.py</code> script populates consent IDs like <code>cns_valid_tier2_agri</code>, <code>cns_valid_tier2_health</code>, etc.</p><h2 id=tier-specific-consent-requirements>Tier-Specific Consent Requirements</h2><table><thead><tr><th>Tier</th><th><code>collection_method</code> allowed</th><th>Additional requirement</th></tr></thead><tbody><tr><td>2</td><td><code>otp</code>, <code>consent-manager</code></td><td>None</td></tr><tr><td>3</td><td><code>biometric</code>, <code>consent-manager</code></td><td><code>revocation_check_url</code> required</td></tr><tr><td>4</td><td><code>manual-approval</code></td><td><code>revocation_check_url</code> required; human approval gate</td></tr></tbody></table><p>For Tier 3 (<code>biometric</code>/<code>consent-manager</code>), the Trust Server may check the <code>revocation_check_url</code> in real-time to verify the consent has not been withdrawn since it was issued.</p></div></main></div></div><footer class="td-footer row d-print-none"><div class=uai-footer-bottom><span class=uai-footer-copyright>&copy; 2026 Unified AI Interface</span>
+<span class=uai-footer-attr><span>Part of IndiaAI Mission under MeitY</span>
+<span>Open Protocol Infrastructure for India's AI Ecosystem</span></span></div></footer></div><script src=/js/main.min.95fb6baaf69b9e0f93b4faa2a3a4943fb4932a8978d8cdec750bacdb3a2f2961.js integrity="sha256-lftrqvabng+TtPqio6SUP7STKol42M3sdQus2zovKWE=" crossorigin=anonymous></script><script defer src=/js/click-to-copy.min.24576ff9fe9f85bb1948ecae52ce227cafce53757a3ad52301f2a79260f6b97d.js integrity="sha256-JFdv+f6fhbsZSOyuUs4ifK/OU3V6OtUjAfKnkmD2uX0=" crossorigin=anonymous></script><script src=/js/tabpane-persist.js></script></body></html>
