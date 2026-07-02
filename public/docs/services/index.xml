@@ -1,156 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Services on UAI Protocol Documentation</title><link>http://localhost/docs/services/</link><description>Recent content in Services on UAI Protocol Documentation</description><generator>Hugo</generator><language>en-us</language><atom:link href="http://localhost/docs/services/index.xml" rel="self" type="application/rss+xml"/><item><title>Registry</title><link>http://localhost/docs/services/registry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/services/registry/</guid><description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;services/registry/&lt;/code&gt;&lt;br&gt;
-&lt;strong&gt;Port:&lt;/strong&gt; 8000&lt;br&gt;
-&lt;strong&gt;Backend:&lt;/strong&gt; Elasticsearch 8.13.0 (index: &lt;code&gt;uai-agents&lt;/code&gt;)&lt;/p&gt;
-&lt;p&gt;The Registry is the authoritative directory of all UAI-participating agents. It handles agent registration with cryptographic proof-of-control, capability-based discovery, and ETag-based caching.&lt;/p&gt;
-&lt;h2 id="startup-sequence"&gt;Startup Sequence&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Connects to Elasticsearch at &lt;code&gt;ES_HOST&lt;/code&gt; (default: &lt;code&gt;http://localhost:9200&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;Creates the &lt;code&gt;uai-agents&lt;/code&gt; index if it doesn&amp;rsquo;t exist (with appropriate field mappings)&lt;/li&gt;
-&lt;li&gt;Initializes &lt;code&gt;NonceStore&lt;/code&gt; for challenge-response registration (in-memory, 5-min TTL per nonce)&lt;/li&gt;
-&lt;li&gt;Starts FastAPI on port 8000&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="key-dependencies"&gt;Key Dependencies&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;adapters/bridge/did_resolver&lt;/code&gt; — resolves &lt;code&gt;did:web&lt;/code&gt; DIDs to DID Documents&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;adapters/bridge/signature_verifier&lt;/code&gt; — verifies Ed25519 and P-256 signatures&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;jsonschema&lt;/code&gt; (Draft202012Validator) — validates records against &lt;code&gt;schemas/registry-agent-record/schema.json&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="registration-validation"&gt;Registration Validation&lt;/h2&gt;
-&lt;p&gt;When &lt;code&gt;POST /registry/v1/agents&lt;/code&gt; is called, the Registry:&lt;/p&gt;</description></item><item><title>Trust Server</title><link>http://localhost/docs/services/trust-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/services/trust-server/</guid><description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;services/trust-server/&lt;/code&gt;&lt;br&gt;
-&lt;strong&gt;Port:&lt;/strong&gt; 8002&lt;br&gt;
-&lt;strong&gt;Backend:&lt;/strong&gt; Stateless (in-memory JTI replay cache only)&lt;/p&gt;
-&lt;p&gt;The Trust Server is the authorization authority of the UAI platform. It issues short-lived, Ed25519-signed JWTs after evaluating the risk policy, optionally validating consent, and optionally verifying DPoP proofs.&lt;/p&gt;
-&lt;h2 id="startup-state"&gt;Startup State&lt;/h2&gt;
-&lt;p&gt;On startup, the Trust Server initializes:&lt;/p&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Component&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;TrustServerIdentity&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Holds the Trust Server&amp;rsquo;s DID and Ed25519 key pair for signing JWTs&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;PolicyEvaluator&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Loaded from &lt;code&gt;POLICY_FILE&lt;/code&gt; env var. Validates policy consistency at load.&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;RegistryClient&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;HTTP client for verifying providers in the Registry&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;ConsentFetcher&lt;/code&gt; / &lt;code&gt;ConsentValidator&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;HTTP fetch + 5-check consent validation&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="policy-evaluation"&gt;Policy Evaluation&lt;/h2&gt;
-&lt;p&gt;The &lt;code&gt;PolicyEvaluator&lt;/code&gt; (&lt;code&gt;services/trust-server/policy/evaluator.py&lt;/code&gt;) handles scope lookup with the following precedence:&lt;/p&gt;</description></item><item><title>Audit Ledger</title><link>http://localhost/docs/services/audit-ledger/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/services/audit-ledger/</guid><description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;services/audit-ledger/&lt;/code&gt;&lt;br&gt;
-&lt;strong&gt;Port:&lt;/strong&gt; 8001&lt;br&gt;
-&lt;strong&gt;Backend:&lt;/strong&gt; PostgreSQL 16 (table: &lt;code&gt;receipts&lt;/code&gt;)&lt;/p&gt;
-&lt;p&gt;The Audit Ledger provides non-repudiation for all UAI interactions. Once a receipt is written, it cannot be modified or deleted — enforced at the database level via PostgreSQL triggers.&lt;/p&gt;
-&lt;h2 id="immutability-guarantee"&gt;Immutability Guarantee&lt;/h2&gt;
-&lt;p&gt;PostgreSQL triggers reject any &lt;code&gt;UPDATE&lt;/code&gt; or &lt;code&gt;DELETE&lt;/code&gt; operation on the &lt;code&gt;receipts&lt;/code&gt; table. The append-only constraint is enforced at the database level, not just in application code — it cannot be bypassed even with direct database access (without dropping the trigger).&lt;/p&gt;</description></item><item><title>Demo Providers</title><link>http://localhost/docs/services/demo-providers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/services/demo-providers/</guid><description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;services/demo-providers/&lt;/code&gt;&lt;br&gt;
-&lt;strong&gt;Port:&lt;/strong&gt; 8005&lt;/p&gt;
-&lt;p&gt;The Demo Providers service hosts five reference provider implementations in a single FastAPI app using path-based routing. Each provider has its own Ed25519 key pair and DID, but they share the same service process.&lt;/p&gt;
-&lt;h2 id="the-five-providers"&gt;The Five Providers&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Provider&lt;/th&gt;
-					&lt;th&gt;Path Prefix&lt;/th&gt;
-					&lt;th&gt;DID&lt;/th&gt;
-					&lt;th&gt;Max Tier&lt;/th&gt;
-					&lt;th&gt;Scopes&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Education&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;/education/&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:education&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;2&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:curriculum_data&lt;/code&gt; (T1), &lt;code&gt;read:student_progress&lt;/code&gt; (T2)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Agriculture&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;/agriculture/&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:agriculture&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;2&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:crop_diagnosis&lt;/code&gt; (T1), &lt;code&gt;read:pmkisan_status&lt;/code&gt; (T2)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Bhashini&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;/bhashini/&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:bhashini&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;1&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:translation&lt;/code&gt; (T1)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Health&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;/health/&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:health&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;3&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:health_profile&lt;/code&gt; (T2), &lt;code&gt;read:diagnostic_result&lt;/code&gt; (T3)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;Finance&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;/finance/&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:finance&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;3&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;read:credit_data&lt;/code&gt; (T2), &lt;code&gt;write:loan_application&lt;/code&gt; (T3)&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="did-document-resolution"&gt;DID Document Resolution&lt;/h2&gt;
-&lt;p&gt;Each provider&amp;rsquo;s DID Document is accessible at its path:&lt;/p&gt;</description></item><item><title>Adapters</title><link>http://localhost/docs/services/adapters/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost/docs/services/adapters/</guid><description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;adapters/bridge/&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;The Bridge Adapter is a Python package that provides the integration layer between global NANDA discovery and the UAI national trust infrastructure. It is used by both the Registry and any third-party agent integration.&lt;/p&gt;
-&lt;h2 id="module-overview"&gt;Module Overview&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;Module&lt;/th&gt;
-					&lt;th&gt;Class / Function&lt;/th&gt;
-					&lt;th&gt;Description&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;did_resolver.py&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;resolve_did()&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;W3C &lt;code&gt;did:web&lt;/code&gt; resolution with 5-minute caching&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;signature_verifier.py&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;verify_signature()&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Ed25519 and P-256 signature verification&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;discover.py&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;discover_agents()&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Registry + NANDA fallback discovery&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;negotiate.py&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;negotiate_protocol()&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Best endpoint selection from AgentFacts&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;publish_agentfacts.py&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;BridgeAdapter&lt;/code&gt; class&lt;/td&gt;
-					&lt;td&gt;Validate and publish AgentFacts to Registry + NANDA&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;code&gt;mcp_bridge.py&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;MCPBridge&lt;/code&gt; class&lt;/td&gt;
-					&lt;td&gt;MCP ↔ UAI translation&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr&gt;
-&lt;h2 id="did-resolver-did_resolverpy"&gt;DID Resolver (&lt;code&gt;did_resolver.py&lt;/code&gt;)&lt;/h2&gt;
-&lt;p&gt;Resolves &lt;code&gt;did:web&lt;/code&gt; identifiers to DID Documents per the W3C spec.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Services on UAI Protocol Documentation</title>
+		<link>http://localhost:1313/docs/services/</link>
+		<description>Recent content in Services on UAI Protocol Documentation</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="http://localhost:1313/docs/services/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Registry</title>
+				<link>http://localhost:1313/docs/services/registry/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/services/registry/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;services/registry/&lt;/code&gt;&lt;br&gt;&#xA;&lt;strong&gt;Port:&lt;/strong&gt; 8000&lt;br&gt;&#xA;&lt;strong&gt;Backend:&lt;/strong&gt; Elasticsearch 8.13.0 (index: &lt;code&gt;uai-agents&lt;/code&gt;)&lt;/p&gt;&#xA;&lt;p&gt;The Registry is the authoritative directory of all UAI-participating agents. It handles agent registration with cryptographic proof-of-control, capability-based discovery, and ETag-based caching.&lt;/p&gt;&#xA;&lt;h2 id=&#34;startup-sequence&#34;&gt;Startup Sequence&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Connects to Elasticsearch at &lt;code&gt;ES_HOST&lt;/code&gt; (default: &lt;code&gt;http://localhost:9200&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;Creates the &lt;code&gt;uai-agents&lt;/code&gt; index if it doesn&amp;rsquo;t exist (with appropriate field mappings)&lt;/li&gt;&#xA;&lt;li&gt;Initializes &lt;code&gt;NonceStore&lt;/code&gt; for challenge-response registration (in-memory, 5-min TTL per nonce)&lt;/li&gt;&#xA;&lt;li&gt;Starts FastAPI on port 8000&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;key-dependencies&#34;&gt;Key Dependencies&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;adapters/bridge/did_resolver&lt;/code&gt; — resolves &lt;code&gt;did:web&lt;/code&gt; DIDs to DID Documents&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;adapters/bridge/signature_verifier&lt;/code&gt; — verifies Ed25519 and P-256 signatures&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;jsonschema&lt;/code&gt; (Draft202012Validator) — validates records against &lt;code&gt;schemas/registry-agent-record/schema.json&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;registration-validation&#34;&gt;Registration Validation&lt;/h2&gt;&#xA;&lt;p&gt;When &lt;code&gt;POST /registry/v1/agents&lt;/code&gt; is called, the Registry:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Trust Server</title>
+				<link>http://localhost:1313/docs/services/trust-server/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/services/trust-server/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;services/trust-server/&lt;/code&gt;&lt;br&gt;&#xA;&lt;strong&gt;Port:&lt;/strong&gt; 8002&lt;br&gt;&#xA;&lt;strong&gt;Backend:&lt;/strong&gt; Stateless (in-memory JTI replay cache only)&lt;/p&gt;&#xA;&lt;p&gt;The Trust Server is the authorization authority of the UAI platform. It issues short-lived, Ed25519-signed JWTs after evaluating the risk policy, optionally validating consent, and optionally verifying DPoP proofs.&lt;/p&gt;&#xA;&lt;h2 id=&#34;startup-state&#34;&gt;Startup State&lt;/h2&gt;&#xA;&lt;p&gt;On startup, the Trust Server initializes:&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Component&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;TrustServerIdentity&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Holds the Trust Server&amp;rsquo;s DID and Ed25519 key pair for signing JWTs&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;PolicyEvaluator&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Loaded from &lt;code&gt;POLICY_FILE&lt;/code&gt; env var. Validates policy consistency at load.&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;RegistryClient&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;HTTP client for verifying providers in the Registry&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;ConsentFetcher&lt;/code&gt; / &lt;code&gt;ConsentValidator&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;HTTP fetch + 5-check consent validation&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;policy-evaluation&#34;&gt;Policy Evaluation&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;code&gt;PolicyEvaluator&lt;/code&gt; (&lt;code&gt;services/trust-server/policy/evaluator.py&lt;/code&gt;) handles scope lookup with the following precedence:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Audit Ledger</title>
+				<link>http://localhost:1313/docs/services/audit-ledger/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/services/audit-ledger/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;services/audit-ledger/&lt;/code&gt;&lt;br&gt;&#xA;&lt;strong&gt;Port:&lt;/strong&gt; 8001&lt;br&gt;&#xA;&lt;strong&gt;Backend:&lt;/strong&gt; PostgreSQL 16 (table: &lt;code&gt;receipts&lt;/code&gt;)&lt;/p&gt;&#xA;&lt;p&gt;The Audit Ledger provides non-repudiation for all UAI interactions. Once a receipt is written, it cannot be modified or deleted — enforced at the database level via PostgreSQL triggers.&lt;/p&gt;&#xA;&lt;h2 id=&#34;immutability-guarantee&#34;&gt;Immutability Guarantee&lt;/h2&gt;&#xA;&lt;p&gt;PostgreSQL triggers reject any &lt;code&gt;UPDATE&lt;/code&gt; or &lt;code&gt;DELETE&lt;/code&gt; operation on the &lt;code&gt;receipts&lt;/code&gt; table. The append-only constraint is enforced at the database level, not just in application code — it cannot be bypassed even with direct database access (without dropping the trigger).&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Demo Providers</title>
+				<link>http://localhost:1313/docs/services/demo-providers/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/services/demo-providers/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;services/demo-providers/&lt;/code&gt;&lt;br&gt;&#xA;&lt;strong&gt;Port:&lt;/strong&gt; 8005&lt;/p&gt;&#xA;&lt;p&gt;The Demo Providers service hosts five reference provider implementations in a single FastAPI app using path-based routing. Each provider has its own Ed25519 key pair and DID, but they share the same service process.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-five-providers&#34;&gt;The Five Providers&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Provider&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Path Prefix&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;DID&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Max Tier&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Scopes&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Education&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;/education/&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:education&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;2&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:curriculum_data&lt;/code&gt; (T1), &lt;code&gt;read:student_progress&lt;/code&gt; (T2)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Agriculture&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;/agriculture/&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:agriculture&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;2&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:crop_diagnosis&lt;/code&gt; (T1), &lt;code&gt;read:pmkisan_status&lt;/code&gt; (T2)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Bhashini&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;/bhashini/&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:bhashini&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;1&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:translation&lt;/code&gt; (T1)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Health&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;/health/&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:health&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;3&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:health_profile&lt;/code&gt; (T2), &lt;code&gt;read:diagnostic_result&lt;/code&gt; (T3)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Finance&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;/finance/&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did:web:localhost%3A8005:finance&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;3&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;read:credit_data&lt;/code&gt; (T2), &lt;code&gt;write:loan_application&lt;/code&gt; (T3)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;did-document-resolution&#34;&gt;DID Document Resolution&lt;/h2&gt;&#xA;&lt;p&gt;Each provider&amp;rsquo;s DID Document is accessible at its path:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Adapters</title>
+				<link>http://localhost:1313/docs/services/adapters/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/docs/services/adapters/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; &lt;code&gt;adapters/bridge/&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;The Bridge Adapter is a Python package that provides the integration layer between global NANDA discovery and the UAI national trust infrastructure. It is used by both the Registry and any third-party agent integration.&lt;/p&gt;&#xA;&lt;h2 id=&#34;module-overview&#34;&gt;Module Overview&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Module&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Class / Function&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Description&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;did_resolver.py&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;resolve_did()&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;W3C &lt;code&gt;did:web&lt;/code&gt; resolution with 5-minute caching&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;signature_verifier.py&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;verify_signature()&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Ed25519 and P-256 signature verification&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;discover.py&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;discover_agents()&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Registry + NANDA fallback discovery&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;negotiate.py&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;negotiate_protocol()&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Best endpoint selection from AgentFacts&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;publish_agentfacts.py&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;BridgeAdapter&lt;/code&gt; class&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Validate and publish AgentFacts to Registry + NANDA&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;mcp_bridge.py&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;MCPBridge&lt;/code&gt; class&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;MCP ↔ UAI translation&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;did-resolver-did_resolverpy&#34;&gt;DID Resolver (&lt;code&gt;did_resolver.py&lt;/code&gt;)&lt;/h2&gt;&#xA;&lt;p&gt;Resolves &lt;code&gt;did:web&lt;/code&gt; identifiers to DID Documents per the W3C spec.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>
