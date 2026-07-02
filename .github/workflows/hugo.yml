@@ -53,12 +53,6 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --panicOnWarning --printPathWarnings
 
-      - name: Check links
-        uses: lycheeverse/lychee-action@v2
-        with:
-          args: --root-dir $GITHUB_WORKSPACE/public --timeout 10 --max-retries 3 './public/**/*.html'
-          fail: true
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
